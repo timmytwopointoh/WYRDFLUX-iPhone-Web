@@ -1,0 +1,471 @@
+{
+  "version": "3.1",
+  "sample_rate": 48000,
+  "original_no_external_samples": true,
+  "cues": {
+    "title": {
+      "file": "music/title.wav",
+      "title": "The Signal Remains \u2014 Overture",
+      "bpm": 88,
+      "bars": 32,
+      "seconds": 87.273,
+      "rms": 0.04083619115952825,
+      "guitar": "acoustic",
+      "bass": "plucked modeled bass guitar",
+      "sections": [
+        "arrival",
+        "development",
+        "breakdown",
+        "climax"
+      ]
+    },
+    "breach": {
+      "file": "music/breach.wav",
+      "title": "Perimeter Pulse",
+      "bpm": 128,
+      "bars": 32,
+      "seconds": 60.0,
+      "rms": 0.0565454940284283,
+      "guitar": "electric",
+      "bass": "plucked modeled bass guitar",
+      "sections": [
+        "arrival",
+        "development",
+        "breakdown",
+        "climax"
+      ]
+    },
+    "boss": {
+      "file": "music/boss.wav",
+      "title": "Collision of Titans",
+      "bpm": 150,
+      "bars": 36,
+      "seconds": 57.6,
+      "rms": 0.05805892182639415,
+      "guitar": "electric",
+      "bass": "plucked modeled bass guitar",
+      "sections": [
+        "arrival",
+        "development",
+        "breakdown",
+        "climax"
+      ]
+    },
+    "hell": {
+      "file": "music/hell.wav",
+      "title": "Black Chapel: Ash Machine",
+      "bpm": 160,
+      "bars": 36,
+      "seconds": 54.0,
+      "rms": 0.05903402550055218,
+      "guitar": "electric",
+      "bass": "plucked modeled bass guitar",
+      "sections": [
+        "arrival",
+        "development",
+        "breakdown",
+        "climax"
+      ]
+    },
+    "archfiend": {
+      "file": "music/archfiend.wav",
+      "title": "The Archfiend Engine",
+      "bpm": 174,
+      "bars": 40,
+      "seconds": 55.172,
+      "rms": 0.057896217669379496,
+      "guitar": "electric",
+      "bass": "plucked modeled bass guitar",
+      "sections": [
+        "arrival",
+        "development",
+        "breakdown",
+        "climax"
+      ]
+    },
+    "heaven": {
+      "file": "music/heaven.wav",
+      "title": "Eight Windows of Light",
+      "bpm": 84,
+      "bars": 24,
+      "seconds": 68.571,
+      "rms": 0.036570686690320486,
+      "guitar": "acoustic",
+      "bass": "plucked modeled bass guitar",
+      "sections": [
+        "arrival",
+        "development",
+        "breakdown",
+        "climax"
+      ]
+    },
+    "angel": {
+      "file": "music/angel.wav",
+      "title": "Wheels of Judgement",
+      "bpm": 114,
+      "bars": 32,
+      "seconds": 67.368,
+      "rms": 0.04134384816316717,
+      "guitar": "acoustic",
+      "bass": "plucked modeled bass guitar",
+      "sections": [
+        "arrival",
+        "development",
+        "breakdown",
+        "climax"
+      ]
+    },
+    "meadow": {
+      "file": "music/meadow.wav",
+      "title": "The Shattered Wilds",
+      "bpm": 106,
+      "bars": 32,
+      "seconds": 72.453,
+      "rms": 0.03993562755362403,
+      "guitar": "acoustic",
+      "bass": "plucked modeled bass guitar",
+      "sections": [
+        "arrival",
+        "development",
+        "breakdown",
+        "climax"
+      ]
+    },
+    "block": {
+      "file": "music/block.wav",
+      "title": "Grass Above, Caves Below",
+      "bpm": 110,
+      "bars": 32,
+      "seconds": 69.818,
+      "rms": 0.03909869909667988,
+      "guitar": "acoustic",
+      "bass": "plucked modeled bass guitar",
+      "sections": [
+        "arrival",
+        "development",
+        "breakdown",
+        "climax"
+      ]
+    },
+    "warden": {
+      "file": "music/warden.wav",
+      "title": "Deep Dark: Heartbeat",
+      "bpm": 126,
+      "bars": 32,
+      "seconds": 60.952,
+      "rms": 0.0584681453809116,
+      "guitar": "electric",
+      "bass": "plucked modeled bass guitar",
+      "sections": [
+        "arrival",
+        "development",
+        "breakdown",
+        "climax"
+      ]
+    },
+    "circusidle": {
+      "file": "music/circusidle.wav",
+      "title": "The Big Top Waits",
+      "bpm": 80,
+      "bars": 24,
+      "seconds": 72.0,
+      "rms": 0.035495136695532704,
+      "guitar": "acoustic",
+      "bass": "plucked modeled bass guitar",
+      "sections": [
+        "arrival",
+        "development",
+        "breakdown",
+        "climax"
+      ]
+    },
+    "circusdance": {
+      "file": "music/circusdance.wav",
+      "title": "Marionettes on the Sawdust",
+      "bpm": 112,
+      "bars": 32,
+      "seconds": 68.571,
+      "rms": 0.03752555716333576,
+      "guitar": "acoustic",
+      "bass": "plucked modeled bass guitar",
+      "sections": [
+        "arrival",
+        "development",
+        "breakdown",
+        "climax"
+      ]
+    },
+    "circussilence": {
+      "file": "music/circussilence.wav",
+      "title": "The Curtain Holds Its Breath",
+      "bpm": 112,
+      "bars": 28,
+      "seconds": 60.0,
+      "rms": 0.03821089006911396,
+      "guitar": "acoustic",
+      "bass": "plucked modeled bass guitar",
+      "sections": [
+        "arrival",
+        "development",
+        "breakdown",
+        "climax"
+      ]
+    },
+    "circusattack": {
+      "file": "music/circusattack.wav",
+      "title": "The Marionette Feeds",
+      "bpm": 154,
+      "bars": 36,
+      "seconds": 56.104,
+      "rms": 0.057154911388624045,
+      "guitar": "electric",
+      "bass": "plucked modeled bass guitar",
+      "sections": [
+        "arrival",
+        "development",
+        "breakdown",
+        "climax"
+      ]
+    },
+    "ringleader": {
+      "file": "music/ringleader.wav",
+      "title": "Encore: The Grand Impostor",
+      "bpm": 152,
+      "bars": 36,
+      "seconds": 56.842,
+      "rms": 0.056472839807366816,
+      "guitar": "electric",
+      "bass": "plucked modeled bass guitar",
+      "sections": [
+        "arrival",
+        "development",
+        "breakdown",
+        "climax"
+      ]
+    },
+    "blackwake": {
+      "file": "music/blackwake.wav",
+      "title": "The Drowned Broadside",
+      "bpm": 110,
+      "bars": 32,
+      "seconds": 69.818,
+      "rms": 0.04369153439424974,
+      "guitar": "acoustic",
+      "bass": "plucked modeled bass guitar",
+      "sections": [
+        "arrival",
+        "development",
+        "breakdown",
+        "climax"
+      ]
+    },
+    "shop": {
+      "file": "music/shop.wav",
+      "title": "The Rift Merchant",
+      "bpm": 96,
+      "bars": 24,
+      "seconds": 60.0,
+      "rms": 0.04136641019389975,
+      "guitar": "acoustic",
+      "bass": "plucked modeled bass guitar",
+      "sections": [
+        "arrival",
+        "development",
+        "breakdown",
+        "climax"
+      ]
+    },
+    "city": {
+      "file": "music/city.wav",
+      "title": "Neon Ghost Traffic \u2014 Through the Rain",
+      "bpm": 119,
+      "bars": 32,
+      "seconds": 64.538,
+      "rms": 0.05818304972770407,
+      "guitar": "electric",
+      "bass": "plucked modeled bass guitar",
+      "sections": [
+        "arrival",
+        "development",
+        "breakdown",
+        "climax"
+      ]
+    },
+    "null": {
+      "file": "music/null.wav",
+      "title": "The Empty Frequency \u2014 Broken Signal",
+      "bpm": 101,
+      "bars": 32,
+      "seconds": 76.04,
+      "rms": 0.04172702838715985,
+      "guitar": "acoustic",
+      "bass": "plucked modeled bass guitar",
+      "sections": [
+        "arrival",
+        "development",
+        "breakdown",
+        "climax"
+      ]
+    },
+    "forge": {
+      "file": "music/forge.wav",
+      "title": "Hammerfall Industries \u2014 Molten Line",
+      "bpm": 142,
+      "bars": 32,
+      "seconds": 54.085,
+      "rms": 0.05847588216385656,
+      "guitar": "electric",
+      "bass": "plucked modeled bass guitar",
+      "sections": [
+        "arrival",
+        "development",
+        "breakdown",
+        "climax"
+      ]
+    },
+    "gloom": {
+      "file": "music/gloom.wav",
+      "title": "Last Light in the Rain \u2014 Afterimage",
+      "bpm": 105,
+      "bars": 32,
+      "seconds": 73.143,
+      "rms": 0.040907880667617906,
+      "guitar": "acoustic",
+      "bass": "plucked modeled bass guitar",
+      "sections": [
+        "arrival",
+        "development",
+        "breakdown",
+        "climax"
+      ]
+    },
+    "orbit": {
+      "file": "music/orbit.wav",
+      "title": "Ascent Array \u2014 Gravity Harp",
+      "bpm": 122,
+      "bars": 32,
+      "seconds": 62.951,
+      "rms": 0.04236716302833729,
+      "guitar": "acoustic",
+      "bass": "plucked modeled bass guitar",
+      "sections": [
+        "arrival",
+        "development",
+        "breakdown",
+        "climax"
+      ]
+    },
+    "heart": {
+      "file": "music/heart.wav",
+      "title": "Iron Heartbeat \u2014 Redline",
+      "bpm": 147,
+      "bars": 32,
+      "seconds": 52.245,
+      "rms": 0.058699734858453936,
+      "guitar": "electric",
+      "bass": "plucked modeled bass guitar",
+      "sections": [
+        "arrival",
+        "development",
+        "breakdown",
+        "climax"
+      ]
+    },
+    "veil": {
+      "file": "music/veil.wav",
+      "title": "The Veil Is Thin \u2014 Unlit Threshold",
+      "bpm": 77,
+      "bars": 24,
+      "seconds": 74.805,
+      "rms": 0.037792244419622076,
+      "guitar": "acoustic",
+      "bass": "plucked modeled bass guitar",
+      "sections": [
+        "arrival",
+        "development",
+        "breakdown",
+        "climax"
+      ]
+    },
+    "witch": {
+      "file": "music/witch.wav",
+      "title": "Blackthorn's Bargain \u2014 Hollowwood",
+      "bpm": 86,
+      "bars": 24,
+      "seconds": 66.977,
+      "rms": 0.03978010051065928,
+      "guitar": "acoustic",
+      "bass": "plucked modeled bass guitar",
+      "sections": [
+        "arrival",
+        "development",
+        "breakdown",
+        "climax"
+      ]
+    },
+    "greenhouse": {
+      "file": "music/greenhouse.wav",
+      "title": "Verdant Sanctuary \u2014 Roots in Moonlight",
+      "bpm": 91,
+      "bars": 24,
+      "seconds": 63.297,
+      "rms": 0.038122394025061304,
+      "guitar": "acoustic",
+      "bass": "plucked modeled bass guitar",
+      "sections": [
+        "arrival",
+        "development",
+        "breakdown",
+        "climax"
+      ]
+    },
+    "library": {
+      "file": "music/library.wav",
+      "title": "Arcane Aurora Library \u2014 Pages Without End",
+      "bpm": 79,
+      "bars": 24,
+      "seconds": 72.911,
+      "rms": 0.036935565672330334,
+      "guitar": "acoustic",
+      "bass": "plucked modeled bass guitar",
+      "sections": [
+        "arrival",
+        "development",
+        "breakdown",
+        "climax"
+      ]
+    },
+    "circusreveal": {
+      "file": "music/circusreveal.wav",
+      "title": "Curtain Collapse \u2014 Shattered Smile",
+      "bpm": 112,
+      "bars": 32,
+      "seconds": 68.571,
+      "rms": 0.0383368743244977,
+      "guitar": "acoustic",
+      "bass": "plucked modeled bass guitar",
+      "sections": [
+        "arrival",
+        "development",
+        "breakdown",
+        "climax"
+      ]
+    },
+    "ringleaderfinale": {
+      "file": "music/ringleaderfinale.wav",
+      "title": "Grand Impostor \u2014 The Final Encore",
+      "bpm": 160,
+      "bars": 36,
+      "seconds": 54.0,
+      "rms": 0.05693427435772062,
+      "guitar": "electric",
+      "bass": "plucked modeled bass guitar",
+      "sections": [
+        "arrival",
+        "development",
+        "breakdown",
+        "climax"
+      ]
+    }
+  }
+}

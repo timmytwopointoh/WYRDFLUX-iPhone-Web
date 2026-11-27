@@ -1,0 +1,1840 @@
+:root{color-scheme:dark;--cyan:#6fffea;--violet:#c17bff;--white:#ebedff;--danger:#ff4d75}*{box-sizing:border-box}html,body{height:100%;margin:0;overflow:hidden;background:#04050a;color:var(--white);font-family:Inter,Arial,Helvetica,sans-serif;user-select:none;-webkit-user-select:none;touch-action:none}button,select{font-family:inherit}button{cursor:pointer;touch-action:manipulation}#world{position:absolute;inset:0;width:100%;height:100%;display:block;background:radial-gradient(ellipse at 70% 40%,#251445,#02040b 75%)}#vignette,#noise,#damage{position:absolute;inset:0;pointer-events:none}#vignette{box-shadow:inset 0 0 min(18vw,180px) 8px #03040fb4;background:linear-gradient(90deg,#06061233,transparent 22%,transparent 77%,#0606122f)}#noise{opacity:.085;mix-blend-mode:screen;background:repeating-linear-gradient(0deg,transparent 0,transparent 3px,#fff1 4px),repeating-linear-gradient(90deg,transparent 0,transparent 73px,#ae65ff17 74px)}#damage{background:radial-gradient(ellipse,transparent 30%,#ed2258 110%);opacity:0;transition:opacity .12s}.hidden{display:none!important}#hud{position:absolute;top:max(8px,env(safe-area-inset-top));left:max(14px,env(safe-area-inset-left));right:max(14px,env(safe-area-inset-right));display:grid;grid-template-columns:1fr 1.25fr 1fr;gap:16px;align-items:start;pointer-events:none;text-shadow:0 2px 12px #000c;z-index:3}.hud-left{max-width:250px}.topline{display:flex;gap:9px;align-items:center;margin-bottom:9px;font-size:10px;letter-spacing:2.3px;font-weight:800;color:#a4b4c7}.mini-logo{font-size:19px;font-weight:950;color:#e1f3ff;letter-spacing:-2px}.mini-logo span{color:var(--violet)}.vitals{background:linear-gradient(105deg,#080e1dc7,#10102184);border-left:2px solid #ab75ffad;padding:8px 12px 4px}.meterline{display:grid;grid-template-columns:65px 1fr 34px;gap:8px;align-items:center;margin-bottom:8px}.meterline b{font-size:9px;letter-spacing:1.4px;color:#b7c6d3}.meterline strong{font-size:10px;font-variant-numeric:tabular-nums}.meter{height:6px;background:#15172b;overflow:hidden;transform:skewX(-12deg)}.meter>div{height:100%;width:100%;transition:width .2s}.health{background:linear-gradient(90deg,#ff476e,#ff9a88);box-shadow:0 0 7px #ff4e81}.shield{background:linear-gradient(90deg,#6559ed,#80c9ff)}.rage{background:linear-gradient(90deg,#7436f9,#f188ff)}.hud-center{text-align:center;padding-top:6px}.hud-center #missionLabel{letter-spacing:2.6px;font-size:10px;color:#e6caff;font-weight:800;margin:3px auto 10px}.hud-stats{display:flex;gap:18px;justify-content:center;white-space:nowrap;font-size:10px;letter-spacing:1.3px;color:#a7b5d0}.hud-stats b{color:#f9fcff;font-size:14px}.hud-right{display:flex;justify-content:flex-end;gap:12px;align-items:flex-start}#radar{background:#070d1ac2;border:1px solid #906cc45e;border-radius:50%;box-shadow:0 0 28px #b36cff21}#pauseButton{background:#161128ca;border:1px solid #956eff74;border-radius:6px;color:#ded0ff;font-size:23px;width:39px;height:39px;pointer-events:auto}#aim{position:absolute;left:50%;top:50%;width:38px;height:38px;transform:translate(-50%,-50%);pointer-events:none;z-index:5;filter:drop-shadow(0 0 8px #b67eff)}#aim>div{position:absolute;background:#dff6ff}.aimh{width:9px;height:2px;top:18px;left:0;box-shadow:28px 0 #dff6ff}.aimv{width:2px;height:9px;left:18px;top:0;box-shadow:0 28px #dff6ff}.aimdot{width:4px;height:4px;left:17px;top:17px;border-radius:100%}#hitflash{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:56px;height:56px;pointer-events:none;opacity:0;border-radius:100%;border:2px solid #89fff5;box-shadow:0 0 24px #ad81ff;z-index:5}#weaponHud{position:absolute;bottom:max(15px,env(safe-area-inset-bottom));right:max(15px,env(safe-area-inset-right));min-width:235px;background:linear-gradient(90deg,#090c20d1,#141124be);border-right:2px solid var(--violet);padding:12px 15px;z-index:4;pointer-events:auto}.weaponLine{display:flex;justify-content:space-between;gap:20px;font-size:15px;font-weight:900;letter-spacing:1.2px}.weaponLine span:last-child{color:var(--cyan)}#weaponSub{font-size:9px;color:#b4a0d3;letter-spacing:1.5px;margin-top:5px}#weaponSelect{display:flex;gap:3px;margin-top:10px}#weaponSelect button{background:#11152d88;color:#9ca3c2;border:1px solid #34365c6e;font-size:9px;padding:6px 7px;font-weight:800}#weaponSelect .selected{background:#643b9d;border-color:#c28eff;color:#fff}#toast,#waveAnnounce{position:absolute;text-align:center;left:50%;transform:translateX(-50%);pointer-events:none;z-index:8;text-shadow:0 0 18px #4fffe699}#toast{top:24%;color:var(--cyan);font-size:12px;letter-spacing:2px;font-weight:800}#waveAnnounce{top:40%;font-size:clamp(23px,5vw,51px);letter-spacing:7px;font-weight:1000;color:#f0dbff}#touchUI{position:absolute;inset:0;pointer-events:none;z-index:6}#joystick{position:absolute;left:6%;bottom:11%;width:116px;height:116px;border:2px solid #a0bbff57;border-radius:50%;background:#221b484a;box-shadow:inset 0 0 18px #805fff24;pointer-events:auto}#stick{position:absolute;width:46px;height:46px;left:35px;top:35px;border-radius:50%;border:2px solid #94fcfa8b;background:radial-gradient(circle,#5c85b5c4,#263363b5);box-shadow:0 0 16px #6fe4ff33}#aimZone{position:absolute;left:45%;width:55%;top:18%;height:60%;pointer-events:auto}#touchUI button{pointer-events:auto;border-radius:50%;font-size:12px;font-weight:950;letter-spacing:1px;color:#fff;border:2px solid #b187ffcc;background:#5126769e;box-shadow:0 0 18px #992cfc5c}#shootButton{position:absolute;bottom:20%;right:6%;width:90px;height:90px;touch-action:none;overscroll-behavior:contain}#dashButton{position:absolute;bottom:8%;right:31%;width:60px;height:60px;border-color:#63f6ec!important;background:#12485b9a!important;font-size:10px!important}#specialButton{position:absolute;bottom:8%;right:6%;width:67px;height:67px;font-size:8px!important}#touchTip{position:absolute;right:5%;top:22%;color:#b8c2e477;font-size:10px;letter-spacing:1px}.screen{position:absolute;inset:0;z-index:12;background:radial-gradient(ellipse at 72% 44%,#411d6caa,#030510c9 53%,#02030ced 100%);display:flex;align-items:center;justify-content:center;overflow:hidden}.menuInner{width:min(760px,84vw);z-index:2;position:relative;margin-right:8vw}.eyebrow{font-size:clamp(9px,1.5vw,12px);color:var(--cyan);letter-spacing:3px;font-weight:850}.redline{display:inline-block;width:24px;height:2px;background:#d67fff;vertical-align:middle;margin-right:10px;box-shadow:0 0 14px #ff94ff}h1{font-weight:1000;line-height:.88;letter-spacing:-.072em;font-size:clamp(49px,9vw,120px);margin:18px 0 12px;text-shadow:0 0 55px #c373ff26}h1 em{color:#cb91ff;font-style:normal;text-shadow:0 0 33px #9658ff8a}.subtitle{font-weight:700;color:#bfacdd;font-size:clamp(14px,2.2vw,22px);letter-spacing:clamp(6px,2.1vw,18px)}.intro{color:#9fa9c6;line-height:1.7;font-size:clamp(12px,1.5vw,15px);margin:27px 0 25px}.menuActions{display:flex;gap:12px;flex-wrap:wrap}.primary,.secondary{border-radius:3px;padding:15px 20px;font-size:12px;font-weight:900;letter-spacing:1.5px;transition:transform .12s,background .12s}.primary{background:linear-gradient(105deg,#9b54ef,#5b2bb9);border:1px solid #d69aff;color:#fff;box-shadow:0 0 23px #a84aff44}.primary span{padding-left:28px;font-size:17px}.primary:active,.secondary:active{transform:scale(.97)}.secondary{background:#0a1024aa;border:1px solid #746c9c9c;color:#bbc4e0}.secondary:disabled{opacity:.35;cursor:default}.menuFoot{display:flex;gap:24px;flex-wrap:wrap;margin-top:40px;color:#8994ac;letter-spacing:1.9px;font-size:10px;font-weight:750}.menuDecoration{position:absolute;right:4%;top:13%;width:33vw;height:75vh;opacity:.9;pointer-events:none}.circle{border:2px solid #ae75ff33;border-radius:50%;position:absolute;inset:2%;box-shadow:0 0 60px #be80ff29,inset 0 0 44px #ad88ff23;animation:orb 24s linear infinite}.circle:before{content:"";position:absolute;inset:11%;border:1px dashed #7cf4ee55;border-radius:50%}.circle2{inset:19%;border:12px solid #6630af39;animation-direction:reverse;animation-duration:12s}.scanner{position:absolute;left:0;right:0;top:54%;height:1px;background:#a1fdf1;box-shadow:0 0 45px 7px #70f6e768;animation:sweep 4s ease-in-out infinite alternate}.decText{position:absolute;bottom:-15px;right:0;text-align:right;font-size:9px;letter-spacing:2px;color:#94adcb}@keyframes orb{to{transform:rotate(360deg)}}@keyframes sweep{to{top:20%}}.sheet{width:min(900px,92vw);background:linear-gradient(130deg,#090c1dee,#0e1026eb);border:1px solid #9f7ae86b;border-top:2px solid #b185fb;padding:clamp(20px,4vw,42px);box-shadow:0 20px 140px #000b,0 0 80px #7343af33}.sheet h2{font-size:clamp(28px,4vw,51px);letter-spacing:-1px;margin:10px 0}.sheet p{color:#aab5cb;line-height:1.5;font-size:14px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:25px 0}.card{display:flex;flex-direction:column;min-height:187px;text-align:left;color:#e9f0ff;background:radial-gradient(ellipse at 65% 0%,#3d2b66a8,#0e1326a8 67%);border:1px solid #6b639e;padding:20px;position:relative}.card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:#9f7dff}.card:hover{border-color:#abdcff;background:#1c2243}.card .tag{color:#88f3df;font-size:9px;letter-spacing:2px;font-weight:900}.card .icon{font-size:36px;margin:13px 0 3px}.card strong{font-size:16px;letter-spacing:.6px}.card p{font-size:11px;line-height:1.45;color:#aeb3d8}.smallnote{text-align:center;color:#848fa8;font-size:10px;letter-spacing:2px}.compact{max-width:450px;display:flex;flex-direction:column;gap:13px}.compact button{width:100%}.setting{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#171a31;padding:12px;font-size:11px;letter-spacing:1px}.setting select{background:#13152a;color:#fff;border:1px solid #8073ae;padding:7px}.loadInner{text-align:center;width:min(600px,80vw)}.loadingBar{height:3px;background:#24243a;margin:25px 0 12px}.loadingBar div{height:100%;width:0;background:#a87dff;box-shadow:0 0 15px #ac82ff;transition:width .3s}#loadingText{letter-spacing:3px;color:#98bad3;font-size:10px}@media (max-width:700px){.hud-center{padding-top:3px}.hud-stats{gap:6px;font-size:8px}.hud-stats b{font-size:11px}.topline{font-size:8px;letter-spacing:1px}.meterline{grid-template-columns:45px 1fr 26px;gap:3px}.meterline b{font-size:7px}.hud-left{max-width:155px}.vitals{padding:5px}.hud-center #missionLabel{font-size:8px;letter-spacing:1px}#radar{width:80px;height:80px}#pauseButton{width:29px;height:29px;font-size:17px}.hud-right{gap:3px}.menuDecoration{opacity:.4}.cards{gap:8px}.card{min-height:150px;padding:10px}.card .icon{font-size:24px;margin:5px}.card strong{font-size:12px}.card p{font-size:10px}.menuInner{width:86vw;margin:0}#weaponHud{padding:6px 9px;min-width:188px}#weaponSelect button{font-size:8px;padding:5px 4px}#touchTip{display:none}}@media(orientation:portrait){#touchUI{transform:none}#joystick{bottom:7%;left:5%}#shootButton{bottom:9%}#dashButton{bottom:4%;right:35%}#specialButton{bottom:4%}#weaponHud{bottom:22%;right:5px}#hud .hud-center{display:none}}
+
+/* v0.2 world objective compass, kinetic traversal and mobile actions */
+.energy{background:linear-gradient(90deg,#1cbaaf,#a8fff2);box-shadow:0 0 7px #44ffe8}.objectiveHeading{display:flex;justify-content:space-between;align-items:center;gap:14px;color:#84eadc;font-size:9px;font-weight:900;letter-spacing:1.9px}.objectiveHeading span:last-child{display:inline-block;font-size:18px;transform-origin:50% 50%;color:#c2ffef}.objectiveMeter{height:3px;background:#182139;margin-top:8px;overflow:hidden}.objectiveMeter>div{height:100%;width:0;background:#69ffe3;box-shadow:0 0 10px #76ffe5}#objectiveCard{position:absolute;top:max(120px,env(safe-area-inset-top));left:max(15px,env(safe-area-inset-left));z-index:3;background:linear-gradient(135deg,#0b1728e8,#121328b9);border-left:2px solid #67ffe0a6;padding:10px 14px;min-width:232px;max-width:min(290px,40vw);pointer-events:none;box-shadow:0 14px 38px #0005}#objectiveCard strong{display:block;color:#effffd;font-size:12px;letter-spacing:1px;margin-top:6px}#objectiveCard small{display:block;color:#a4b7ce;font-size:10px;margin-top:4px}#interactHint{color:#7bffe4;font-size:10px;font-weight:850;letter-spacing:1px;margin-top:5px;min-height:12px}.restored{border-color:#69ffb2!important;background:#0d2425db!important}#jumpButton{position:absolute;right:21%;bottom:26%;width:55px;height:55px;font-size:10px!important;background:#15495a9e!important;border-color:#7df9e5!important}#focusButton{position:absolute;right:34%;bottom:15%;width:58px;height:58px;font-size:9px!important}#focusButton.active{background:#389594bb!important;box-shadow:0 0 24px #68faffbb}#interactButton{position:absolute;left:27%;bottom:18%;height:74px;width:74px;color:#0b1b2c!important;background:#7dfbd8c9!important;border-color:#e9fff1!important;box-shadow:0 0 25px #5affdf7c!important;font-size:9px!important;line-height:1.3}#objectiveArrow{transition:transform .15s}#objectiveStatus{font-variant-numeric:tabular-nums}@media(max-width:700px){#objectiveCard{top:97px;left:7px;min-width:165px;max-width:190px;padding:7px 9px}#objectiveCard strong{font-size:9px}#objectiveCard small{font-size:8px}#interactButton{left:32%;bottom:20%;width:55px;height:55px}#focusButton{right:37%;bottom:24%;width:46px;height:46px}#jumpButton{right:23%;bottom:33%;width:48px;height:48px}#shootButton{right:3%;bottom:20%}}@media(orientation:portrait){#objectiveCard{top:75px}#interactButton{bottom:35%;left:10%}#jumpButton{right:6%;bottom:28%}#focusButton{right:37%;bottom:16%}}
+
+/* AFTERLIGHT v0.3 — filmic atmosphere and visual-motion kit. Screen-space only. */
+#atmosphere{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at 55% 55%,transparent 22%,#0307144a 81%,#02030b83 100%),linear-gradient(130deg,#2d559c10,transparent 37%,#b347e90b 100%);mix-blend-mode:screen;animation:afterlight-atmos 11s ease-in-out infinite alternate}
+#lensFlare{position:fixed;width:36vw;height:36vw;left:32%;top:8%;pointer-events:none;z-index:1;background:radial-gradient(circle,#bd8eff14 0%,#9877fa0a 11%,transparent 58%);filter:blur(18px);animation:afterlight-lens 17s ease-in-out infinite alternate}
+#combatScan{position:absolute;left:50%;top:66px;transform:translateX(-50%);z-index:3;width:min(33vw,320px);text-align:center;color:#9fe9de8a;pointer-events:none;font-size:8px;font-weight:800;letter-spacing:2px;text-shadow:0 0 16px #5cf8c988}
+#combatScan i{display:block;height:1px;margin-top:4px;background:linear-gradient(90deg,transparent,#71f3eb70,transparent);box-shadow:0 0 13px #67ffee66;animation:afterlight-scanner 5s ease-in-out infinite}
+#vignette{background:radial-gradient(ellipse at 50% 50%,transparent 43%,#02040b83 94%,#02040be8 110%)}
+.screen:not(.hidden){backdrop-filter:blur(2px)}
+#mainMenu:before{content:'';position:absolute;inset:-20%;pointer-events:none;background:repeating-linear-gradient(0deg,transparent 0 43px,#7ee5eb05 44px 45px);transform:perspective(420px) rotateX(52deg) translateY(33%);opacity:.7}
+#mainMenu h1{filter:drop-shadow(0 5px 19px #a475e92e)}
+.menuDecoration .holoCity{position:absolute;bottom:3%;right:4%;width:88%;height:50%;display:flex;align-items:flex-end;justify-content:center;gap:1.8%;transform:perspective(400px) rotateY(-12deg) rotateX(7deg);opacity:.85}
+.holoCity span{display:flex;justify-content:center;align-items:flex-start;font-size:12px;padding-top:8px;width:11%;height:55%;background:linear-gradient(135deg,#6976e322,#100a2433);border:1px solid #9c93ff36;border-top:2px solid #8a87ff88;box-shadow:inset 2px 0 14px #50dcfc0e,0 0 20px #8f6ac526;color:#9ae4ff3d}
+.holoCity span:nth-child(2),.holoCity span:nth-child(6){height:88%}.holoCity span:nth-child(3),.holoCity span:nth-child(7){height:67%}.holoCity span:nth-child(5){height:100%}.holoCity span:nth-child(4){height:42%}
+#objectiveCard:before{content:'╱╲';position:absolute;right:12px;top:4px;opacity:.15;color:#87ffe3}
+#weaponHud{backdrop-filter:blur(11px);border-top:1px solid #a7f5fc36}
+#radar{filter:drop-shadow(0 0 12px #48e9d022)}
+@keyframes afterlight-atmos{from{opacity:.7;transform:scale(1)}to{opacity:.95;transform:scale(1.035)}}
+@keyframes afterlight-lens{from{transform:translateX(-2vw);opacity:.65}to{transform:translateX(3vw);opacity:1}}
+@keyframes afterlight-scanner{0%,100%{opacity:.4;transform:scaleX(.75)}50%{opacity:1;transform:scaleX(1)}}
+@media (prefers-reduced-motion:reduce){#atmosphere,#lensFlare,#combatScan i{animation:none}.menuDecoration .circle,.menuDecoration .scanner{animation:none}}
+@media(max-width:700px){#combatScan{display:none}.holoCity{opacity:.22!important}#lensFlare{opacity:.2}#atmosphere{opacity:.6}}
+
+
+/* AFTERLIGHT 0.4: kinetic combat, fusion telegraphy and rarity progression. */
+#fusionLabel{margin:9px auto 0;max-width:min(470px,50vw);font-size:9px;color:#7fa9ac;letter-spacing:1.2px;font-weight:850;line-height:1.5;opacity:.78}
+#fusionLabel.active{color:#8dffec;text-shadow:0 0 13px #4effcf95;animation:fusion-breathe 1.8s ease-in-out infinite alternate}
+@keyframes fusion-breathe{from{filter:brightness(.8)}to{filter:brightness(1.5)}}
+.augmentSubline{font-size:10px;font-weight:900;letter-spacing:2px;color:#76f6dd;margin-top:-3px}
+#upgradeScreen .sheet{width:min(1020px,94vw);max-height:95dvh;overflow-y:auto;border-radius:9px;background:radial-gradient(ellipse at 70% -5%,#512c724a,transparent 55%),linear-gradient(135deg,#070d1cf5,#111028f5)}
+#upgradeScreen .cards{gap:12px;margin:20px 0}
+#upgradeScreen .card{border-radius:5px;overflow:hidden;box-shadow:inset 0 0 25px #6877ba0e,0 6px 24px #0007;min-height:218px;transition:border-color .15s,transform .15s,box-shadow .15s;position:relative}
+#upgradeScreen .card:active{transform:scale(.975)}
+#upgradeScreen .card:hover{transform:translateY(-4px);box-shadow:0 18px 50px #000a,0 0 20px #65fff02e}
+#upgradeScreen .card.rarity-common:before{background:#6e9aae}
+#upgradeScreen .card.rarity-rare{background:radial-gradient(ellipse at 85% 10%,#174c6e6b,#0b1325 67%);border-color:#437eaf}
+#upgradeScreen .card.rarity-rare:before{background:#5ac6ff;box-shadow:0 0 14px #5ac6ff}
+#upgradeScreen .card.rarity-epic{background:radial-gradient(ellipse at 85% 10%,#5828889a,#110d23 70%);border-color:#9c5ff5}
+#upgradeScreen .card.rarity-epic:before{background:#ae64ff;box-shadow:0 0 20px #ae64ff}
+#upgradeScreen .card.rarity-legendary{background:radial-gradient(ellipse at 75% 10%,#ac63297c,#211229 62%,#121320);border-color:#ffbd5d;box-shadow:inset 0 0 45px #c57d322e,0 0 20px #db8e4f2c}
+#upgradeScreen .card.rarity-legendary:before{background:#ffe69b;box-shadow:0 0 23px #ffbd58}
+#upgradeScreen .card.rarity-legendary strong{color:#ffe2a2;text-shadow:0 0 19px #ffa44466}
+#upgradeScreen .card .icon{font-size:37px;filter:drop-shadow(0 0 14px #b9c8ff66)}
+#upgradeScreen .card .tag{color:#9cecff}
+#upgradeScreen .card.rarity-legendary .tag{color:#ffda92}
+#upgradeScreen .upgradeStack{margin-top:auto;font-size:8px;font-weight:900;letter-spacing:.9px;color:#86d1db;opacity:.75}
+#combatFloats{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:6}
+#combatFloats .floatText{position:absolute;left:50%;top:45%;font-size:12px;font-weight:1000;letter-spacing:1.3px;color:#d8fff9;text-shadow:0 1px 10px #000,0 0 16px #37fce2;white-space:nowrap;will-change:transform,opacity}
+#combatFloats .floatText.gold{color:#ffe59b;text-shadow:0 1px 12px #000,0 0 17px #ffb94c}
+#muzzleOverlay{position:absolute;left:53%;top:53%;width:22px;height:22px;border-radius:100%;pointer-events:none;z-index:5;opacity:0;transform:translate(-50%,-50%);background:radial-gradient(circle,#efffffef,#b2fffdb8 12%,#67ebfe69 30%,transparent 72%);filter:blur(5px)}
+#weaponHud{transition:box-shadow .13s}
+@media(max-width:760px){
+ #fusionLabel{font-size:7px;max-width:40vw;margin-top:5px;letter-spacing:.5px}
+ #upgradeScreen .sheet{padding:12px;max-height:95dvh}
+ #upgradeScreen .sheet h2{font-size:24px;margin:5px 0}
+ #upgradeScreen .sheet p{font-size:10px;margin:7px 0}
+ #upgradeScreen .card{min-height:155px;padding:9px}
+ #upgradeScreen .card .icon{font-size:25px;margin:7px 0 3px}
+ #upgradeScreen .card strong{font-size:11px}
+ #upgradeScreen .card p{font-size:9px}
+ #upgradeScreen .upgradeStack{font-size:7px}
+ #upgradeScreen .cards{margin:10px 0;gap:6px}
+ #combatFloats .floatText{font-size:9px}
+}
+@media (prefers-reduced-motion:reduce){#fusionLabel.active{animation:none}#upgradeScreen .card{transition:none}}
+
+/* v0.8: dual-channel armory controls and visually distinct weapon draft cards. */
+#weaponHud{width:min(344px,44vw);min-width:224px}
+#weaponSelect{display:flex;flex-direction:column;gap:6px;max-width:100%;margin-top:7px}
+.weaponLoadoutRow{display:flex;align-items:center;gap:7px;min-width:0}
+.loadoutLabel{min-width:30px;font-size:8px;font-weight:900;letter-spacing:1px;color:#8adcf7}
+.weaponTabs{display:flex;gap:4px;flex:1;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;scrollbar-color:#9067c2 transparent;padding-bottom:2px;min-width:0}
+#weaponSelect .weaponTabs button{flex:0 0 auto;font-size:8px;letter-spacing:.15px;padding:5px 6px;white-space:nowrap;border-radius:4px}
+#weaponSelect .weaponTabs button.selected{background:linear-gradient(140deg,#4331a4,#255b70);border-color:#afffee;box-shadow:0 0 10px #60f6f047}
+#upgradeScreen .card.weaponCard{border:2px solid #81f2d6;box-shadow:inset 0 0 26px #33f0d520,0 0 20px #2af2c52c}
+#upgradeScreen .card.weaponCard:after{content:"NEW WEAPON";position:absolute;top:9px;right:9px;color:#ccffe9;font-size:8px;letter-spacing:1px}
+#upgradeScreen .card.weaponCard .icon{color:#93ffef;text-shadow:0 0 24px #75ffe5}
+@media(max-width:760px){
+ #weaponHud{width:220px;max-width:44vw;padding:7px 9px;max-height:110px;overflow-y:auto}
+ .weaponLine{font-size:11px;gap:5px}
+ #weaponSub{font-size:7px;line-height:1.25;letter-spacing:.3px}
+ #weaponSelect .weaponTabs button{font-size:7px;padding:5px}
+ .weaponLoadoutRow{gap:4px}
+}
+
+/* AFTERLIGHT v0.9 CINEMATIC COMBAT / UI ART DIRECTION */
+:root{--battle-cyan:#76fff4;--battle-violet:#af7bff;--hud-glass:#060d20ce}
+#screenBloom{position:fixed;inset:0;pointer-events:none;z-index:1;
+ background:radial-gradient(ellipse 34% 28% at 42% 8%,#9b75ff16,transparent 94%),
+ radial-gradient(ellipse 45% 43% at 84% 69%,#38ecff0c,transparent 90%);
+ mix-blend-mode:screen;opacity:.76;animation:cinematic-ambient 18s ease-in-out infinite alternate}
+@keyframes cinematic-ambient{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.04);opacity:.94}}
+#mainMenu{background:radial-gradient(ellipse at 79% 21%,#48307a3c,transparent 52%),
+ linear-gradient(105deg,#050510f8 25%,#081a24b3 56%,#090917dc 95%);overflow:hidden}
+#mainMenu:after{content:'';position:absolute;inset:0;pointer-events:none;
+ background:linear-gradient(125deg,transparent 32%,#91ffff08 47%,transparent 61%),
+ repeating-linear-gradient(90deg,transparent 0 83px,#a99bff05 84px 85px);
+ mix-blend-mode:screen}
+#mainMenu h1{letter-spacing:-.084em;text-shadow:0 0 21px #bf80ff26,0 18px 48px #0009}
+#mainMenu h1 em{background:linear-gradient(135deg,#f4ceff,#9c67ff 56%,#6dfbff);background-clip:text;-webkit-background-clip:text;color:transparent;filter:drop-shadow(0 0 12px #a84aff5a)}
+#mainMenu .subtitle{color:#c6e4f7;text-shadow:0 0 25px #72faff49}
+.menuDecoration .circle{border-color:#8ceaff42;box-shadow:0 0 60px #5acdf13f,inset 0 0 38px #ba80ff1b}
+.menuDecoration .holoCity span{background:linear-gradient(0deg,#0d244d91,#8666ce2b 74%,#bbebff22);
+ border-color:#a8d6ff37;box-shadow:inset 4px 0 15px #52c5e516,0 0 15px #88bbff15}
+#hud .vitals{background:linear-gradient(112deg,#05101ee8,#121535b5);
+ border-left:2px solid #67f9f6bb;box-shadow:0 0 32px #52cfff17,inset 0 0 16px #72baff06;
+ backdrop-filter:blur(8px)}
+.hud-center{filter:drop-shadow(0 1px 14px #6f9af641)}
+#weaponHud{background:linear-gradient(126deg,#080d22ee,#18132aca);
+ box-shadow:0 12px 35px #0009,0 0 31px #a87cff16;
+ border:1px solid #9fe8f128;border-right:3px solid #b58cff;border-radius:4px;
+ backdrop-filter:blur(13px)}
+#weaponHud .weaponLine{color:#f0faff;text-shadow:0 0 16px #8bc0ff45}
+#weaponSelect .weaponTabs button{transition:background .14s,box-shadow .14s;box-shadow:inset 0 0 8px #ffffff06}
+#weaponSelect .weaponTabs button.selected{box-shadow:0 0 17px #8bffef48,inset 0 0 12px #66dbff22}
+#radar{border-radius:100%;box-shadow:0 0 30px #7e72fc1f,inset 0 0 16px #14a8cf19}
+#aim .aimdot{box-shadow:0 0 15px 3px #7affee8c}
+#upgradeScreen .sheet{background:radial-gradient(ellipse 60% 42% at 75% 2%,#6b367351,transparent),
+ linear-gradient(135deg,#070e20f8,#181129f5);border:1px solid #77d5f75c;border-top:2px solid #99ffe0a8}
+#upgradeScreen .card{border-width:1px;box-shadow:inset 0 0 38px #6b95f313,0 8px 28px #0009}
+#upgradeScreen .card:after{filter:drop-shadow(0 0 7px #9fdaffb0)}
+#upgradeScreen .card.rarity-legendary{box-shadow:0 0 34px #e4aa7330,inset 0 0 30px #daa76f19}
+#upgradeScreen .card.rarity-epic{box-shadow:0 0 26px #c17cff26,inset 0 0 28px #a17dff10}
+#upgradeScreen .card.weaponCard{background:radial-gradient(ellipse at 15% 8%,#1b787953,transparent 54%),linear-gradient(136deg,#122d43,#080f25)}
+#bossWarning{position:absolute;z-index:9;top:18%;left:50%;transform:translateX(-50%);
+ min-width:min(360px,77vw);width:min(480px,82vw);padding:12px 18px 13px;
+ background:linear-gradient(120deg,#23080fea,#380b1bdc 55%,#1c0c20e4);
+ border:1px solid #ff797c9e;border-top:2px solid #ffd3be;box-shadow:0 0 60px #f3465a51,0 13px 36px #000b;
+ pointer-events:none;text-align:center;clip-path:polygon(0 0,98% 0,100% 15%,100% 100%,2% 100%,0 85%)}
+.bossWarningTop{display:flex;justify-content:space-between;color:#ffc1b3;font-size:9px;
+ font-weight:900;letter-spacing:2.1px;margin-bottom:5px}
+#bossWarningText{display:block;color:#fff3e8;font-size:clamp(15px,2vw,22px);
+ text-shadow:0 0 19px #ff696a;letter-spacing:2px;font-weight:1000}
+.bossChargeTrack{height:5px;background:#3b171a;margin:10px 0 8px;transform:skewX(-13deg);border:1px solid #ff969844}
+.bossChargeTrack>div{height:100%;width:var(--charge,0%);background:linear-gradient(90deg,#d84b74,#ffb9a2);
+ box-shadow:0 0 16px #ffa89d}
+.bossWarningHint{font-size:9px;letter-spacing:1.3px;color:#ffbcb4;font-weight:900}
+#bossWarning.firing{border-color:#ffded1;box-shadow:0 0 77px #ff3b6b8a,0 15px 48px #000c;animation:boss-fire-alert .21s ease-in-out infinite alternate}
+#bossWarning.firing .bossChargeTrack>div{width:100%;background:#fff7e2}
+@keyframes boss-fire-alert{from{filter:brightness(1);transform:translateX(-50%) scale(1)}to{filter:brightness(1.24);transform:translateX(-50%) scale(1.012)}}
+#objectiveCard{border-top:1px solid #8eefff3a;box-shadow:0 12px 38px #0009,0 0 21px #69fff117}
+#toast{filter:drop-shadow(0 0 7px #6df5e9ab)}
+#touchUI button{backdrop-filter:blur(6px)}
+body[data-sector="3"] #atmosphere{background:radial-gradient(ellipse at 50% 68%,#b7662219,transparent 66%)}
+body[data-sector="4"] #atmosphere{background:radial-gradient(ellipse at 57% 52%,#45bf7430,transparent 77%)}
+body[data-sector="6"] #atmosphere{background:radial-gradient(ellipse at 52% 45%,#d03b6040,transparent 76%)}
+@media(max-width:760px){
+ #bossWarning{top:23%;padding:8px 11px;width:min(370px,84vw)}
+ #bossWarningText{font-size:14px;letter-spacing:1.3px}
+ .bossWarningTop{font-size:7px;letter-spacing:1.2px}
+ .bossWarningHint{font-size:8px}
+ #mainMenu h1{font-size:clamp(47px,11vw,85px)}
+ #screenBloom{opacity:.45}
+}
+@media(prefers-reduced-motion:reduce){#screenBloom,#bossWarning.firing{animation:none}}
+
+/* V0.10 minimal in-combat information: hide decorative words, preserve critical gauges,
+   pause, weapon switching, interact progress and boss danger warning. */
+#combatScan,#missionLabel,#fusionLabel,#hud .topline,#weaponSub,#touchTip,
+#toast,#waveAnnounce,#combatFloats,
+#objectiveCard .objectiveHeading span:first-child,#objectiveName,
+#upgradeScreen .augmentSubline{display:none!important}
+#hud{grid-template-columns:1fr 1fr 1fr;gap:8px}
+#hud .hud-center{padding-top:6px}
+#hud .hud-stats{display:inline-flex;justify-content:center;min-width:72px;
+ padding:7px 10px;background:#071125ba;border:1px solid #78dcef38;
+ border-top:2px solid #8fefff6c;border-radius:4px;backdrop-filter:blur(7px)}
+#hud .hud-stats span:not(:first-child){display:none!important}
+#hud .hud-stats span:first-child{font-size:9px;letter-spacing:1.2px}
+#objectiveCard{top:max(92px,env(safe-area-inset-top));left:max(14px,env(safe-area-inset-left));
+ min-width:0;width:125px;max-width:125px;padding:7px 8px;border-radius:4px}
+#objectiveCard .objectiveHeading{margin:0;line-height:1;text-align:right;height:10px}
+#objectiveCard .objectiveHeading #objectiveArrow{font-size:9px}
+#objectiveCard #objectiveStatus{display:block;font-size:8px;margin:0 0 4px;text-align:center;letter-spacing:0}
+#objectiveCard #interactHint{display:none!important}
+#objectiveCard .objectiveMeter{margin:4px 0 0}
+#weaponHud{min-width:0;width:225px;max-width:39vw;padding:9px 10px}
+#weaponHud .weaponLine{font-size:12px;letter-spacing:.35px;gap:4px}
+#weaponHud .weaponLine span:last-child{display:none!important}
+#weaponSelect{margin-top:6px}
+#bossWarning .bossWarningTop,#bossWarning .bossWarningHint{display:none}
+#bossWarning{top:14%;padding:8px 13px;min-width:0;width:min(370px,70vw)}
+#bossWarningText{font-size:clamp(13px,2vw,18px);letter-spacing:.6px}
+.bossChargeTrack{margin:6px 0 1px}
+@media(max-width:760px){
+ #hud .hud-stats{min-width:53px;padding:4px 6px}
+ #hud .hud-stats span:first-child{font-size:8px}
+ #objectiveCard{top:max(80px,env(safe-area-inset-top));width:103px;max-width:103px;left:7px;padding:5px}
+ #weaponHud{width:185px;max-width:39vw;max-height:88px;overflow-y:auto;bottom:max(7px,env(safe-area-inset-bottom))}
+ #weaponHud .weaponLine{font-size:10px}
+ #weaponSelect .weaponTabs button{font-size:7px;padding:3px 5px}
+ #bossWarning{top:18%;width:min(330px,67vw);padding:7px 9px}
+ #bossWarningText{font-size:12px}
+}
+
+/* AFTERLIGHT V0.12 -- VIDEO-DRIVEN MOBILE HUD & CONTRAST PASS
+   Default phone layout no longer places a weapon card over FIRE/DASH/JUMP. */
+#loadoutToggle{display:none;cursor:pointer;align-items:center;justify-content:center;gap:5px;
+ color:#b8fff8;background:linear-gradient(135deg,#122639f3,#291b3cec);
+ border:1px solid #7cf9e87c;border-radius:4px;padding:6px 10px;font-size:9px;
+ font-weight:900;letter-spacing:1px;text-shadow:0 0 10px #4cead7aa}
+#loadoutToggle span{transition:transform .15s}
+body.armory-open #loadoutToggle span{transform:rotate(180deg)}
+#weaponHud{transition:background .17s,box-shadow .17s}
+#aim .aimdot{transition:background .1s,box-shadow .1s}
+#aim.targeting .aimdot{background:#ffab6d;box-shadow:0 0 11px 3px #ffa45caa}
+#aim.targeting .aimh,#aim.targeting .aimv{background:#ffc6a2}
+#hud .vitals{border-color:#78d6ec6b;background:#061124d9}
+#hud .meterline{letter-spacing:.55px}
+#screenBloom{opacity:.43;mix-blend-mode:screen}
+#vignette{opacity:.53}
+@media (max-width:1100px), (pointer:coarse){
+ #weaponHud{
+  left:40%!important;right:auto!important;bottom:max(9px,env(safe-area-inset-bottom))!important;
+  transform:translateX(-50%);width:176px!important;max-width:28vw!important;
+  min-width:0!important;max-height:none!important;padding:5px 7px 6px!important;
+  border:1px solid #68eaff6f;border-bottom:2px solid #87f5e0;
+  border-radius:7px;z-index:9;box-shadow:0 4px 20px #050a19aa;
+  overflow:visible!important;background:linear-gradient(125deg,#091225ec,#13182dd9)
+ }
+ #weaponHud .weaponLine{font-size:10px!important;line-height:1.1;letter-spacing:.12px;
+  white-space:nowrap;text-align:center;justify-content:center;overflow:hidden}
+ #weaponTitle{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+ #weaponHud #loadoutToggle{display:flex;width:100%;padding:4px 5px;margin-top:3px;font-size:8px}
+ #weaponSelect{display:none!important;position:absolute;bottom:calc(100% + 4px);
+  left:0;right:0;flex-direction:column;gap:4px;max-height:38dvh;overflow-y:auto;
+  background:#081126f5;border:1px solid #68dff3a6;border-radius:6px;padding:8px;
+  box-shadow:0 0 22px #070b1caa}
+ body.armory-open #weaponSelect{display:flex!important}
+ #weaponSelect .weaponLoadoutRow{align-items:stretch;flex-direction:column;gap:3px}
+ #weaponSelect .loadoutLabel{color:#78ebdc;font-size:8px}
+ #weaponSelect .weaponTabs{overflow-x:auto;max-width:100%}
+ #weaponSelect .weaponTabs button{font-size:9px!important;min-height:28px;min-width:36px}
+ #touchUI button{touch-action:none}
+ #shootButton{right:5%;bottom:23%;width:86px;height:86px}
+ #dashButton{right:29%;bottom:6%;width:63px;height:63px}
+ #focusButton,#jumpButton{z-index:6}
+ #upgradeScreen .sheet>p{display:none}
+ #upgradeScreen .sheet{max-height:95dvh;overflow-y:auto}
+ #upgradeScreen .sheet h2{margin:5px 0 10px}
+ #upgradeScreen .card{padding:10px;min-height:148px}
+ #upgradeScreen .card strong{line-height:1.2}
+}
+@media (orientation:portrait) and (max-width:850px){
+ #weaponHud{left:50%!important;bottom:21%!important;max-width:44vw!important}
+ #weaponSelect{max-height:26dvh}
+}
+@media (orientation:landscape) and (max-height:440px){
+ #weaponHud{bottom:5px!important;max-width:27vw!important;padding:4px 5px!important}
+ #weaponHud .weaponLine{font-size:9px!important}
+ #weaponHud #loadoutToggle{font-size:7px;padding:3px}
+ #weaponSelect{max-height:50dvh}
+ #hud .vitals{padding:5px 9px}
+}
+
+/* v0.13: remove intrusive upper text overlays and menu copy; keep gameplay vital
+   meters, pause button, radar, action buttons, title and actual menu choices. */
+#hud .topline,#hud .hud-center,#combatScan,#waveAnnounce,#toast,
+#mainMenu .eyebrow,#mainMenu .subtitle,#mainMenu .intro,
+#mainMenu .menuFoot,#mainMenu .menuDecoration .decText{display:none!important}
+#hud{grid-template-columns:minmax(0,210px) 1fr;gap:8px;align-items:start}
+#hud .hud-left{max-width:190px;min-width:120px}
+#hud .vitals{
+ padding:6px 9px 3px!important;min-width:0;border:1px solid #82a9d43d;
+ border-left:2px solid #71eedda0;border-radius:3px;
+ background:#070e1da8;box-shadow:inset 0 0 12px #4164a215;
+ backdrop-filter:blur(4px)
+}
+#hud .meterline{grid-template-columns:1fr 28px;gap:6px;margin-bottom:5px}
+#hud .meterline b{display:none!important}
+#hud .meterline strong{font-size:9px;color:#c6e7f2}
+#hud .meter{height:6px}
+#hud .hud-right{grid-column:2;grid-row:1}
+#objectiveCard .objectiveHeading,#objectiveCard #objectiveStatus,
+#objectiveCard #objectiveName,#objectiveCard #interactHint{display:none!important}
+#objectiveCard{padding:4px!important;width:42px!important;max-width:42px!important;
+ min-width:42px!important;box-shadow:0 0 12px #53b8ea25}
+#objectiveCard .objectiveMeter{margin:0!important;height:3px}
+#mainMenu .menuInner{
+ width:min(760px,91vw);max-width:91vw;
+ text-align:center;margin:0!important;display:flex;flex-direction:column;
+ align-items:center;justify-content:center;gap:20px;
+ filter:drop-shadow(0 12px 27px #07031b8e)
+}
+#mainMenu h1{
+ margin:0!important;font-size:clamp(54px,9.8vw,116px);
+ text-shadow:0 12px 35px #03040fdf,0 0 36px #7188f741;
+ line-height:.87
+}
+#mainMenu .menuActions{
+ margin-top:16px;display:flex;gap:12px;justify-content:center;
+ width:100%;max-width:560px
+}
+#mainMenu .menuActions button{min-width:185px;max-width:280px;flex:1}
+#mainMenu .menuDecoration{opacity:.37!important;filter:blur(.5px);z-index:0}
+#mainMenu .menuDecoration .holoCity{opacity:.5}
+#mainMenu:before{opacity:.28}
+#mainMenu .intro{display:none}
+#soundButton{font-weight:850;letter-spacing:.5px}
+@media(max-width:760px){
+ #hud{left:max(7px,env(safe-area-inset-left));right:max(7px,env(safe-area-inset-right))}
+ #hud .hud-left{max-width:145px;min-width:104px}
+ #hud .vitals{padding:4px 7px 1px!important}
+ #hud .meterline{margin-bottom:3px;gap:4px;grid-template-columns:1fr 23px}
+ #hud .meterline strong{font-size:8px}
+ #hud .meter{height:5px}
+ #mainMenu .menuActions{gap:7px;flex-wrap:wrap}
+ #mainMenu .menuActions button{padding:11px 13px;min-width:135px;font-size:10px}
+ #mainMenu .menuInner{gap:12px}
+ #mainMenu h1{font-size:clamp(44px,10vw,74px)}
+ #mainMenu .menuDecoration{width:75vw;right:-12vw;opacity:.25!important}
+}
+@media(max-height:450px) and (orientation:landscape){
+ #mainMenu .menuInner{gap:6px}
+ #mainMenu h1{font-size:clamp(52px,8.4vw,86px)}
+ #mainMenu .menuActions{margin-top:7px}
+ #mainMenu .menuActions button{padding:9px 12px}
+ #hud .meterline{margin-bottom:2px}
+}
+
+/* AFTERLIGHT v0.14: original real-time cinematic opening.
+   This is a transparent overlay over the REAL WebGL2 scene, not a video
+   loading screen, stock picture or fake animation. */
+#cinematicIntro{z-index:24;isolation:isolate;background:transparent!important;
+ display:block;overflow:hidden;pointer-events:auto;color:#edf8ff;
+ filter:none;text-shadow:0 2px 18px #000c}
+#cinematicIntro:before{content:'';position:absolute;inset:0;pointer-events:none;
+ background:linear-gradient(180deg,#01030ac6 0%,transparent 24%,transparent 67%,#01030ad5 100%),
+ radial-gradient(ellipse at 52% 42%,transparent 25%,#02040cb8 110%);z-index:1}
+#cinematicIntro:after{content:'';position:absolute;inset:0;pointer-events:none;opacity:.18;
+ background:repeating-linear-gradient(0deg,transparent 0,transparent 2px,#8fe7fb0c 3px);
+ mix-blend-mode:screen;z-index:2}
+.cinemaTopBar,.cinemaBottomBar{position:absolute;left:0;right:0;height:6.7%;background:#020308;
+ z-index:4;pointer-events:none}
+.cinemaTopBar{top:0;border-bottom:1px solid #78c9e126}
+.cinemaBottomBar{bottom:0;border-top:1px solid #78c9e126}
+#cinemaAmbient{position:absolute;inset:7% 0;pointer-events:none;z-index:1;opacity:.45;
+ background:radial-gradient(ellipse 46% 34% at 75% 41%,#7349d52a,transparent 100%),
+ radial-gradient(ellipse 32% 40% at 23% 58%,#20c5ef25,transparent 100%);
+ mix-blend-mode:screen;animation:intro-breath 3.4s ease-in-out infinite alternate}
+#cinemaFlash{position:absolute;inset:6.7% 0;z-index:3;pointer-events:none;
+ background:radial-gradient(ellipse at 51% 49%,#ccf7ff 0,#9cbaff 25%,#7038b7 58%,transparent 84%);
+ opacity:var(--cineflash,0);mix-blend-mode:screen}
+#cinemaCaption{position:absolute;left:max(7.5vw,22px);bottom:16%;z-index:5;
+ border-left:3px solid #81ffe9;padding:8px 14px;max-width:min(590px,76vw);
+ background:linear-gradient(90deg,#061121b5,#06112100);
+ opacity:1;transform:translateY(0);transition:opacity .42s ease,transform .42s ease;
+ pointer-events:none}
+#cinemaCaption small{display:block;font-size:clamp(8px,1vw,10px);color:#9af7e3;
+ letter-spacing:4px;font-weight:900;margin-bottom:5px}
+#cinemaCaption strong{display:block;font-size:clamp(15px,2.8vw,32px);font-weight:950;
+ letter-spacing:.07em;line-height:1.08;color:#fff7fb;filter:drop-shadow(0 0 18px #60cbff55)}
+#cinemaLogo{position:absolute;inset:13% 10% 17%;display:flex;flex-direction:column;
+ align-items:center;justify-content:center;text-align:center;z-index:5;pointer-events:none;
+ opacity:0;transform:scale(1.22);filter:blur(8px);
+ transition:opacity 1.0s ease,transform 1.1s cubic-bezier(.16,.82,.18,1),filter 1.05s ease}
+#cinemaLogo small{font-size:clamp(8px,1.15vw,11px);color:#9bffe7;font-weight:800;
+ letter-spacing:clamp(2px,.44vw,6px);margin-bottom:16px}
+#cinemaLogo strong{font-size:clamp(42px,8vw,103px);font-weight:1000;line-height:.86;
+ letter-spacing:-.07em;text-shadow:0 0 65px #71aaff75,0 14px 22px #01010be1}
+#cinemaLogo strong em{font-style:normal;color:#92eaff;
+ text-shadow:0 0 36px #a466ffe0}
+#cinemaLogo span{font-size:clamp(14px,2.4vw,27px);color:#b6c7ff;font-weight:900;
+ letter-spacing:clamp(5px,1.4vw,18px);margin-top:16px;text-shadow:0 0 27px #8a4affb2}
+#cinematicIntro[data-shot="title"] #cinemaLogo{opacity:1;transform:scale(1);
+ filter:blur(0)}
+#cinematicIntro[data-shot="title"] #cinemaCaption{opacity:0;transform:translateY(12px)}
+.cinemaControls{position:absolute;top:calc(6.7% + 12px);right:max(3.5vw,12px);z-index:7;
+ display:flex;gap:10px;align-items:center}
+.cinemaControls button{padding:10px 13px;border-radius:3px;
+ background:#050a17aa;border:1px solid #9dc9e052;color:#c8f3fa;
+ font-size:clamp(9px,1vw,12px);font-weight:850;letter-spacing:1.25px;
+ backdrop-filter:blur(8px);box-shadow:0 0 17px #14172a52;touch-action:manipulation}
+.cinemaControls button:active{transform:scale(.96)}
+.cinemaControls #cinemaSkip{border-color:#7aeed5a9}
+.cinemaControls #cinemaAudio{border-color:#a88bfc84}
+.cinemaControls button span{margin-left:7px}
+#cinemaProgress{position:absolute;bottom:6.7%;left:0;right:0;height:3px;
+ background:#2435499b;z-index:5;pointer-events:none}
+#cinemaProgressFill{height:100%;width:var(--cine-progress,0%);
+ background:linear-gradient(90deg,#478bf9,#77fff0,#d6aeff);
+ box-shadow:0 0 12px 2px #75f3efaa}
+@keyframes intro-breath{from{opacity:.2;transform:scale(1)}to{opacity:.66;transform:scale(1.08)}}
+#mainMenu.menu-arrive .menuInner{animation:menu-cine-arrive .6s ease-out both}
+@keyframes menu-cine-arrive{from{opacity:0;transform:translateY(14px) scale(.984)}
+ to{opacity:1;transform:translateY(0) scale(1)}}
+#replayIntroButton{background:transparent;border:0;color:#b8d4e3a3;
+ letter-spacing:1.9px;font-size:10px;font-weight:850;padding:7px 14px;
+ transition:color .15s ease,filter .15s ease}
+#replayIntroButton:active,#replayIntroButton:hover{color:#c9fdf3;filter:drop-shadow(0 0 8px #83fbf88a)}
+@media(max-height:470px) and (orientation:landscape){
+ #cinemaCaption{bottom:15%;padding:6px 11px}
+ #cinemaCaption strong{font-size:clamp(15px,3vw,26px)}
+ #cinemaLogo small{margin-bottom:6px}
+ #cinemaLogo span{margin-top:7px}
+ .cinemaControls button{padding:7px 10px;font-size:9px}
+ #cinemaLogo strong{font-size:clamp(39px,8vw,76px)}
+}
+@media(max-width:650px){
+ .cinemaControls{top:calc(6.7% + 8px);gap:6px}
+ .cinemaControls button{padding:7px 9px;letter-spacing:.5px;font-size:9px}
+ #cinemaCaption small{letter-spacing:2px}
+ #cinemaCaption strong{font-size:clamp(15px,4.4vw,24px)}
+ #cinemaLogo{inset:20% 5%}
+ #replayIntroButton{font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){
+ #cinemaAmbient,#mainMenu.menu-arrive .menuInner{animation:none}
+ #cinemaLogo,#cinemaCaption{transition:none}
+}
+
+/* AFTERLIGHT v0.15: four authored, performance-capped, skippable boss arrivals.
+   Gameplay is fully frozen during reveal; the combat canvas stays visible. */
+#bossEntrance{position:fixed;inset:0;z-index:25;pointer-events:none;isolation:isolate;
+  --boss-accent:#ae85ff;--boss-accent-rgb:174,133,255;
+  background:radial-gradient(ellipse at 50% 45%,transparent 20%,#0304116b 90%);
+}
+#bossEntrance[data-archetype="behemoth"]{--boss-accent:#ffad55;--boss-accent-rgb:255,173,85}
+#bossEntrance[data-archetype="overseer"]{--boss-accent:#78ffbc;--boss-accent-rgb:120,255,188}
+#bossEntrance[data-archetype="colossus"]{--boss-accent:#ff668e;--boss-accent-rgb:255,102,142}
+#bossEntrance:before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(ellipse at 50% 53%,rgba(var(--boss-accent-rgb),.06),transparent 65%);
+  animation:boss-intro-glow 2.4s ease-in-out both}
+.bossLetterbox{position:absolute;left:0;right:0;height:8.2%;background:linear-gradient(#010207,#04050b);
+  box-shadow:0 0 24px #02030c;animation:boss-letterbox .45s ease-out both}
+.bossTop{top:0;border-bottom:1px solid rgba(var(--boss-accent-rgb),.30)}
+.bossBottom{bottom:0;border-top:1px solid rgba(var(--boss-accent-rgb),.30)}
+.bossIntroAccent{position:absolute;left:8%;right:8%;top:15%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--boss-accent),transparent);
+  box-shadow:0 0 25px var(--boss-accent);opacity:.75}
+.bossIntroCopy{position:absolute;left:6.5%;right:6.5%;bottom:13%;text-align:center;
+  text-shadow:0 4px 34px #000,0 0 26px rgba(var(--boss-accent-rgb),.48);
+  animation:boss-typography .55s ease-out both}
+.bossIntroCopy small{font-size:clamp(9px,1vw,12px);font-weight:900;letter-spacing:.45em;
+  color:var(--boss-accent);text-transform:uppercase}
+.bossIntroCopy h2{margin:8px 0 5px;font-size:clamp(31px,6.2vw,80px);font-weight:1000;
+  letter-spacing:.045em;line-height:.95;color:#fff9ff;transform:scaleX(1.03)}
+.bossIntroCopy p{margin:9px 0;font-size:clamp(9px,1.2vw,13px);font-weight:850;
+  letter-spacing:.25em;color:#e8e4fa}
+#bossEntranceSkip{position:absolute;right:max(15px,env(safe-area-inset-right));top:calc(8.2% + 12px);
+  pointer-events:auto;touch-action:manipulation;cursor:pointer;border:1px solid rgba(var(--boss-accent-rgb),.7);
+  color:#fff;background:#070816d9;border-radius:4px;padding:10px 14px;
+  font-size:10px;font-weight:900;letter-spacing:1px;box-shadow:0 0 25px #000a}
+#bossEntranceSkip:active{transform:scale(.97)}
+body.boss-intro-active #hud,body.boss-intro-active #touchUI,
+body.boss-intro-active #weaponHud,body.boss-intro-active #objectiveCard,
+body.boss-intro-active #aim,body.boss-intro-active #bossWarning,
+body.boss-intro-active #combatScan{opacity:0;pointer-events:none}
+@keyframes boss-intro-glow{0%{opacity:0}35%{opacity:1}100%{opacity:.9}}
+@keyframes boss-letterbox{from{transform:scaleY(.2);opacity:.2}to{transform:scaleY(1);opacity:1}}
+@keyframes boss-typography{from{opacity:0;transform:translateY(25px);filter:blur(8px)}
+ to{opacity:1;transform:translateY(0);filter:blur(0)}}
+@media(max-width:720px){
+ .bossLetterbox{height:7%}.bossIntroCopy{bottom:13%;left:4%;right:4%}
+ .bossIntroCopy h2{font-size:clamp(30px,7vw,56px);letter-spacing:0}
+ .bossIntroCopy small{letter-spacing:2px}
+ .bossIntroCopy p{font-size:9px;letter-spacing:1.5px}
+ #bossEntranceSkip{top:calc(7% + 8px);padding:8px 11px}
+}
+@media(prefers-reduced-motion:reduce){
+ #bossEntrance:before,.bossLetterbox,.bossIntroCopy{animation:none}
+}
+
+/* AFTERLIGHT v0.16 multi-part boss — small readable vitals, not a full-screen HUD. */
+#puppetVitals{position:fixed;top:max(65px,12%);left:50%;transform:translateX(-50%);z-index:8;
+ width:min(450px,58vw);padding:8px 12px 10px;background:linear-gradient(90deg,#03070be8,#10102bc4,#03070be8);
+ border:1px solid #845c9b68;box-shadow:0 6px 30px #03030b9a;pointer-events:none;
+ text-align:center}
+#puppetVitals>strong{display:flex;align-items:center;justify-content:space-between;gap:12px;
+ font-size:11px;font-weight:950;color:#faeaff;letter-spacing:1.5px;text-shadow:0 0 9px #7735a055}
+#puppetVitals>strong small{font-size:8px;color:#f49f9f;letter-spacing:1px}
+.puppetMeters{display:grid;grid-template-columns:1fr 1.08fr 1fr;gap:9px;margin-top:9px}
+.puppetMeter{display:flex;align-items:center;gap:5px;min-width:0}
+.puppetMeter span{font-size:8px;font-weight:850;color:#a2b6c9;letter-spacing:.5px}
+.puppetMeter i{display:block;flex:1;height:5px;background:#131526;overflow:hidden;transform:skewX(-12deg)}
+.puppetMeter i b{display:block;height:100%;width:100%;background:linear-gradient(90deg,#632da3,#e384ff);
+ box-shadow:0 0 9px #b06eff}
+.puppetMeter:first-child i b{background:linear-gradient(90deg,#a62043,#fd677e)}
+.puppetMeter:last-child i b{background:linear-gradient(90deg,#2056a1,#5abaf8)}
+#puppetVitals.exposed{border-color:#f95b717b}
+#puppetVitals.exposed .puppetMeter:nth-child(2) i b{background:linear-gradient(90deg,#ff643c,#ffd5ab)}
+body.boss-intro-active #puppetVitals{display:none}
+@media(max-width:740px){#puppetVitals{top:max(45px,11%);width:55vw;padding:5px 7px}
+ #puppetVitals>strong{font-size:8px;letter-spacing:.5px}
+ #puppetVitals>strong small{font-size:7px;letter-spacing:0}
+ .puppetMeters{gap:3px;margin-top:5px}.puppetMeter{gap:2px}.puppetMeter span{font-size:6px}
+ .puppetMeter i{height:4px}}
+
+/* AFTERLIGHT 0.17: compact persistent progression browser. */
+.archiveSheet{max-width:min(760px,94vw);max-height:92vh;overflow-y:auto;
+ scrollbar-width:thin;padding:clamp(18px,4vw,34px);text-align:left}
+.archiveSheet h2{margin:5px 0 12px;font-size:clamp(25px,5vw,47px);letter-spacing:.035em}
+.archiveSheet p{font-size:clamp(12px,1.45vw,15px);color:#c6cadd;max-width:640px;line-height:1.55}
+.archiveOverview{padding:12px 14px;border:1px solid #6571a145;background:#0b1020aa;
+ font-size:12px;font-weight:800;letter-spacing:.5px;margin:12px 0}
+#archiveCount{display:block;margin:12px 0;color:#b2deff;font-size:14px}
+.archiveList{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;
+ max-height:40vh;overflow-y:auto;margin:12px 0 18px}
+.archiveEntry{display:flex;flex-direction:column;gap:4px;padding:9px 11px;
+ border:1px solid #6774a24a;background:linear-gradient(100deg,#151a2ce0,#0a0e1dd9);
+ min-width:0;box-shadow:inset 3px 0 #965cbb77}
+.archiveEntry strong{color:#f0f0ff;font-size:11px;line-height:1.2}
+.archiveEntry small{color:#9fb6d1;font-size:9px;line-height:1.5}
+.unlockRecap{color:#aee1ff!important;font-weight:800;line-height:1.6}
+.rarity-mythic{border-color:#ffbb5ca0!important;box-shadow:inset 0 0 22px #cd7d2f2b,0 0 14px #ffbc5a1c}
+.rarity-mythic .tag{color:#ffd689!important}
+@media(max-width:680px){.archiveList{grid-template-columns:1fr;max-height:34vh}
+ .archiveSheet{padding:15px}.archiveOverview{font-size:10px}}
+
+.archiveTools{display:flex;gap:8px;margin:12px 0}
+.archiveTools input,.archiveTools select{flex:1;min-width:0;background:#0c1123;color:#e5eafe;
+ border:1px solid #64749a88;padding:9px 11px;border-radius:3px;font-size:12px}
+.archiveEntry.acquired{box-shadow:inset 4px 0 #66f9cf90}
+.archiveEntry.locked{opacity:.82}
+#archiveShowing{display:block;font-size:10px;color:#9faac8;margin:6px 0 10px}
+#archiveMore{margin-bottom:14px}
+@media(max-width:680px){.archiveTools{flex-direction:column;gap:6px}}
+
+
+/* AFTERLIGHT v0.20: final-pass motion and visual hierarchy, tuned for
+   landscape touch devices. Decorative UI never intercepts aiming input. */
+#mainMenu .menuInner{
+ position:relative;isolation:isolate;
+ filter:drop-shadow(0 1px 12px rgba(3,6,17,.65));
+}
+#mainMenu .menuInner::before{
+ content:"";position:absolute;inset:-28px -36px;z-index:-1;
+ background:radial-gradient(ellipse at 18% 48%,rgba(11,18,38,.88),
+  rgba(7,9,21,.46) 55%,transparent 86%);
+ pointer-events:none;
+}
+#mainMenu .subtitle{
+ text-shadow:0 0 12px rgba(126,228,235,.32);
+ animation:afterlight-logo-breathe 7s ease-in-out infinite alternate;
+}
+@keyframes afterlight-logo-breathe{
+ from{letter-spacing:clamp(4px,1.15vw,9px);opacity:.77}
+ to{letter-spacing:clamp(5px,1.28vw,10px);opacity:.99}
+}
+#mainMenu .menuActions button,
+#mainMenu #replayIntroButton,
+#upgradeScreen .cards button,
+#pauseScreen .sheet button,
+#endScreen .sheet button{
+ -webkit-tap-highlight-color:transparent;
+ transition:transform .19s cubic-bezier(.15,.7,.26,1),
+ border-color .19s ease,background .19s ease,box-shadow .19s ease;
+}
+#mainMenu .menuActions button:active,
+#upgradeScreen .cards button:active,
+#pauseScreen .sheet button:active,
+#endScreen .sheet button:active{transform:translateY(2px) scale(.987);}
+#mainMenu .menuActions button:focus-visible,
+#pauseScreen .sheet button:focus-visible,
+#endScreen .sheet button:focus-visible,
+#upgradeScreen .cards button:focus-visible{
+ outline:2px solid #bdfaf2;outline-offset:3px;
+}
+#upgradeScreen .sheet,#pauseScreen .sheet,#endScreen .sheet,
+#archiveScreen .archiveSheet{
+ backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);
+ box-shadow:0 22px 120px #000b,0 0 62px #6652a12f,
+ inset 0 1px 0 #b8d9ff29;
+}
+#bossEntrance .bossIntroCopy,#cinematicIntro #cinemaCaption{
+ text-shadow:0 3px 22px #010207f2,0 0 20px #080c13a6;
+}
+#touchUI button{
+ -webkit-tap-highlight-color:transparent;
+ touch-action:manipulation;
+}
+@media(max-height:430px) and (orientation:landscape){
+ #mainMenu .menuInner{max-height:94dvh;overflow-y:auto;padding-bottom:10px;}
+ #mainMenu .intro{margin:12px 0 13px;line-height:1.42;}
+ #mainMenu .menuActions{gap:8px;}
+ #mainMenu .menuFoot{margin-top:10px;}
+ #upgradeScreen .sheet,#archiveScreen .sheet,#pauseScreen .sheet,
+ #endScreen .sheet{max-height:93dvh;overflow:auto;overscroll-behavior:contain;}
+}
+@media(prefers-reduced-motion:reduce){
+ #mainMenu .subtitle{animation:none;}
+ #mainMenu .menuActions button,#upgradeScreen .cards button{
+  transition:none;
+ }
+}
+
+/* AFTERLIGHT v0.21 - Hell Breach portal, accessible opt-out and calm menus. */
+#hellSkipButton{margin-top:7px;padding:9px 11px;font-size:10px;
+ font-weight:850;letter-spacing:1.1px;color:#ecd2d7;
+ border:1px solid #b9788259;background:#270b16d9;
+ touch-action:manipulation;max-width:100%;
+ box-shadow:inset 0 1px 0 #e96b7a2a}
+#hellSkipButton:active{background:#542130}
+body.hell-breach #vignette{box-shadow:inset 0 0 min(24vw,190px) 20px rgba(0,0,0,.78)}
+body.hell-breach #atmosphere,body.hell-breach #lensFlare{
+ opacity:.12!important;animation:none!important}
+body.hell-breach #combatScan{opacity:.08}
+body.hell-breach #objectiveCard{border-color:#883742b3;background:#1b0910ed}
+body.hell-breach #objectiveHeading{color:#db6779}
+body.hell-breach #aim{filter:drop-shadow(0 0 4px #b51433)}
+#bossEntrance[data-archetype="wallmaw"]{
+ --boss-accent:#b81c35;--boss-accent-rgb:184,28,53;
+ background:radial-gradient(ellipse at 50% 42%,transparent 14%,#0b010fdc 88%)}
+@media(max-height:430px) and (orientation:landscape){
+ #hellSkipButton{padding:7px 9px;font-size:9px;}
+}
+@media(prefers-reduced-motion:reduce){
+ body.hell-breach #vignette{transition:none}
+}
+/* v0.27 private QA lab menu, compact and separate from career launch. */
+.testLabButton{padding:10px 12px;border-color:#ba81cd99;color:#e8c3f5;background:#150d28cc;font-size:10px}
+.testLabPanel{margin-top:11px;padding:13px 15px;border:1px solid #ac78d177;background:linear-gradient(135deg,#140d23ee,#0a101ff2);box-shadow:0 12px 24px #0007;border-radius:6px;max-width:580px}
+.testLabNotice{font-size:10px;letter-spacing:1.3px;font-weight:800;line-height:1.5;color:#bdb6d2;margin-bottom:9px}
+.testLabActions{display:flex;flex-wrap:wrap;gap:9px}
+.testLabActions button{font-size:10px;padding:10px 15px;min-height:42px}
+@media(max-width:620px){.testLabPanel{padding:10px}.testLabNotice{font-size:9px;letter-spacing:.7px}.testLabActions button{font-size:9px}}
+
+/* AFTERLIGHT v0.40 — Celestial Court: separate visual language from Hell.
+   UI indicators stay legible and damage warnings remain intact. */
+body.heaven-sanctum #world{
+  background:radial-gradient(ellipse at 50% 32%,#e9e4d6,#849bbf 72%,#374963);
+}
+body.heaven-sanctum #vignette{
+  box-shadow:inset 0 0 min(11vw,110px) 6px #596b8e29;
+  background:linear-gradient(90deg,#c3c4d812,transparent 21%,transparent 79%,#d5c7a81c);
+}
+body.heaven-sanctum #noise{opacity:.026;mix-blend-mode:soft-light}
+body.heaven-sanctum #screenBloom{opacity:.16}
+
+
+/* v0.46 Startup integrity: cinematic owns the first frame. A rendered menu must
+   never flash behind WebView's bootstrap or before finishOpening is called. */
+body:not(.afterlight-intro-finished) #mainMenu{visibility:hidden!important;pointer-events:none!important}
+body.afterlight-intro-finished #mainMenu:not(.hidden){visibility:visible}
+#cinematicIntro{background:radial-gradient(ellipse at 49% 42%,#090a22ab,#010208e0 100%);will-change:opacity}
+#cinematicIntro:before{background:
+ linear-gradient(180deg,#01030df2 0%,transparent 18%,transparent 64%,#020310ec 100%),
+ radial-gradient(ellipse at 45% 41%,transparent 16%,#080526aa 110%)!important}
+#cinematicIntro .cinemaTopBar,#cinematicIntro .cinemaBottomBar{
+ background:linear-gradient(90deg,#02040a,#080c1e 42%,#02040a);
+ border-color:#83dcfc44;box-shadow:0 0 24px #48c0ff15}
+#cinematicIntro[data-shot="titan"]{--cinema-accent:#d8b1ff}
+#cinematicIntro[data-shot="surge"]{--cinema-accent:#9df9ff}
+#cinematicIntro[data-shot="title"]{--cinema-accent:#ffd5fc}
+#cinematicIntro #cinemaCaption{filter:drop-shadow(0 2px 15px #000b)}
+#cinematicIntro #cinemaCaption strong{text-shadow:0 0 22px var(--cinema-accent,#85f5ee)}
+@media (prefers-reduced-motion:reduce){
+ #cinematicIntro *{animation-duration:.001ms!important}
+}
+/* Full-coverage world transition while the Android GLB and actor materials are
+   decoded on the game thread; no meadow half-render or exposed menu. */
+#afterlightWorldLoading{position:fixed;inset:0;z-index:790;display:grid;
+ place-items:center;pointer-events:auto;color:#e9fcff;text-align:center;
+ background:radial-gradient(ellipse at 50% 30%,#254c5a 0%,#061722 43%,#020812 100%);
+ font-family:system-ui,sans-serif;opacity:1;transition:opacity .42s ease}
+#afterlightWorldLoading.hidden{display:none!important}
+#afterlightWorldLoading .worldload-title{font-weight:900;
+ font-size:clamp(27px,5vw,49px);letter-spacing:.10em;text-shadow:0 0 30px #9ae6df66}
+#afterlightWorldLoading .worldload-detail{color:#c2e0dc;font-size:12px;
+ letter-spacing:.18em;margin-top:16px}
+#afterlightWorldLoading .worldload-track{width:min(420px,74vw);height:4px;
+ background:#426d7890;border-radius:9px;margin:23px auto 0;overflow:hidden}
+#afterlightWorldLoading .worldload-track span{display:block;width:0;height:100%;
+ background:linear-gradient(90deg,#69b9bb,#e3fbd6);box-shadow:0 0 12px #a1f7d7;
+ transition:width .26s ease}
+
+
+/* AFTERLIGHT PC v0.51: real cursor access to upgrades/weapon selection
+ * and compact live checkpoint collection on the title screen. */
+body:has(#afterlightPcCollection) #mainMenu .menuInner{
+ max-height:100dvh;overflow-y:auto;overscroll-behavior:contain;padding-bottom:20px;
+ scrollbar-width:thin;scrollbar-color:#805ca7 #141529;
+}
+#afterlightPcCollection{
+ width:min(775px,88vw);max-width:100%;margin:15px 0 10px;
+ padding:14px;border:1px solid #9579bf7a;border-radius:15px;
+ background:linear-gradient(145deg,#14172de6,#281c3bdb);
+ color:#ecf3ff;box-shadow:0 7px 28px #0007;
+}
+.afterlightPcCollectionTop{display:flex;align-items:center;gap:10px;
+ justify-content:space-between;flex-wrap:wrap}
+.afterlightPcCollectionTop strong{font-size:13px;letter-spacing:.13em;color:#f3d4ff}
+.afterlightPcCollectionTop small{color:#8deded;font-size:11px;letter-spacing:.04em}
+.afterlightPcCollectionGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:9px;margin-top:10px}
+.afterlightPcCollectionGrid details{border:1px solid #b5c3ff36;border-radius:10px;
+ background:#0b1022ab;min-width:0}
+.afterlightPcCollectionGrid summary{cursor:pointer;font-size:10px;font-weight:850;
+ letter-spacing:.08em;padding:9px;color:#c6b9fa;user-select:none}
+.afterlightPcCollectionItems{max-height:124px;overflow-y:auto;padding:3px 8px 9px;
+ display:flex;flex-wrap:wrap;gap:5px;align-content:flex-start;scrollbar-width:thin}
+.collectedItem,.emptyItem{padding:4px 6px;border:1px solid #9ab4e34b;
+ border-radius:5px;font-size:10px;line-height:1.28;color:#e6f9ff;
+ background:#4651852c;overflow-wrap:anywhere}
+.emptyItem{color:#90a5b6;font-style:italic}
+body.afterlight-gamepad-active button:focus-visible,
+body.afterlight-gamepad-active button:focus{outline:2px solid #7bffff!important;
+ outline-offset:3px;box-shadow:0 0 17px #77fefe7a!important}
+body.afterlight-pc-menu-cursor #world{cursor:default!important}
+#upgradeScreen, #afterlightWaveReport,#pauseScreen,#mainMenu{cursor:default}
+@media(max-width:680px){
+ .afterlightPcCollectionGrid{grid-template-columns:1fr;gap:5px}
+ #afterlightPcCollection{width:min(540px,90vw);padding:9px}
+ .afterlightPcCollectionItems{max-height:75px}
+}
+
+
+/* PC HUD neon feedback, fixed above all 3D meshes without pointer capture. */
+#afterlightPcHealthLayer{position:fixed;inset:0;z-index:112;pointer-events:none;
+ font-family:system-ui,"Segoe UI",sans-serif;user-select:none}
+.afterlightTargetHealth{position:absolute;top:0;left:0;height:20px;
+ will-change:transform,opacity;filter:drop-shadow(0 0 10px #07ffff96)}
+.afterlightTargetHealthTrack{position:absolute;inset:3px 0 4px;
+ border:1px solid #abfaff;border-radius:5px;background:#020916eb;
+ box-shadow:0 0 0 1px #22466fb0,0 0 12px #07dfff50;
+ overflow:hidden;transform:skewX(-9deg)}
+.afterlightTargetHealthTrail{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,#f9f99f,#fff9e5);
+ box-shadow:0 0 12px #fffaaa90;transition:width .22s ease-out}
+.afterlightTargetHealthFill{position:absolute;inset:1px auto 1px 0;
+ border-radius:2px;background:linear-gradient(90deg,#46fff0,#00c1ff,#ff35e9);
+ box-shadow:0 0 14px #36f8f9,0 0 5px #ffffff99;transition:width .08s linear}
+.afterlightTargetHealthPip{position:absolute;right:3px;top:-3px;
+ font:900 10px system-ui;color:#fffdf2;text-shadow:0 0 5px #040e1b,0 0 6px #ec63fa;
+ transform:skewX(9deg)}
+#afterlightBossHealth{position:absolute;top:max(20px,env(safe-area-inset-top));left:50%;
+ transform:translateX(-50%);width:min(800px,62vw);padding:11px 18px 16px;
+ border:1px solid #c772ff82;border-top:2px solid #6df8ff;
+ border-radius:0 0 22px 22px;box-sizing:border-box;
+ background:linear-gradient(145deg,#080a1be5,#1c0b31e3);
+ box-shadow:0 8px 38px #0009,0 0 28px #5ddcff36;
+ backdrop-filter:blur(4px);display:none}
+.afterlightBossHealthCaption{display:grid;grid-template-columns:1fr auto;
+ align-items:baseline;gap:3px;color:#eef5ff;text-shadow:0 0 14px #61baff80}
+.afterlightBossHealthCaption span{grid-column:1/-1;font-size:10px;
+ font-weight:850;letter-spacing:.27em;color:#ff9bed}
+.afterlightBossHealthCaption strong{font-size:clamp(14px,2.2vw,22px);
+ font-weight:900;letter-spacing:.12em}
+.afterlightBossHealthCaption b{font-size:12px;color:#b7eaff;
+ font-variant-numeric:tabular-nums}
+.afterlightBossHealthTrack{height:23px;position:relative;margin-top:9px;
+ background:#060b1df2;border:1px solid #ff73dc9e;border-radius:4px;
+ box-shadow:inset 0 0 18px #0009,0 0 13px #de47d754;overflow:hidden}
+.afterlightBossHealthTrail{position:absolute;inset:0 auto 0 0;
+ background:linear-gradient(90deg,#ffeec2,#ffed84);transition:width .28s ease-out}
+.afterlightBossHealthFill{position:absolute;inset:1px auto 1px 0;
+ background:linear-gradient(90deg,#ff266c,#ff36c3,#b75eff,#4bedff);
+ box-shadow:0 0 28px #ed54ff,0 0 8px #fff8;transition:width .12s linear}
+.afterlightBossHealthSegments{position:absolute;inset:0;
+ background:repeating-linear-gradient(90deg,transparent 0%,transparent 9.85%,#050c218a 10%);
+ opacity:.65}
+@media(max-width:740px){#afterlightBossHealth{top:10px;width:92vw;padding:7px 10px 12px}
+ .afterlightBossHealthTrack{height:18px}}
+
+
+/* WYRDFLUX PC v0.54 — original Blender treasure-cavern title composition.
+ * The chest fills the right half; all controls stay reachable on the left.
+ * These classes are desktop-only; existing Android UI remains untouched. */
+body:has(.wyrdfluxTreasureMenu) #mainMenu.wyrdfluxTreasureMenu{
+ background-image:
+   linear-gradient(90deg,#02040df8 0%,#030612f1 15%,#040917da 31%,
+    #030817a8 44%,#06091a21 61%,#08091418 100%),
+   url("../desktop/assets/menu/wyrdflux-treasure-menu.png");
+ background-position:center,center;
+ background-repeat:no-repeat,no-repeat;
+ background-size:cover,cover;
+}
+#mainMenu.wyrdfluxTreasureMenu .menuDecoration{display:none!important}
+#mainMenu.wyrdfluxTreasureMenu{justify-content:flex-start;align-items:center}
+#mainMenu.wyrdfluxTreasureMenu .menuInner{
+ width:min(590px,43vw);margin-left:clamp(25px,5vw,104px);margin-right:0;
+ background:transparent;max-height:93vh;overflow-y:auto;overflow-x:hidden;
+ padding:28px 18px 30px 2px;scrollbar-width:thin;
+}
+#mainMenu.wyrdfluxTreasureMenu .eyebrow{
+ color:#d4b18b;font-size:10px;font-weight:900;letter-spacing:.19em;
+ text-shadow:0 2px 10px #000a
+}
+#mainMenu.wyrdfluxTreasureMenu .wyrdfluxDualTitle{
+ position:relative;display:block;isolation:isolate;
+ font-family:Georgia,'Times New Roman',serif;font-size:clamp(52px,6.1vw,108px);
+ line-height:1.02;margin:12px 0 11px;letter-spacing:.045em;
+ color:#fff0c5;white-space:nowrap;font-weight:900;
+ -webkit-text-stroke:1px #8e5b21;
+ text-shadow:0 2px 0 #542708,0 4px 0 #170e15,0 9px 22px #000c,
+  0 0 36px #ed9b3b7d;
+}
+#mainMenu.wyrdfluxTreasureMenu .wyrdfluxDualTitle::before,
+#mainMenu.wyrdfluxTreasureMenu .wyrdfluxDualTitle::after{
+ content:attr(data-echo);position:absolute;inset:0;pointer-events:none;
+ white-space:nowrap;mix-blend-mode:screen
+}
+#mainMenu.wyrdfluxTreasureMenu .wyrdfluxDualTitle::before{
+ color:#ff9f3c;opacity:.48;transform:translate(3px,3px);
+ -webkit-text-stroke:1px #ffb55a;text-shadow:0 0 25px #ec8505
+}
+#mainMenu.wyrdfluxTreasureMenu .wyrdfluxDualTitle::after{
+ color:#89eaff;opacity:.38;transform:translate(-2px,-2px);
+ -webkit-text-stroke:.8px #6aedff;text-shadow:0 0 33px #6ba2ff
+}
+#mainMenu.wyrdfluxTreasureMenu .subtitle{
+ font-size:clamp(12px,1.45vw,18px);letter-spacing:.34em;
+ color:#c4f2ee;font-weight:900;text-shadow:0 0 20px #2cdcff74
+}
+#mainMenu.wyrdfluxTreasureMenu .intro{
+ max-width:455px;font-size:clamp(12px,1vw,14px);
+ line-height:1.5;color:#d1cce2;margin:19px 0 19px;
+ text-shadow:0 3px 13px #000;
+}
+#mainMenu.wyrdfluxTreasureMenu .menuActions{
+ display:flex;flex-direction:column;align-items:stretch;gap:9px;
+ width:min(370px,94%);
+}
+#mainMenu.wyrdfluxTreasureMenu .menuActions>button{
+ text-align:left;padding:12px 18px;min-height:43px;
+ background:linear-gradient(105deg,#070b15ee,#1b1739d6);
+ border:1px solid #cda87185;border-left:3px solid #d5ae53;
+ border-radius:4px;color:#efe0bf;box-shadow:0 4px 18px #0009;
+ transition:transform .12s,box-shadow .18s;
+}
+#mainMenu.wyrdfluxTreasureMenu .menuActions>button:first-child{
+ background:linear-gradient(110deg,#824d22e5,#4b2f31c9);
+ border-color:#ffd37cc0;color:#fff4c2;
+ box-shadow:0 0 18px #ba6a1866,inset 0 0 13px #ffe0a021;
+}
+#mainMenu.wyrdfluxTreasureMenu .menuActions>button:focus-visible,
+#mainMenu.wyrdfluxTreasureMenu .menuActions>button:hover{
+ transform:translateX(5px);border-color:#8cecff;
+ box-shadow:0 0 24px #2dc9fa7e
+}
+#mainMenu.wyrdfluxTreasureMenu .menuFoot{
+ margin-top:15px;max-width:390px;line-height:1.65;font-size:9px;
+ color:#b4a4a0;letter-spacing:.12em
+}
+#mainMenu.wyrdfluxTreasureMenu #afterlightPcCollection{
+ max-height:min(190px,23vh);overflow:auto;
+ background:#050a16d6;backdrop-filter:blur(5px);
+ border-color:#a8844b5e;
+}
+#mainMenu.wyrdfluxTreasureMenu #replayIntroButton{margin-top:8px}
+
+/* Double-layer echo on valuable items, newly awarded rare guns, and perks.
+ * No extra text is read aloud because pseudo-elements are CSS-only. */
+.wyrdflux-rare-label{position:relative;isolation:isolate;display:inline-block}
+.rarity-rare .wyrdflux-rare-label::after,
+.rarity-epic .wyrdflux-rare-label::after,
+.rarity-legendary .wyrdflux-rare-label::after,
+.rarity-mythic .wyrdflux-rare-label::after,
+.wyrdflux-rare-label.rarity-rare::after,
+.wyrdflux-rare-label.rarity-epic::after,
+.wyrdflux-rare-label.rarity-legendary::after,
+.wyrdflux-rare-label.rarity-mythic::after{
+ content:attr(data-echo);position:absolute;inset:0;pointer-events:none;
+ transform:translate(1.5px,1.5px);opacity:.50;white-space:nowrap;
+ color:#7cf4ff;text-shadow:-1px -1px 9px #8ae1ff;
+}
+.rarity-epic .wyrdflux-rare-label::after,
+.wyrdflux-rare-label.rarity-epic::after{color:#d19fff;text-shadow:0 0 15px #b06dff}
+.rarity-legendary .wyrdflux-rare-label::after,
+.rarity-mythic .wyrdflux-rare-label::after,
+.wyrdflux-rare-label.rarity-legendary::after,
+.wyrdflux-rare-label.rarity-mythic::after{
+ color:#ffdd8a;opacity:.68;text-shadow:0 0 16px #ffc049
+}
+#wyrdfluxRunLevel{
+ position:fixed;z-index:10;left:clamp(14px,1.8vw,32px);bottom:21px;
+ border:1px solid #c3a5ff9c;border-left:3px solid #b0ebff;
+ padding:10px 13px 14px;min-width:235px;
+ background:linear-gradient(100deg,#080d25e8,#21153de0);
+ font-size:11px;font-weight:900;letter-spacing:.09em;
+ color:#e5f6ff;text-shadow:0 0 12px #b1cfff7c;pointer-events:none;
+ box-shadow:0 5px 30px #0008,0 0 16px #9071e32c;
+}
+#wyrdfluxRunLevel::after{
+ content:'';position:absolute;left:0;bottom:0;height:4px;
+ background:linear-gradient(90deg,#63e8ff,#a872ed,#ffc879);
+ width:var(--run-level-fill,0%);
+ box-shadow:0 0 12px #7cf5ff
+}
+#upgradeScreen.wyrdfluxKillDraft .sheet{
+ border-top-color:#ffe5a2;box-shadow:0 0 34px #d1a04c5a,0 20px 120px #000c
+}
+@media(max-width:800px){
+ #mainMenu.wyrdfluxTreasureMenu .menuInner{
+   width:min(560px,65vw);margin-left:3vw;
+   background:linear-gradient(90deg,#050815ce,#05081560);
+ }
+ #mainMenu.wyrdfluxTreasureMenu .wyrdfluxDualTitle{
+  font-size:clamp(38px,6.4vw,72px)
+ }
+}
+
+
+/* v0.55: actual animated Blender camera-orbit video covers the cave PNG.
+ * The film is fully behind our title/controls and receives no controller or
+ * mouse events; fallback PNG is retained when autoplay or decoding fails. */
+#mainMenu.wyrdfluxTreasureMenu{
+ position:absolute;isolation:isolate;
+}
+#mainMenu.wyrdfluxTreasureMenu #wyrdfluxTreasureOrbit{
+ position:absolute;inset:0;width:100%;height:100%;
+ z-index:0;pointer-events:none;object-fit:cover;object-position:center;
+ opacity:1;filter:saturate(1.05);
+}
+#mainMenu.wyrdfluxTreasureMenu::before{
+ content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
+ background:linear-gradient(90deg,#02040df6 0%,#030612ed 13%,#040917d4 29%,
+  #0308179b 43%,#06091a17 64%,#08091404 100%);
+}
+#mainMenu.wyrdfluxTreasureMenu .menuInner{
+ z-index:2;position:relative;
+}
+@media(prefers-reduced-motion:reduce){
+ #mainMenu.wyrdfluxTreasureMenu #wyrdfluxTreasureOrbit{display:none}
+}
+
+/* WYRDFLUX PC v0.57: realm guide and responsive edge damage indicator.
+   Never intercept mouse, Xbox controls, or weapon selection. */
+#wyrdfluxRealmGuide{
+ position:fixed;left:clamp(14px,2vw,38px);top:clamp(94px,16vh,158px);
+ width:min(415px,35vw);max-height:52vh;overflow:auto;z-index:18;
+ padding:16px 19px 18px;border-radius:10px;
+ border:1px solid #a782e68f;border-left:4px solid #b696ff;
+ background:linear-gradient(137deg,#090b1ff5,#1a112cde);
+ box-shadow:0 12px 42px #000c,inset 0 0 32px #9b66db14;
+ color:#ecdcff;pointer-events:none;
+}
+#wyrdfluxRealmGuide h3{margin:0 0 8px;font:900 14px system-ui;
+ letter-spacing:.09em;color:#f0bfff;text-shadow:0 0 13px #a784ffb0;}
+#wyrdfluxRealmGuide p{margin:0;font:500 12px/1.57 system-ui;color:#e7e7f9;}
+#wyrdfluxRealmGuide strong{display:block;margin-top:12px;padding:8px 9px;
+ background:#6a45ae33;border:1px solid #bb96eb4d;
+ color:#aef7fb;font:800 11px/1.5 system-ui;letter-spacing:.04em;}
+#wyrdfluxRealmGuide.claimed{border-left-color:#7debd1;}
+#wyrdfluxDamageVignette{position:fixed;inset:0;z-index:92;pointer-events:none;opacity:0;
+ background:radial-gradient(ellipse at 50% 48%,transparent 38%,
+  #82071e29 60%,#9d091f83 83%,#d50930c2 100%);
+ box-shadow:inset 0 0 88px 19px #f20e3695,inset 0 0 175px 45px #a9081e3f;
+ transition:opacity 45ms linear;mix-blend-mode:screen;}
+@media(max-width:1050px){#wyrdfluxRealmGuide{width:min(360px,43vw);top:100px;padding:12px;}
+ #wyrdfluxRealmGuide p{font-size:11px;line-height:1.47;}}
+@media(max-width:650px){#wyrdfluxRealmGuide{width:min(300px,65vw);
+ top:84px;max-height:40vh;}#wyrdfluxRealmGuide p{font-size:10px;}}
+@media(prefers-reduced-motion:reduce){#wyrdfluxDamageVignette{transition:none;}}
+
+/* WYRDFLUX v0.58: helpful contextual action prompt (PC + controller). */
+#wyrdfluxInteractionPrompt{
+ position:fixed;z-index:89;left:50%;bottom:clamp(115px,15vh,200px);transform:translateX(-50%);
+ width:min(670px,84vw);padding:14px 18px 16px;
+ border-radius:12px;border:1px solid #8ce2fdbd;
+ border-left:4px solid #aaf4ff;
+ background:linear-gradient(120deg,#080d22f5,#191032ed);
+ box-shadow:0 11px 40px #000d,0 0 26px #95e8ff3a;
+ text-align:center;letter-spacing:.06em;
+ font:800 12px/1.55 system-ui,-apple-system,sans-serif;
+ color:#e8f8ff;pointer-events:none;text-shadow:0 0 10px #8ccfff4f
+}
+#wyrdfluxInteractionPrompt::after{
+ content:'';position:absolute;left:0;bottom:0;height:4px;
+ width:var(--hold-progress,0%);background:linear-gradient(90deg,#a671f2,#87fffd);
+ border-radius:0 0 5px 5px;box-shadow:0 0 14px #64f7ffb2
+}
+#wyrdfluxInteractionPrompt.hidden{display:none!important}
+#pauseScreen .sheet{overflow-y:auto;max-height:94vh;max-height:94dvh;}
+#wyrdfluxRunInventory{
+ margin:20px 0 8px;padding:17px 18px 19px;
+ background:linear-gradient(150deg,#071a2cf0,#1b1030eb);color:#ecedff;
+ border-radius:14px;border:1px solid #b8a2ed78;
+ box-shadow:inset 0 0 28px #5c66c716
+}
+#wyrdfluxRunInventory h3{margin:0 0 8px;color:#f9daff;font:900 16px/1.4 system-ui;letter-spacing:.075em}
+#wyrdfluxRunInventory .runInventorySummary{margin:0 0 12px;color:#93f4e3;
+ font:700 12px/1.5 system-ui;letter-spacing:.035em}
+#wyrdfluxRunInventory .runInventoryGroup{border-top:1px solid #bcbde145;padding:10px 0 3px}
+#wyrdfluxRunInventory h4{font:800 11px/1.5 system-ui;letter-spacing:.16em;color:#bcd5f7;margin:0 0 8px}
+#wyrdfluxRunInventory ul{padding:0;margin:0;display:grid;gap:7px;list-style:none}
+#wyrdfluxRunInventory li{
+ display:flex;justify-content:space-between;gap:10px;align-items:baseline;flex-wrap:wrap;
+ padding:8px 10px;border-radius:8px;border:1px solid #c6baff24;background:#a4a7f70c
+}
+#wyrdfluxRunInventory li strong{font:800 12px/1.5 system-ui;color:#f2e2ff}
+#wyrdfluxRunInventory li small{font:500 11px/1.45 system-ui;color:#c3d5ea}
+#wyrdfluxRunInventory li.runInventoryEmpty{color:#a9abc8;font:500 11px system-ui}
+.afterlight-gamepad-active .sheet button:focus,.afterlight-gamepad-active button:focus,
+.afterlight-gamepad-active [role="button"]:focus{
+ outline:3px solid #a6fbff!important;outline-offset:3px!important;
+ box-shadow:0 0 0 4px #7b7aff44,0 0 24px #5dddf488!important
+}
+@media(max-width:780px){
+ #wyrdfluxInteractionPrompt{font-size:10px;padding:9px 12px 12px;bottom:105px}
+ #wyrdfluxRunInventory{padding:11px 12px}
+}
+
+/* WYRDFLUX v0.60: distinct bottom-of-screen badge for mixed guns. */
+#hud #wyrdfluxGunFusion{
+ position:fixed;left:50%;bottom:max(17px,env(safe-area-inset-bottom));
+ transform:translateX(-50%);width:max-content;max-width:min(65vw,510px);
+ display:flex;flex-direction:column;align-items:center;gap:3px;
+ padding:9px 18px 10px;box-sizing:border-box;
+ background:linear-gradient(92deg,#0c1428eb,#281438e9,#101d35e9);
+ border:1px solid #9cffebad;border-bottom:2px solid #b993ff;
+ border-radius:10px;box-shadow:0 0 26px #9853ed69,inset 0 0 24px #7398ff18;
+ pointer-events:none;text-align:center;isolation:isolate;overflow:hidden;z-index:5;
+}
+#hud #wyrdfluxGunFusion::before{
+ content:"";position:absolute;inset:0;z-index:-1;opacity:.42;
+ background:linear-gradient(105deg,transparent 20%,#8eddfa25 43%,transparent 65%);
+ animation:wyrdfluxFusionSweep 3.3s linear infinite;
+}
+#wyrdfluxGunFusion .fusionEyebrow{
+ font:900 9px/1.1 system-ui;letter-spacing:.24em;color:#a8f9e5;
+}
+#wyrdfluxGunFusion .fusionSignature{
+ font:950 clamp(15px,2.2vw,24px)/1.1 system-ui;
+ color:#fff4ff;letter-spacing:.035em;text-transform:uppercase;
+ text-shadow:-1px -1px 0 #76ffe0,1px 2px 0 #ae71f1,0 0 24px #a0dcffcc;
+ overflow-wrap:anywhere;
+}
+#wyrdfluxGunFusion .fusionClasses{
+ font:800 9px/1.2 system-ui;color:#d4c6f7;letter-spacing:.065em;
+}
+#hud #wyrdfluxGunFusion.fusionReveal{
+ animation:wyrdfluxFusionReveal .54s cubic-bezier(.16,.84,.26,1.08) both;
+}
+#weaponSelect .gunClassHeading{
+ display:inline-flex;align-items:center;justify-content:center;
+ flex:0 0 auto;letter-spacing:.11em;white-space:nowrap;
+ color:#90f6e6;font:900 9px/1.2 system-ui;
+ margin:0 3px 0 8px;padding:5px 5px;
+ border-bottom:1px solid #90f6e68c;
+}
+#wyrdfluxArchiveClass{
+ background:#101b2d;color:#ebeeff;
+ border:1px solid #8b90bd;border-radius:6px;padding:7px;
+ max-width:100%;font:800 11px system-ui;letter-spacing:.04em;
+}
+@keyframes wyrdfluxFusionSweep{
+ from{transform:translateX(-115%)}to{transform:translateX(115%)}
+}
+@keyframes wyrdfluxFusionReveal{
+ from{opacity:0;transform:translateX(-50%) scale(.78)}
+ to{opacity:1;transform:translateX(-50%) scale(1)}
+}
+@media(max-width:760px){
+ #hud #wyrdfluxGunFusion{bottom:max(104px,env(safe-area-inset-bottom));
+  max-width:72vw;padding:6px 10px 7px}
+ #wyrdfluxGunFusion .fusionSignature{font-size:13px}
+ #wyrdfluxGunFusion .fusionEyebrow{font-size:8px}
+}
+@media(prefers-reduced-motion:reduce){
+ #hud #wyrdfluxGunFusion::before,#hud #wyrdfluxGunFusion.fusionReveal{animation:none}
+}
+
+/* WYRDFLUX — original escalating loop calligraphy.
+ * Distinct from the standard neon combat HUD; locally drawn, no font downloads. */
+#wyrdfluxWaveCrown{
+ position:fixed;top:clamp(20px,4vh,58px);left:50%;
+ transform:translateX(-50%);z-index:72;pointer-events:none;
+ min-width:210px;padding:6px 15px 9px;text-align:center;
+ color:#ebf8ff;background:#091328c9;border-top:2px solid #b3f4ef;
+ border-bottom:2px solid #6ed9ff;border-radius:3px 3px 13px 13px;
+ text-shadow:0 0 16px #79dfff;box-shadow:0 10px 35px #08072179;
+}
+#wyrdfluxWaveCrown .waveCrownLabel{display:block;font:850 9px/1.4 system-ui;letter-spacing:.27em;color:#bad5ff}
+#wyrdfluxWaveCrown .waveCrownNumber{
+ display:block;font:1000 clamp(23px,3.2vw,45px)/1.1 Georgia,serif;
+ font-style:italic;letter-spacing:.045em;
+}
+#wyrdfluxWaveCrown .waveCrownNext{display:block;font:800 10px/1.3 system-ui;letter-spacing:.09em;color:#c9ffef}
+#wyrdfluxWaveCrown[data-intensity="charged"]{
+ border-color:#e2b76a;color:#fff3d7;
+ text-shadow:0 0 17px #efa245,0 0 8px #fff5cd;
+}
+#wyrdfluxWaveCrown[data-intensity="fractured"]{
+ background:linear-gradient(126deg,#1b0d18d9 0 47%,#4b122cba 48% 50%,#120d22dd 51% 100%);
+ border-color:#ff729b;clip-path:polygon(0 0,100% 0,100% 82%,94% 92%,87% 83%,75% 100%,60% 87%,48% 95%,36% 86%,24% 100%,11% 87%,0 94%);
+}
+#wyrdfluxWaveCrown[data-intensity="unstable"]{
+ border-color:#dc73ff;color:#fff5ff;
+ box-shadow:0 0 25px #a33dffaf,0 11px 38px #05020ac9;
+ background:linear-gradient(180deg,#1d0a34ee,#4a0865bb);
+}
+#wyrdfluxWaveCrown[data-intensity="unstable"] .waveCrownNumber{
+ background:linear-gradient(180deg,#fff 5%,#e6a8ff 37%,#ab69ff 60%,#f3a0fc);
+ background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+ filter:drop-shadow(0 3px 1px #8618b3);
+}
+#wyrdfluxWaveCrown[data-intensity="unstable"]::after{
+ content:"";position:absolute;left:18%;top:100%;width:12px;height:17px;
+ background:#ac74ff;border-radius:0 0 70% 65%;opacity:.85;
+ box-shadow:42px -3px 0 #ef83ff,104px -5px 0 #b457ef,161px -2px 0 #de80ff;
+ animation:wyrdfluxEnergyDrip 2.1s ease-in infinite;
+}
+#wyrdfluxWaveCrown.waveCrownPulse{
+ animation:wyrdfluxWaveEntry .52s cubic-bezier(.15,.8,.2,1.2) both;
+}
+#wyrdfluxWaveCrown[data-intensity="fractured"],
+#wyrdfluxWaveCrown[data-intensity="unstable"]{
+ animation:wyrdfluxCounterVibrate .12s ease-in-out 6 alternate;
+}
+@keyframes wyrdfluxWaveEntry{
+ from{opacity:0;transform:translateX(-50%) scale(1.15) rotate(-1.3deg)}
+ to{opacity:1;transform:translateX(-50%) scale(1)}
+}
+@keyframes wyrdfluxCounterVibrate{
+ from{transform:translateX(calc(-50% - 2px)) skewX(-1.4deg)}
+ to{transform:translateX(calc(-50% + 2px)) skewX(1.4deg)}
+}
+@keyframes wyrdfluxEnergyDrip{
+ 0%{transform:translateY(-3px) scaleY(.5);opacity:.6}
+ 65%{opacity:1}100%{transform:translateY(42px) scaleY(2.1);opacity:0}
+}
+.wyrdfluxTravelerShieldTrack{
+ position:relative;display:none;margin-top:5px;height:15px;
+ border:1px solid #65eefa9c;border-radius:4px;overflow:hidden;
+ background:#0a1230b8;box-shadow:inset 0 0 11px #4addfc4d;
+}
+.wyrdfluxTravelerShieldFill{
+ position:absolute;inset:0 auto 0 0;height:100%;
+ width:100%;background:linear-gradient(90deg,#1089d1,#52e8ff,#b5f5ff);
+ transition:width .14s linear;box-shadow:0 0 15px #57ecff;
+}
+.wyrdfluxTravelerShieldLabel{
+ position:absolute;inset:0;text-align:center;color:#fff;
+ font:900 9px/13px system-ui;letter-spacing:.14em;text-shadow:0 1px 3px #001;
+}
+body.wyrdflux-circus-hit #world{
+ animation:wyrdfluxCircusSmear 1.7s cubic-bezier(.17,.6,.21,.98) both;
+ transform-origin:51% 48%;
+}
+body.wyrdflux-circus-hit::after{
+ content:"";position:fixed;inset:0;z-index:110;pointer-events:none;
+ background:repeating-linear-gradient(110deg,#ff65f01a 0 3px,transparent 3px 43px,#56fff716 43px 46px,transparent 46px 82px);
+ mix-blend-mode:screen;
+ animation:wyrdfluxCircusGhost 1.7s ease-out both;
+}
+@keyframes wyrdfluxCircusSmear{
+ 0%{transform:translate(0,0) skew(0deg);filter:none}
+ 11%{transform:translate(11px,-6px) skew(-3deg,1.6deg);
+  filter:blur(1.5px) contrast(1.3) saturate(1.9);
+  box-shadow:14px 0 18px #ff79df64,-14px 0 18px #32e9e5ad}
+ 38%{transform:translate(-5px,3px) skew(2deg,-.9deg);
+  filter:blur(.8px) contrast(1.17) saturate(1.5);
+  box-shadow:5px -2px 15px #fc6bbd65,-6px 1px 15px #6effd362}
+ 68%{transform:translate(2px,-1px) skew(-.55deg,.2deg);
+  filter:blur(.35px) contrast(1.07)}
+ 100%{transform:none;filter:none;box-shadow:none}
+}
+@keyframes wyrdfluxCircusGhost{
+ 0%{opacity:0;transform:translateX(0)}
+ 13%{opacity:.7;transform:translateX(13px)}
+ 37%{opacity:.28;transform:translateX(-7px)}
+ 100%{opacity:0;transform:translateX(0)}
+}
+@media(prefers-reduced-motion:reduce){
+ #wyrdfluxWaveCrown,#wyrdfluxWaveCrown[data-intensity="fractured"],
+ #wyrdfluxWaveCrown[data-intensity="unstable"],
+ #wyrdfluxWaveCrown[data-intensity="unstable"]::after,
+ body.wyrdflux-circus-hit #world,
+ body.wyrdflux-circus-hit::after{animation:none;transform:none;filter:none}
+ body.wyrdflux-circus-hit::after{opacity:.12}
+}
+
+/* Keep the escalation crown above the combat HUD, but never cover boss HP. */
+body.wyrdflux-boss-on #wyrdfluxWaveCrown{top:clamp(115px,14vh,154px)}
+@media(max-width:760px){
+ body.wyrdflux-boss-on #wyrdfluxWaveCrown{top:clamp(125px,18vh,162px)}
+}
+
+/* WYRDFLUX v0.60.2 — owner playtest: premium no-routine-scroll title layout.
+ * Desktop only; compact collection is a disclosure, not three scrollboxes.
+ * CSS scroll remains enabled when a player deliberately expands many unlocks
+ * or uses a genuinely too-small monitor. All controls remain gamepad focusable.
+ */
+#mainMenu.wyrdfluxTreasureMenu .menuInner{
+  width:min(520px,50.5vw);
+  max-height:calc(100dvh - 16px);
+  min-height:0;
+  margin:0 0 0 clamp(14px,2.8vw,46px);
+  padding:clamp(10px,1.6vh,18px) clamp(12px,1.55vw,22px);
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  justify-content:center;
+  gap:clamp(4px,.72vh,9px);
+  overflow-x:hidden;
+  overflow-y:auto;
+  border:1px solid #9e8dd03a;
+  border-right:2px solid #af88ef9b;
+  border-radius:13px;
+  background:linear-gradient(103deg,#030714f3 0%,#080b1ce8 75%,#0b0d2366 100%);
+  box-shadow:0 20px 50px #0008,inset -5px 0 28px #845fc512;
+  scrollbar-width:thin;
+  scrollbar-color:#a77ac4 #111426;
+}
+#mainMenu.wyrdfluxTreasureMenu{
+  justify-content:flex-start;
+  align-items:center;
+}
+#mainMenu.wyrdfluxTreasureMenu .eyebrow{
+  font:900 clamp(8px,.9vw,10px)/1.3 system-ui,sans-serif;
+  letter-spacing:.12em;
+  color:#e0c19d;
+}
+#mainMenu.wyrdfluxTreasureMenu .wyrdfluxDualTitle{
+  font-size:clamp(38px,4.65vw,66px);
+  line-height:1.03;
+  letter-spacing:.005em;
+  max-width:100%;
+  margin:1px 0;
+  text-shadow:0 2px 0 #542708,0 7px 18px #000c,0 0 26px #d5a26154;
+}
+#mainMenu.wyrdfluxTreasureMenu .subtitle{
+  margin:0;
+  font-size:clamp(10px,1.1vw,14px);
+  letter-spacing:.19em;
+  line-height:1.25;
+}
+#mainMenu.wyrdfluxTreasureMenu .intro{
+  margin:3px 0 5px;
+  max-width:100%;
+  font-size:clamp(10px,1.0vw,12px);
+  line-height:1.38;
+  color:#c5cfdf;
+}
+#mainMenu.wyrdfluxTreasureMenu .menuActions{
+  width:100%;
+  max-width:100%;
+  margin:0;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:clamp(6px,.9vh,10px);
+  align-items:stretch;
+}
+#mainMenu.wyrdfluxTreasureMenu .menuActions>button{
+  width:100%;
+  min-width:0;
+  max-width:none;
+  min-height:clamp(38px,5vh,47px);
+  padding:8px 11px;
+  margin:0;
+  border-radius:8px;
+  font:900 clamp(10px,1vw,12px)/1.25 system-ui,sans-serif;
+  letter-spacing:.055em;
+  white-space:normal;
+  text-align:left;
+  background:linear-gradient(115deg,#0b1530f0,#2b2046e0);
+  border:1px solid #aca2d177;
+  border-left:3px solid #b395d5;
+  color:#f4edff;
+  box-shadow:0 4px 14px #0008,inset 0 1px 0 #fff1;
+}
+#mainMenu.wyrdfluxTreasureMenu .menuActions>button:first-child{
+  grid-column:1/-1;
+  background:linear-gradient(110deg,#965c25,#66394c);
+  color:#fff4d9;border:1px solid #ffe0a6;
+  border-left:4px solid #fff0ad;
+  box-shadow:0 0 18px #d99c4b48,inset 0 1px 0 #fff4;
+}
+#mainMenu.wyrdfluxTreasureMenu .menuActions>button:last-child:nth-child(even){
+  grid-column:1/-1;
+}
+#mainMenu.wyrdfluxTreasureMenu .menuActions>button:disabled{
+  opacity:.49;filter:saturate(.55);
+}
+#mainMenu.wyrdfluxTreasureMenu .wyrdfluxMenuTestRow{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:8px;
+  width:100%;
+}
+#mainMenu.wyrdfluxTreasureMenu .wyrdfluxMenuTestRow button{
+  min-width:0;min-height:clamp(37px,4.8vh,44px);
+  padding:8px 11px;margin:0;
+  border:1px solid #9472cb;
+  border-left:3px solid #b4a1e7;
+  border-radius:8px;
+  background:linear-gradient(110deg,#15132fef,#211d43ed);
+  color:#d8e4ff;
+  font:900 clamp(10px,1vw,12px)/1.15 system-ui,sans-serif;
+  letter-spacing:.04em;text-align:left;
+  box-shadow:0 3px 15px #0009;
+}
+#mainMenu.wyrdfluxTreasureMenu .wyrdfluxMenuTestRow .wyrdfluxCircusTestButton{
+  color:#ffe7f5;
+  border-color:#e693cd;
+  border-left-color:#ff79b6;
+  background:linear-gradient(110deg,#45162ddf,#281f4af0);
+  box-shadow:0 0 17px #b54eae3a,inset 0 0 16px #ff83d11e;
+}
+#mainMenu.wyrdfluxTreasureMenu .wyrdfluxMenuTestRow button:is(:hover,:focus-visible),
+#mainMenu.wyrdfluxTreasureMenu .menuActions>button:is(:hover,:focus-visible){
+  outline:2px solid #a4f5ff;
+  outline-offset:2px;
+  transform:translateX(2px);
+  box-shadow:0 0 21px #72d9ff8c;
+}
+#mainMenu.wyrdfluxTreasureMenu #afterlightPcCollection{
+  width:100%;max-width:100%;height:auto;
+  max-height:none;overflow:visible;
+  margin:3px 0;
+  padding:9px 10px;
+  border:1px solid #978ed076;
+  border-radius:10px;
+  background:linear-gradient(135deg,#090f22e6,#1b1a30d9);
+  box-shadow:inset 0 1px 0 #fff1;
+  backdrop-filter:blur(7px);
+}
+#mainMenu.wyrdfluxTreasureMenu .afterlightPcCollectionTop{
+  display:flex;gap:6px;align-items:baseline;flex-wrap:wrap;
+}
+#mainMenu.wyrdfluxTreasureMenu .afterlightPcCollectionTop strong{
+  font:900 10px/1.3 system-ui,sans-serif;
+  letter-spacing:.13em;color:#f2e4ff;
+}
+#mainMenu.wyrdfluxTreasureMenu .afterlightPcCollectionTop small{
+  font:800 9px/1.3 system-ui,sans-serif;color:#9bf9e6;
+}
+#mainMenu.wyrdfluxTreasureMenu .afterlightPcCollectionGrid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:6px;margin:7px 0 0;
+}
+#mainMenu.wyrdfluxTreasureMenu .afterlightPcCollectionGrid details{
+  min-width:0;min-height:57px;
+  background:linear-gradient(140deg,#10162bef,#121932de);
+  border:1px solid #81769b74;
+  border-radius:8px;overflow:visible;
+}
+#mainMenu.wyrdfluxTreasureMenu .afterlightPcCollectionGrid summary{
+  display:flex;flex-direction:column;justify-content:center;gap:3px;
+  min-height:56px;padding:7px 8px 7px 12px;
+  list-style:none;cursor:pointer;overflow:hidden;
+}
+#mainMenu.wyrdfluxTreasureMenu .afterlightPcCollectionGrid summary::-webkit-details-marker{display:none}
+#mainMenu.wyrdfluxTreasureMenu .afterlightPcCollectionGrid summary strong{
+  font:900 9px/1.25 system-ui,sans-serif;
+  letter-spacing:.045em;color:#ecdfff;
+}
+#mainMenu.wyrdfluxTreasureMenu .afterlightPcCollectionGrid summary small{
+  display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  font:650 9px/1.3 system-ui,sans-serif;
+  color:#aad9e8;
+}
+#mainMenu.wyrdfluxTreasureMenu .afterlightPcCollectionGrid details[open] summary{
+  border-bottom:1px solid #aa95db57;
+  background:#634c9130;
+}
+#mainMenu.wyrdfluxTreasureMenu .afterlightPcCollectionGrid details[open] .afterlightPcCollectionItems{
+  max-height:min(30dvh,235px);
+  overflow-y:auto;
+  overflow-x:hidden;
+  scrollbar-width:thin;
+}
+#mainMenu.wyrdfluxTreasureMenu .afterlightPcCollectionItems{
+  padding:7px;gap:5px;
+}
+#mainMenu.wyrdfluxTreasureMenu .menuFoot{
+  margin:1px 0 0;
+  font-size:9px;line-height:1.25;
+}
+#mainMenu.wyrdfluxTreasureMenu #replayIntroButton{
+  margin:2px 0 0;
+  padding:4px 9px;
+  min-height:25px;
+  font-size:10px;
+}
+/* When test options are requested they appear as an intentional panel, not
+ * another expanding list which pushes the main title off the screen. */
+#mainMenu.wyrdfluxTreasureMenu #testLabPanel:not(.hidden){
+  display:grid;
+  position:fixed;z-index:16;
+  top:clamp(70px,11vh,130px);
+  left:clamp(25px,4vw,80px);
+  width:min(490px,52vw);
+  max-height:calc(100dvh - 105px);
+  overflow-y:auto;overflow-x:hidden;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:8px;padding:18px;
+  margin:0;
+  border:1px solid #b8a5ed;
+  border-left:4px solid #bf96f2;
+  border-radius:12px;
+  background:linear-gradient(125deg,#0d122bf7,#22183cf8);
+  box-shadow:0 18px 65px #000d,0 0 32px #a66bda52;
+}
+#mainMenu.wyrdfluxTreasureMenu #testLabPanel .testLabNotice{
+  grid-column:1/-1;
+  font-size:11px;
+}
+#mainMenu.wyrdfluxTreasureMenu #testLabPanel .testLabActions{
+  display:contents;
+}
+#mainMenu.wyrdfluxTreasureMenu #testLabPanel button{
+  width:100%;min-width:0;
+  min-height:39px;padding:8px 9px;
+  border-radius:6px;
+  font-size:10px;
+  letter-spacing:.04em;
+  white-space:normal;
+}
+#mainMenu.wyrdfluxTreasureMenu #wyrdfluxCloseTestLab{
+  grid-column:1/-1;
+  border:1px solid #93d8dd;
+  background:#13263a;
+  color:#d0ffff;
+}
+@media(max-height:710px){
+ #mainMenu.wyrdfluxTreasureMenu .menuInner{
+  gap:4px;padding-top:8px;padding-bottom:8px;
+ }
+ #mainMenu.wyrdfluxTreasureMenu .wyrdfluxDualTitle{font-size:clamp(36px,4.2vw,55px)}
+ #mainMenu.wyrdfluxTreasureMenu .intro{margin:0;line-height:1.24}
+ #mainMenu.wyrdfluxTreasureMenu .menuActions>button,
+ #mainMenu.wyrdfluxTreasureMenu .wyrdfluxMenuTestRow button{min-height:35px;padding:6px 9px}
+ #mainMenu.wyrdfluxTreasureMenu #afterlightPcCollection{padding:6px 8px}
+ #mainMenu.wyrdfluxTreasureMenu .afterlightPcCollectionGrid summary{min-height:48px;padding:6px}
+}
+@media(max-width:760px){
+ #mainMenu.wyrdfluxTreasureMenu .menuInner{
+  width:min(560px,90vw);margin-left:3vw;
+ }
+ #mainMenu.wyrdfluxTreasureMenu .wyrdfluxDualTitle{font-size:clamp(35px,7vw,58px)}
+ #mainMenu.wyrdfluxTreasureMenu #testLabPanel:not(.hidden){width:88vw;left:5vw}
+}
+@media(prefers-reduced-motion:reduce){
+ #mainMenu.wyrdfluxTreasureMenu .menuActions>button,
+ #mainMenu.wyrdfluxTreasureMenu .wyrdfluxMenuTestRow button{transition:none}
+}
+
+/* v0.60.2 native viewport QA correction: 1154×649 had 28px of
+ * unnecessary title scrolling. The main subtitle already explains the run.
+ * Hide redundant prose and reclaim space; don't conceal real overflow. */
+#mainMenu.wyrdfluxTreasureMenu .intro{display:none}
+@media(max-height:750px){
+ #mainMenu.wyrdfluxTreasureMenu .menuInner{
+  padding-block:5px;
+  gap:2px;
+ }
+ #mainMenu.wyrdfluxTreasureMenu .wyrdfluxDualTitle{
+  font-size:clamp(35px,3.75vw,50px);
+  line-height:1;
+ }
+ #mainMenu.wyrdfluxTreasureMenu .afterlightPcCollectionGrid summary{
+  min-height:43px;
+ }
+ #mainMenu.wyrdfluxTreasureMenu .menuActions>button,
+ #mainMenu.wyrdfluxTreasureMenu .wyrdfluxMenuTestRow button{
+  min-height:34px;
+ }
+}
+
+/* The ancient menu glow extends 28px beyond the panel on BOTH sides.
+ * Its absolutely positioned :before created a phantom 28px scrollbar even
+ * after all real title content fit. The new glass panel supplies its own glow. */
+#mainMenu.wyrdfluxTreasureMenu .menuInner::before{
+ display:none!important;
+ content:none!important;
+}
+
+/* v0.60.5: one loop-safe continuous Blender camera path; old 15s CSS
+ * pulses were NEVER in sync with decoder playback and exposed hard cuts.
+ * Show the PNG poster until the FIRST decoded video frame; crossfade only
+ * when decoded video is ready, not on arbitrary wall-clock timestamps. */
+#mainMenu.wyrdfluxTreasureMenu #wyrdfluxTreasureOrbit{
+ opacity:0;transition:opacity .85s cubic-bezier(.23,.75,.28,1);
+ will-change:opacity;animation:none!important;
+}
+#mainMenu.wyrdfluxTreasureMenu.wyrdfluxOrbitReady #wyrdfluxTreasureOrbit{
+ opacity:1;
+}
+@media(prefers-reduced-motion:reduce){
+ #mainMenu.wyrdfluxTreasureMenu #wyrdfluxTreasureOrbit{
+  display:none!important;
+ }
+}
+
+/* v0.60.4: owner's menu/stat, wave announcement and gun-name presentation pass.
+ * The wave crown and weapon identification NEVER remain over active combat.
+ */
+#weaponHud #weaponTitle.wyrdfluxWeaponNameReveal,
+#weaponHud #weaponSub.wyrdfluxWeaponNameReveal{
+ animation:wyrdfluxNameShowAndFade 2.45s ease-in-out both;
+}
+@keyframes wyrdfluxNameShowAndFade{
+ 0%{opacity:0;transform:translateY(5px) scale(.96)}
+ 10%{opacity:1;transform:translateY(0) scale(1.025)}
+ 38%{opacity:1;transform:translateY(0) scale(1)}
+ 75%{opacity:.9}
+ 100%{opacity:0;transform:translateY(-4px) scale(.98)}
+}
+#wyrdfluxWaveCrown.waveCrownPulse,
+#wyrdfluxWaveCrown.waveCrownPulse[data-intensity="fractured"],
+#wyrdfluxWaveCrown.waveCrownPulse[data-intensity="unstable"]{
+ animation:wyrdfluxWaveBriefReveal 1.92s cubic-bezier(.18,.64,.24,1) both!important;
+}
+@keyframes wyrdfluxWaveBriefReveal{
+ 0%{opacity:0;transform:translateX(-50%) scale(1.36)}
+ 13%{opacity:1;transform:translateX(-50%) scale(1.28)}
+ 37%{opacity:1;transform:translateX(-50%) scale(1.08)}
+ 63%{opacity:.95;transform:translateX(-50%) scale(1)}
+ 100%{opacity:0;transform:translateX(-50%) scale(.72)}
+}
+#wyrdfluxRoundLevelBurst{
+ position:fixed;top:29%;left:50%;z-index:85;
+ transform:translateX(-50%);pointer-events:none;
+ color:#fff1be;text-shadow:0 0 24px #f3af59a4,0 3px 9px #090715;
+ font:1000 clamp(18px,3.0vw,38px)/1.15 system-ui;
+ letter-spacing:.12em;white-space:nowrap;
+ opacity:0;
+}
+#wyrdfluxRoundLevelBurst[data-final="true"]{color:#fff9d4}
+#wyrdfluxRoundLevelBurst.wyrdfluxLevelBankBurst{
+ animation:wyrdfluxLevelBankPulse 1.9s cubic-bezier(.22,.7,.18,1) both;
+}
+@keyframes wyrdfluxLevelBankPulse{
+ 0%{opacity:0;transform:translateX(-50%) scale(.78)}
+ 20%{opacity:1;transform:translateX(-50%) scale(1.40)}
+ 48%{opacity:1;transform:translateX(-50%) scale(1.07)}
+ 71%{opacity:.9;transform:translateX(-50%) scale(1.0)}
+ 100%{opacity:0;transform:translateX(-50%) scale(.74) translateY(-19px)}
+}
+/* v0.60.5: stats are part of the in-game Pause sheet, never on the title.
+ * The treasure chest, title and buttons remain fully unobstructed. */
+#mainMenu.wyrdfluxTreasureMenu .wyrdfluxMenuStatRail{display:none!important}
+#mainMenu.wyrdfluxTreasureMenu .menuInner{
+ margin-left:clamp(22px,5.5vw,86px);
+ width:min(540px,46vw);
+ max-width:calc(100vw - 32px);
+ padding-top:clamp(15px,3vh,32px);
+}
+#mainMenu.wyrdfluxTreasureMenu .wyrdfluxDualTitle{
+ font-size:clamp(40px,4.65vw,76px);
+ max-width:100%;
+ letter-spacing:.025em;
+}
+#pauseScreen .wyrdfluxPauseStatDashboard{
+ margin:18px 0 8px;padding:18px;
+ color:#eef5fc;border-radius:14px;
+ border:1px solid #b4a4e383;
+ background:linear-gradient(155deg,#071324e9,#171b32df 64%,#251a35db);
+ box-shadow:inset 0 1px 0 #c7d5fb38,0 12px 32px #0005;
+}
+#pauseScreen .wyrdfluxPauseStatDashboard>h3{
+ margin:0 0 14px;
+ color:#f6ddb0;
+ font:900 14px/1.35 system-ui;letter-spacing:.10em;
+}
+#pauseScreen .wyrdfluxPauseStatGrid{
+ display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+ gap:12px;
+}
+#pauseScreen .wyrdfluxMenuStatRail{
+ box-sizing:border-box;min-width:0;
+ display:flex;flex-direction:column;gap:4px;
+ padding:14px 15px 12px;border-radius:10px;
+ background:linear-gradient(160deg,#0d1426eb,#19172adf);
+ border:1px solid #bfac9270;border-left:3px solid #e4bd7c;
+}
+#pauseScreen .wyrdfluxMenuStatRail-right{border-left-color:#87dbed}
+#pauseScreen .wyrdfluxMenuStatHeader{
+ font:850 11px/1.4 system-ui;letter-spacing:.13em;color:#f2d9b0;
+}
+#pauseScreen .wyrdfluxMenuStatContext{
+ color:#a9c8dc;font:700 11px/1.4 system-ui;
+ margin-bottom:4px;overflow-wrap:anywhere;
+}
+#pauseScreen .wyrdfluxMenuStatRow{
+ border-top:1px solid #c5c8e327;padding:7px 0 6px;
+}
+#pauseScreen .wyrdfluxMenuStatText{
+ display:flex;justify-content:space-between;align-items:baseline;
+ gap:8px;font:750 11px/1.5 system-ui;letter-spacing:.025em;
+}
+#pauseScreen .wyrdfluxMenuStatText span{color:#bcd1df}
+#pauseScreen .wyrdfluxMenuStatText strong{
+ color:#fff3da;font:850 12px/1.4 system-ui;white-space:nowrap;
+}
+#pauseScreen .wyrdfluxMenuStatBar{
+ margin-top:5px;height:4px;border-radius:5px;overflow:hidden;
+ background:#263347;
+}
+#pauseScreen .wyrdfluxMenuStatBar i{
+ display:block;height:100%;border-radius:5px;
+ background:linear-gradient(90deg,#6bc8ed,#dfb0fa,#f8dda4);
+}
+@media(max-width:900px){
+ #mainMenu.wyrdfluxTreasureMenu .menuInner{
+  margin-left:clamp(14px,3vw,40px);width:min(500px,59vw);
+ }
+ #pauseScreen .wyrdfluxPauseStatGrid{grid-template-columns:1fr}
+ #pauseScreen .wyrdfluxPauseStatDashboard{padding:12px}
+}
+@media(max-width:600px){
+ #mainMenu.wyrdfluxTreasureMenu .menuInner{
+  margin:0 auto;width:min(95vw,480px);padding-left:12px;padding-right:12px;
+ }
+ #mainMenu.wyrdfluxTreasureMenu .wyrdfluxDualTitle{
+  font-size:clamp(36px,8.2vw,55px);
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ #weaponHud #weaponTitle.wyrdfluxWeaponNameReveal,
+ #weaponHud #weaponSub.wyrdfluxWeaponNameReveal{
+  animation:wyrdfluxReducedBrief 2.45s steps(1,end) both!important;
+ }
+ #wyrdfluxWaveCrown.waveCrownPulse{
+  animation:wyrdfluxReducedBrief 1.92s steps(1,end) both!important;
+ }
+ #wyrdfluxRoundLevelBurst.wyrdfluxLevelBankBurst{
+  animation:wyrdfluxReducedBrief 1.9s steps(1,end) both!important;
+ }
+ @keyframes wyrdfluxReducedBrief{0%{opacity:1}100%{opacity:0}}
+}
+
+
+/* v0.60.4 native scene warmup: rendered under a live veil, not a fake timer. */
+#wyrdfluxStartupVeil{
+ position:fixed;inset:0;z-index:1500;display:grid;place-items:center;
+ padding:24px;box-sizing:border-box;
+ background:radial-gradient(ellipse at 50% 32%,#201226 0%,#080b17 52%,#020307 100%);
+ color:#f6e6cc;pointer-events:auto;opacity:1;
+ transition:opacity .30s ease;
+}
+#wyrdfluxStartupVeil.wyrdfluxStartupComplete{opacity:0;pointer-events:none}
+#wyrdfluxStartupVeil .wyrdfluxStartupInner{
+ width:min(600px,90vw);padding:clamp(25px,5vw,50px);
+ background:#0c0c18db;border:1px solid #c8a57e77;border-radius:12px;
+ box-shadow:0 24px 70px #000c,inset 0 0 35px #80573516;
+ text-align:center;
+}
+#wyrdfluxStartupVeil strong{
+ display:block;font:950 clamp(22px,3vw,38px)/1.22 Georgia,serif;
+ letter-spacing:.13em;text-shadow:0 0 22px #d4a36d75;
+}
+#wyrdfluxStartupVeil p{
+ margin:22px 0 19px;font:700 clamp(11px,1.1vw,14px)/1.5 system-ui;
+ letter-spacing:.11em;color:#bfbace;
+}
+#wyrdfluxStartupVeil .wyrdfluxStartupTrack{
+ height:5px;border-radius:5px;background:#2a2534;
+ overflow:hidden;box-shadow:inset 0 0 8px #000b;
+}
+#wyrdfluxStartupFill{
+ display:block;height:100%;
+ background:linear-gradient(90deg,#a07ba4,#f5ca88,#f9e2b1);
+ box-shadow:0 0 20px #f2c188bb;transition:width .18s ease;
+}
+
+
+/* Steam candidate / consumer-facing Windows menu — Patch 0.01.
+   Keep the title-cave visible, reduce chrome, and make controller focus clear. */
+#mainMenu.wyrdfluxTreasureMenu #wyrdfluxPatchNumber{
+ position:absolute;right:clamp(16px,2.5vw,42px);
+ bottom:clamp(13px,2.8vh,31px);z-index:14;
+ display:block;pointer-events:none;white-space:nowrap;
+ padding:8px 11px 7px;border-radius:5px;
+ font:900 clamp(12px,1.13vw,16px)/1.15 system-ui,sans-serif;
+ letter-spacing:.15em;color:#ffad58;
+ background:linear-gradient(95deg,#1e140de8,#0b0b13bd);
+ border:1px solid #cf81335c;border-right:3px solid #f4a04b;
+ box-shadow:0 4px 19px #0009,0 0 12px #e98d2b30;
+ text-shadow:0 1px 9px #8f4e1366;
+}
+#mainMenu.wyrdfluxRetailMenu .wyrdfluxMenuTestRow,
+#mainMenu.wyrdfluxRetailMenu #wyrdfluxLivingTestButton,
+#mainMenu.wyrdfluxRetailMenu #testLabButton,
+#mainMenu.wyrdfluxRetailMenu #testLabPanel,
+#mainMenu.wyrdfluxRetailMenu #testMeadowArena{display:none!important}
+#mainMenu.wyrdfluxRetailMenu .menuActions>button{
+ transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease,background .16s ease;
+}
+#mainMenu.wyrdfluxRetailMenu .menuActions>button:is(:hover,:focus-visible),
+#mainMenu.wyrdfluxRetailMenu #afterlightPcCollection summary:focus-visible,
+#pauseScreen button:focus-visible,
+#archiveScreen button:focus-visible,
+#upgradeScreen button:focus-visible{
+ outline:2px solid #ffc782;outline-offset:3px;
+ box-shadow:0 0 0 4px #0a0d1bd9,0 0 24px #e7a25177;
+}
+#mainMenu.wyrdfluxRetailMenu .menuActions>button:disabled{
+ opacity:.48;filter:saturate(.66);cursor:not-allowed;
+}
+#mainMenu.wyrdfluxRetailMenu #afterlightPcCollection summary{
+ cursor:pointer;outline-offset:3px;
+}
+@media(max-width:700px){
+ #mainMenu.wyrdfluxTreasureMenu #wyrdfluxPatchNumber{
+  right:10px;bottom:10px;padding:6px 8px;
+  font-size:11px;letter-spacing:.08em;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ #mainMenu.wyrdfluxRetailMenu .menuActions>button{transition:none}
+}
+
+
+/* Patch 0.01+ consumer reward card silhouettes & super-weapon classification. */
+#upgradeCards .wyrdfluxChoiceCard{
+ isolation:isolate;overflow:hidden;position:relative;
+ transition:transform .15s ease,border-color .15s ease,box-shadow .15s ease;
+}
+#upgradeCards .wyrdfluxChoiceCard::after{
+ content:attr(data-choice-type);position:absolute;top:9px;right:11px;
+ font:800 9px/1.3 system-ui;letter-spacing:.11em;color:#b9cbe8;opacity:.85;
+ pointer-events:none;
+}
+#upgradeCards .wyrdfluxChoiceCard .icon{
+ display:flex;align-items:center;justify-content:center;
+ width:65px;height:45px;margin:8px 0 7px;color:#aad5ef;
+ filter:drop-shadow(0 0 9px #4e95a347);
+}
+#upgradeCards .wyrdfluxChoiceCard .wyrdfluxGunGlyph{
+ display:block;width:64px;height:40px;
+ filter:drop-shadow(0 2px 4px #0009);
+}
+#upgradeCards .wyrdfluxChoice-weapon .icon{color:#d5efff}
+#upgradeCards .wyrdfluxChoice-health .icon{color:#ff9b9e}
+#upgradeCards .wyrdfluxChoice-defense .icon{color:#91d7ff}
+#upgradeCards .wyrdfluxChoice-mobility .icon{color:#b4fcbd}
+#upgradeCards .wyrdfluxChoice-overdrive .icon{color:#ffb55c}
+#upgradeCards .wyrdfluxChoice-offense .icon{color:#f7a0d5}
+#upgradeCards .wyrdfluxChoice-elemental .icon{color:#aa9cff}
+#upgradeCards .wyrdfluxChoiceSuper{
+ border-color:#e4af59!important;border-left:4px solid #f2cf74!important;
+ background:radial-gradient(ellipse at 90% 10%,#71541f57,transparent 60%),
+ linear-gradient(130deg,#261c2cef,#11182ae8)!important;
+ box-shadow:0 0 18px #edb74a23,inset 0 0 15px #e9b75814;
+}
+#upgradeCards .wyrdfluxChoiceSuper .tag{color:#ffe0a2!important}
+#upgradeCards .wyrdfluxChoiceSuper .icon{color:#ffe4a9;filter:drop-shadow(0 0 12px #f5a948af)}
+#upgradeCards .wyrdfluxChoiceCard:is(:focus-visible,:hover){
+ outline:2px solid #ffe0ad;outline-offset:2px;
+ transform:translateY(-3px);box-shadow:0 0 28px #c7975088;
+}
+@media(prefers-reduced-motion:reduce){
+ #upgradeCards .wyrdfluxChoiceCard{transition:none}
+ #upgradeCards .wyrdfluxChoiceCard:is(:focus-visible,:hover){transform:none}
+}
+
+/* WYRDFLUX PC PATCH 0.03: themed encounters, consumptive forge and thermal HUD */
+:root{--wyrdflux-boss-ink:#c2b0ff}
+#afterlightBossHealth[data-boss-theme="blackwake"]{--wyrdflux-boss-ink:#6ce7fb;border:1px solid #7aefff88;background:linear-gradient(125deg,#041a2dec,#101333ef);box-shadow:0 0 32px #30afff37,inset 0 0 28px #26c7ff16}
+#afterlightBossHealth[data-boss-theme="blackwake"] .afterlightBossHealthFill{background:linear-gradient(90deg,#244e98,#17cee9 64%,#ddfaff)!important}
+#afterlightBossHealth[data-boss-theme="hell"]{--wyrdflux-boss-ink:#ff9853;border-color:#ea53248a;background:linear-gradient(120deg,#220704f4,#32100df2)}
+#afterlightBossHealth[data-boss-theme="hell"] .afterlightBossHealthFill{background:linear-gradient(90deg,#7d151b,#ff5a26,#ffe27b)!important}
+#afterlightBossHealth[data-boss-theme="wallmaw"]{--wyrdflux-boss-ink:#f45767;border:1px solid #ea283a89;background:linear-gradient(150deg,#250509,#14060aef);box-shadow:0 0 28px #ff17334d}
+#afterlightBossHealth[data-boss-theme="wallmaw"] .afterlightBossHealthFill{background:linear-gradient(90deg,#5a0b18,#ea2435,#ffa0a7)!important}
+#afterlightBossHealth[data-boss-theme="heaven"]{--wyrdflux-boss-ink:#ffeab0;border:1px solid #f8d780ba;background:linear-gradient(110deg,#293a5df0,#59492ef2)}
+#afterlightBossHealth[data-boss-theme="heaven"] .afterlightBossHealthFill{background:linear-gradient(90deg,#bead72,#fff5cb,#fff)!important}
+#afterlightBossHealth[data-boss-theme="blockworld"]{--wyrdflux-boss-ink:#69ffed;border:1px solid #6effd28e;background:linear-gradient(110deg,#032d38ec,#102348ed)}
+#afterlightBossHealth[data-boss-theme="blockworld"] .afterlightBossHealthFill{background:linear-gradient(90deg,#067b92,#42efda,#c1ffef)!important}
+#afterlightBossHealth[data-boss-theme="siege"]{--wyrdflux-boss-ink:#fc6389;border:1px solid #ce3b56ad;background:linear-gradient(90deg,#1b202ce9,#32111df2)}
+#afterlightBossHealth[data-boss-theme="siege"] .afterlightBossHealthFill{background:linear-gradient(90deg,#80283b,#ff3c69,#f5a3c2)!important}
+#afterlightBossHealth[data-boss-theme="hive"]{--wyrdflux-boss-ink:#b6ff81;border:1px solid #73b5519c;background:linear-gradient(100deg,#081e16f2,#1c2a0ef2)}
+#afterlightBossHealth[data-boss-theme="hive"] .afterlightBossHealthFill{background:linear-gradient(90deg,#427d31,#b7ff77,#e6ffb6)!important}
+#afterlightBossHealth .afterlightBossHealthCaption strong{color:var(--wyrdflux-boss-ink)}
+#rageBar,#rageText,#specialButton{display:none!important}
+*:has(> #rageBar),*:has(> #rageText){display:none!important}
+#mainMenu #replayIntroButton{display:none!important}
+#weaponHud #wyrdfluxHeatMeter{display:block;position:relative;margin:5px 0 7px}
+#weaponHud #wyrdfluxHeatMeter .heatMeterTitle{display:flex;justify-content:space-between;margin-bottom:3px;font:700 9px/1.2 system-ui;letter-spacing:.11em;color:#b6d2e3}
+#weaponHud #wyrdfluxHeatMeter .heatMeterTrack{height:11px;overflow:hidden;position:relative;background:#101720;border:1px solid #4b657f;border-radius:6px;box-shadow:inset 0 0 8px #03060b}
+#weaponHud #wyrdfluxHeatMeter .heatMeterFill{height:100%;width:0;transition:width .11s linear,background .11s linear;box-shadow:0 0 13px currentColor}
+#weaponHud #wyrdfluxHeatMeter.venting .heatMeterTitle{color:#ff7956;animation:wyrd-vent-pulse .46s ease-in-out infinite alternate}
+@keyframes wyrd-vent-pulse{from{opacity:.7}to{opacity:1}}
+#weaponHud #wyrdfluxHeatMeter .heatMeterTrack:after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 9.8%,#0007 10% 10.1%);pointer-events:none}
+#weaponSelect .weaponLoadoutRow:has(.loadoutLabel){border-bottom:1px solid #83e4e424;padding-bottom:4px}
+#weaponSelect .weaponLoadoutRow button:hover{box-shadow:0 0 15px #ffd38177}
+#upgradeScreen .cards button{position:relative;isolation:isolate}
+#upgradeScreen .cards button:is(:focus-visible,:hover):after{content:'✦  ✧  ✦  ✧  ✦';position:absolute;inset:4px 6px auto auto;pointer-events:none;z-index:2;letter-spacing:8px;color:#ffe7a0;text-shadow:0 0 6px #fff,0 0 14px #ffe277,0 0 25px #db85ff;animation:wyrd-upgrade-glimmer 1.7s ease-in-out infinite alternate}
+@keyframes wyrd-upgrade-glimmer{0%{opacity:.3;transform:translate(-8px,5px) scale(.85)}100%{opacity:1;transform:translate(-1px,-7px) scale(1.15)}}
+@media(prefers-reduced-motion:reduce){#upgradeScreen .cards button:is(:focus-visible,:hover):after{animation:none}#weaponHud #wyrdfluxHeatMeter.venting .heatMeterTitle{animation:none}}
+
+/* Patch004: six individual PC loading paintings, decoded BEFORE world creation.
+   Real realm loading runs under the veil; bar is phase-driven, not a timer. */
+#wyrdfluxPcRealmLoad{position:fixed;inset:0;z-index:980;display:flex;justify-content:center;align-items:flex-end;background:#080a14;color:#fff;overflow:hidden;pointer-events:all;opacity:1;transition:opacity .44s ease;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+#wyrdfluxPcRealmLoad .wyrdfluxRealmLoadArt{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;transform:scale(1.015);filter:contrast(1.06) saturate(1.05)}
+#wyrdfluxPcRealmLoad .wyrdfluxRealmLoadArt[hidden]{display:none}
+#wyrdfluxPcRealmLoad .wyrdfluxRealmLoadShade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(1,3,7,.22),rgba(1,3,7,.05) 30%,rgba(1,3,7,.20) 56%,rgba(1,3,7,.89) 100%)}
+#wyrdfluxPcRealmLoad .wyrdfluxRealmLoadInner{position:relative;z-index:1;box-sizing:border-box;display:flex;flex-direction:column;width:min(1020px,92vw);padding:0 0 clamp(25px,7vh,88px);gap:12px;filter:drop-shadow(0 1px 4px #000d)}
+#wyrdfluxPcRealmLoad h2{margin:0;font-size:clamp(20px,4vw,42px);font-weight:900;line-height:1.08;letter-spacing:.08em;text-transform:uppercase}
+#wyrdfluxPcRealmLoad .wyrdfluxRealmLoadTip{margin:0;max-width:850px;font-size:clamp(12px,1.7vw,18px);line-height:1.5;color:#f0f3f9}
+#wyrdfluxPcRealmLoad small{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#c5d3e5}
+#wyrdfluxPcRealmLoad .wyrdfluxRealmLoadMeter{height:7px;max-width:850px;width:100%;background:#050b12;border:1px solid #8197a3a6;border-radius:6px;box-shadow:0 0 20px #000;overflow:hidden}
+#wyrdfluxPcRealmLoad .wyrdfluxRealmLoadMeter span{display:block;width:0%;height:100%;border-radius:6px;background:linear-gradient(90deg,#4568b3,#c0e8fc);box-shadow:0 0 14px #8fcaf5;transition:width .12s ease}
+#wyrdfluxPcRealmLoad.wyrdfluxRealmLoadDone{opacity:0;pointer-events:none}
+@media (prefers-reduced-motion:reduce){#wyrdfluxPcRealmLoad,#wyrdfluxPcRealmLoad .wyrdfluxRealmLoadMeter span{transition:none!important}#wyrdfluxPcRealmLoad .wyrdfluxRealmLoadArt{transform:none}}
+
+/* Compact native display settings on the original game's title menu. */
+#wyrdfluxDisplaySettings{box-sizing:border-box;margin:7px 0 8px;padding:9px 12px;border:1px solid #6983a74a;border-radius:11px;background:#080f1bd4;color:#eaf3ff;max-width:100%}
+#wyrdfluxDisplaySettings>strong{display:block;font:800 11px/1.35 system-ui;letter-spacing:.15em;color:#b7d7ed;margin-bottom:6px}
+#wyrdfluxDisplaySettings .wyrdfluxDisplayFields{display:flex;flex-wrap:wrap;align-items:center;gap:7px 10px}
+#wyrdfluxDisplaySettings label{font:800 10px/1.3 system-ui;letter-spacing:.06em;color:#c1d5e9}
+#wyrdfluxDisplaySettings select{min-height:30px;max-width:245px;min-width:120px;border-radius:6px;background:#101b32;color:#fff;border:1px solid #8da9c6;padding:5px 8px;font:700 12px/1.2 system-ui}
+#wyrdfluxDisplaySettings #wyrdfluxDisplayMonitor{max-width:min(320px,56vw);min-width:180px}
+#wyrdfluxDisplaySettings button{min-height:31px;padding:5px 13px;background:#244b6a;color:#fff;border:1px solid #8bc7e8;border-radius:6px;font:800 11px system-ui;letter-spacing:.05em;cursor:pointer}
+#wyrdfluxDisplaySettings :is(button,select):focus-visible{outline:3px solid #fff3a4;outline-offset:2px}
+#wyrdfluxDisplaySettings>small{display:block;margin-top:5px;font:600 10px system-ui;color:#bbd5e6}
+@media(max-width:680px){#wyrdfluxDisplaySettings .wyrdfluxDisplayFields{gap:5px}#wyrdfluxDisplaySettings select{min-height:27px;min-width:90px;font-size:11px}#wyrdfluxDisplaySettings #wyrdfluxDisplayMonitor{min-width:140px}}
+
+/* The initial actual shader/geometry warmup uses the Meadow's own single-scene art. */
+#wyrdfluxStartupVeil{position:fixed;overflow:hidden}
+#wyrdfluxStartupVeil .wyrdfluxStartupArt{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;filter:saturate(1.05) contrast(1.03)}
+#wyrdfluxStartupVeil:before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,#050b1836 0%,#02071242 51%,#030814d9 100%);pointer-events:none}
+#wyrdfluxStartupVeil .wyrdfluxStartupInner{position:relative;z-index:2}
+
+/* WYRDFLUX BASELINE: Overdrive removed entirely from visible PC HUD.
+   Runtime still recognizes legacy save keys without reactivating their effects. */
+#hud .meterline:has(#rageBar), #touchUI #specialButton{display:none!important}
+
+/* Combo milestone announcer is independent of boss/sector telegraphs. */
+#wyrdfluxKillComboAnnouncement{position:fixed;z-index:415;left:50%;top:22%;transform:translate(-50%,-10px) scale(.90);opacity:0;pointer-events:none;white-space:nowrap;max-width:90vw;box-sizing:border-box;padding:9px 28px;text-align:center;border-radius:4px;border:1px solid #afc6dc;color:#ecfaff;background:linear-gradient(100deg,#071a2bdb,#1b294fdc,#071a2bdb);font:900 clamp(15px,2.8vw,29px)/1.2 system-ui;letter-spacing:.065em;text-shadow:0 2px 6px #010711,0 0 12px #6cb5f5;box-shadow:0 0 29px #244d87b8}
+#wyrdfluxKillComboAnnouncement[data-tier="rare"]{border-color:#d9afff;color:#f0d9ff;text-shadow:0 2px 6px #010711,0 0 12px #bf81ff}
+#wyrdfluxKillComboAnnouncement[data-tier="epic"]{border-color:#ffbc77;color:#ffe6c1;text-shadow:0 2px 6px #010711,0 0 12px #ff9229}
+#wyrdfluxKillComboAnnouncement[data-tier="legendary"]{border-color:#ffe788;color:#fff0b0;text-shadow:0 2px 6px #010711,0 0 12px #fbd24b;box-shadow:0 0 38px #a47728bb}
+#wyrdfluxKillComboAnnouncement.wyrdfluxComboPop{animation:wyrdflux-combo-pop 2.1s ease-out both}
+@keyframes wyrdflux-combo-pop{0%{opacity:0;transform:translate(-50%,-14px) scale(.87)}11%{opacity:1;transform:translate(-50%,0) scale(1.06)}23%,75%{opacity:1;transform:translate(-50%,0) scale(1)}100%{opacity:0;transform:translate(-50%,14px) scale(.96)}}
+@media(prefers-reduced-motion:reduce){#wyrdfluxKillComboAnnouncement.wyrdfluxComboPop{animation:wyrdflux-combo-reduced 2.1s linear both}@keyframes wyrdflux-combo-reduced{0%,80%{opacity:1;transform:translate(-50%,0) scale(1)}100%{opacity:0;transform:translate(-50%,0) scale(1)}}}
+
+/* PC original patch: one active weapon in the corner, discrete combo control. */
+#fusionLabel{display:none!important}
+#weaponHud #wyrdfluxComboSwitch{
+ display:block;width:100%;margin-top:5px;padding:5px 8px;
+ color:#b5f7ff;background:#071a2fda;
+ border:1px solid #4c90a6a3;border-radius:5px;
+ font:800 9px system-ui;letter-spacing:.065em;
+}
+#weaponHud #wyrdfluxComboSwitch:hover,
+#weaponHud #wyrdfluxComboSwitch:focus-visible{
+ border-color:#8cfcff;outline:2px solid #80e0fa66;
+}
+
+/* On-screen weapon details show the active weapon ONLY.
+   Full primary/secondary inventory lives in the deliberate TAB armory. */
+body:not(.armory-open) #weaponHud #weaponSelect{display:none!important}
+body.armory-open #weaponHud #weaponSelect{display:flex!important}
+#weaponHud #loadoutToggle{display:flex}

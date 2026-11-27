@@ -1,0 +1,2214 @@
+{
+  "project": "WYRDFLUX Patch 0.01 original audio",
+  "generator": "generate_audio.py",
+  "sample_rate": 48000,
+  "source_type": "deterministic synthesized oscillators/noise and original MIDI-like compositional motifs",
+  "original_master_date": "2026-11-18",
+  "music": {
+    "title": {
+      "name": "The Signal Remains \u2014 Overture",
+      "file": "music/title.wav",
+      "ogg": "music/title.ogg",
+      "bpm": 88,
+      "meter": "4/4",
+      "key": "D minor",
+      "bars": 12,
+      "length_seconds": 32.727,
+      "sample_rate": 48000,
+      "loop": true
+    },
+    "breach": {
+      "name": "Perimeter Pulse",
+      "file": "music/breach.wav",
+      "ogg": "music/breach.ogg",
+      "bpm": 128,
+      "meter": "4/4",
+      "key": "D minor",
+      "bars": 16,
+      "length_seconds": 30.0,
+      "sample_rate": 48000,
+      "loop": true
+    },
+    "boss": {
+      "name": "Collision of Titans",
+      "file": "music/boss.wav",
+      "ogg": "music/boss.ogg",
+      "bpm": 150,
+      "meter": "4/4",
+      "key": "E Phrygian",
+      "bars": 16,
+      "length_seconds": 25.6,
+      "sample_rate": 48000,
+      "loop": true
+    },
+    "hell": {
+      "name": "Black Chapel: Ash Machine",
+      "file": "music/hell.wav",
+      "ogg": "music/hell.ogg",
+      "bpm": 160,
+      "meter": "4/4",
+      "key": "E Phrygian",
+      "bars": 16,
+      "length_seconds": 24.0,
+      "sample_rate": 48000,
+      "loop": true
+    },
+    "archfiend": {
+      "name": "The Archfiend Engine",
+      "file": "music/archfiend.wav",
+      "ogg": "music/archfiend.ogg",
+      "bpm": 174,
+      "meter": "4/4",
+      "key": "E Phrygian",
+      "bars": 16,
+      "length_seconds": 22.069,
+      "sample_rate": 48000,
+      "loop": true
+    },
+    "heaven": {
+      "name": "Eight Windows of Light",
+      "file": "music/heaven.wav",
+      "ogg": "music/heaven.ogg",
+      "bpm": 84,
+      "meter": "4/4",
+      "key": "G Lydian",
+      "bars": 12,
+      "length_seconds": 34.286,
+      "sample_rate": 48000,
+      "loop": true
+    },
+    "angel": {
+      "name": "Wheels of Judgement",
+      "file": "music/angel.wav",
+      "ogg": "music/angel.ogg",
+      "bpm": 114,
+      "meter": "4/4",
+      "key": "G Lydian",
+      "bars": 12,
+      "length_seconds": 25.263,
+      "sample_rate": 48000,
+      "loop": true
+    },
+    "meadow": {
+      "name": "The Shattered Wilds",
+      "file": "music/meadow.wav",
+      "ogg": "music/meadow.ogg",
+      "bpm": 106,
+      "meter": "4/4",
+      "key": "D Dorian",
+      "bars": 12,
+      "length_seconds": 27.17,
+      "sample_rate": 48000,
+      "loop": true
+    },
+    "block": {
+      "name": "Grass Above, Caves Below",
+      "file": "music/block.wav",
+      "ogg": "music/block.ogg",
+      "bpm": 110,
+      "meter": "4/4",
+      "key": "G major",
+      "bars": 12,
+      "length_seconds": 26.182,
+      "sample_rate": 48000,
+      "loop": true
+    },
+    "warden": {
+      "name": "Deep Dark: Heartbeat",
+      "file": "music/warden.wav",
+      "ogg": "music/warden.ogg",
+      "bpm": 126,
+      "meter": "4/4",
+      "key": "E Locrian",
+      "bars": 12,
+      "length_seconds": 22.857,
+      "sample_rate": 48000,
+      "loop": true
+    },
+    "circusidle": {
+      "name": "The Big Top Waits",
+      "file": "music/circusidle.wav",
+      "ogg": "music/circusidle.ogg",
+      "bpm": 80,
+      "meter": "4/4",
+      "key": "C major with chromatic passing tones",
+      "bars": 8,
+      "length_seconds": 24.0,
+      "sample_rate": 48000,
+      "loop": true
+    },
+    "circusdance": {
+      "name": "Marionettes on the Sawdust",
+      "file": "music/circusdance.wav",
+      "ogg": "music/circusdance.ogg",
+      "bpm": 112,
+      "meter": "4/4",
+      "key": "C major / secondary dominants",
+      "bars": 16,
+      "length_seconds": 34.286,
+      "sample_rate": 48000,
+      "loop": true
+    },
+    "circussilence": {
+      "name": "The Curtain Holds Its Breath",
+      "file": "music/circussilence.wav",
+      "ogg": "music/circussilence.ogg",
+      "bpm": 112,
+      "meter": "4/4",
+      "key": "C diminished tension",
+      "bars": 8,
+      "length_seconds": 17.143,
+      "sample_rate": 48000,
+      "loop": true
+    },
+    "circusattack": {
+      "name": "The Marionette Feeds",
+      "file": "music/circusattack.wav",
+      "ogg": "music/circusattack.ogg",
+      "bpm": 154,
+      "meter": "4/4",
+      "key": "C harmonic minor",
+      "bars": 16,
+      "length_seconds": 24.935,
+      "sample_rate": 48000,
+      "loop": true
+    },
+    "ringleader": {
+      "name": "Encore: The Grand Impostor",
+      "file": "music/ringleader.wav",
+      "ogg": "music/ringleader.ogg",
+      "bpm": 152,
+      "meter": "4/4",
+      "key": "C harmonic minor / diminished",
+      "bars": 16,
+      "length_seconds": 25.263,
+      "sample_rate": 48000,
+      "loop": true
+    },
+    "blackwake": {
+      "name": "The Drowned Broadside",
+      "file": "music/blackwake.wav",
+      "ogg": "music/blackwake.ogg",
+      "bpm": 110,
+      "meter": "4/4",
+      "key": "A minor",
+      "bars": 12,
+      "length_seconds": 26.182,
+      "sample_rate": 48000,
+      "loop": true
+    },
+    "shop": {
+      "name": "The Rift Merchant",
+      "file": "music/shop.wav",
+      "ogg": "music/shop.ogg",
+      "bpm": 96,
+      "meter": "4/4",
+      "key": "F minor",
+      "bars": 8,
+      "length_seconds": 20.0,
+      "sample_rate": 48000,
+      "loop": true
+    }
+  },
+  "guns": [
+    {
+      "id": 0,
+      "name": "FLUXSIDE",
+      "class_index": 0,
+      "modifier": "energy",
+      "file": "guns/gun_000.wav"
+    },
+    {
+      "id": 1,
+      "name": "SHARD CANNON",
+      "class_index": 1,
+      "modifier": "energy",
+      "file": "guns/gun_001.wav"
+    },
+    {
+      "id": 2,
+      "name": "LANCER RAIL",
+      "class_index": 2,
+      "modifier": "energy",
+      "file": "guns/gun_002.wav"
+    },
+    {
+      "id": 3,
+      "name": "NOVA LAUNCHER",
+      "class_index": 3,
+      "modifier": "energy",
+      "file": "guns/gun_003.wav"
+    },
+    {
+      "id": 4,
+      "name": "SPECTRE CARBINE",
+      "class_index": 4,
+      "modifier": "energy",
+      "file": "guns/gun_004.wav"
+    },
+    {
+      "id": 5,
+      "name": "INFERNO REPEATER",
+      "class_index": 5,
+      "modifier": "energy",
+      "file": "guns/gun_005.wav"
+    },
+    {
+      "id": 6,
+      "name": "CRYO NEEDLE",
+      "class_index": 6,
+      "modifier": "energy",
+      "file": "guns/gun_006.wav"
+    },
+    {
+      "id": 7,
+      "name": "TESLA FORK",
+      "class_index": 7,
+      "modifier": "energy",
+      "file": "guns/gun_007.wav"
+    },
+    {
+      "id": 8,
+      "name": "GRAVITON MAUL",
+      "class_index": 8,
+      "modifier": "energy",
+      "file": "guns/gun_008.wav"
+    },
+    {
+      "id": 9,
+      "name": "NEEDLE STORM",
+      "class_index": 9,
+      "modifier": "energy",
+      "file": "guns/gun_009.wav"
+    },
+    {
+      "id": 10,
+      "name": "GHOST FLUXSIDE",
+      "class_index": 0,
+      "modifier": "ignite",
+      "file": "guns/gun_010.wav"
+    },
+    {
+      "id": 11,
+      "name": "GHOST SHARD CANNON",
+      "class_index": 1,
+      "modifier": "gravity",
+      "file": "guns/gun_011.wav"
+    },
+    {
+      "id": 12,
+      "name": "GHOST LANCER RAIL",
+      "class_index": 2,
+      "modifier": "shred",
+      "file": "guns/gun_012.wav"
+    },
+    {
+      "id": 13,
+      "name": "GHOST NOVA LAUNCHER",
+      "class_index": 3,
+      "modifier": "overclock",
+      "file": "guns/gun_013.wav"
+    },
+    {
+      "id": 14,
+      "name": "GHOST SPECTRE CARBINE",
+      "class_index": 4,
+      "modifier": "ignite",
+      "file": "guns/gun_014.wav"
+    },
+    {
+      "id": 15,
+      "name": "GHOST INFERNO REPEATER",
+      "class_index": 5,
+      "modifier": "gravity",
+      "file": "guns/gun_015.wav"
+    },
+    {
+      "id": 16,
+      "name": "GHOST CRYO NEEDLE",
+      "class_index": 6,
+      "modifier": "shred",
+      "file": "guns/gun_016.wav"
+    },
+    {
+      "id": 17,
+      "name": "GHOST TESLA FORK",
+      "class_index": 7,
+      "modifier": "overclock",
+      "file": "guns/gun_017.wav"
+    },
+    {
+      "id": 18,
+      "name": "GHOST GRAVITON MAUL",
+      "class_index": 8,
+      "modifier": "ignite",
+      "file": "guns/gun_018.wav"
+    },
+    {
+      "id": 19,
+      "name": "GHOST NEEDLE STORM",
+      "class_index": 9,
+      "modifier": "gravity",
+      "file": "guns/gun_019.wav"
+    },
+    {
+      "id": 20,
+      "name": "FERAL FLUXSIDE",
+      "class_index": 0,
+      "modifier": "freeze",
+      "file": "guns/gun_020.wav"
+    },
+    {
+      "id": 21,
+      "name": "FERAL SHARD CANNON",
+      "class_index": 1,
+      "modifier": "pierce",
+      "file": "guns/gun_021.wav"
+    },
+    {
+      "id": 22,
+      "name": "FERAL LANCER RAIL",
+      "class_index": 2,
+      "modifier": "shield",
+      "file": "guns/gun_022.wav"
+    },
+    {
+      "id": 23,
+      "name": "FERAL NOVA LAUNCHER",
+      "class_index": 3,
+      "modifier": "glass",
+      "file": "guns/gun_023.wav"
+    },
+    {
+      "id": 24,
+      "name": "FERAL SPECTRE CARBINE",
+      "class_index": 4,
+      "modifier": "freeze",
+      "file": "guns/gun_024.wav"
+    },
+    {
+      "id": 25,
+      "name": "FERAL INFERNO REPEATER",
+      "class_index": 5,
+      "modifier": "pierce",
+      "file": "guns/gun_025.wav"
+    },
+    {
+      "id": 26,
+      "name": "FERAL CRYO NEEDLE",
+      "class_index": 6,
+      "modifier": "shield",
+      "file": "guns/gun_026.wav"
+    },
+    {
+      "id": 27,
+      "name": "FERAL TESLA FORK",
+      "class_index": 7,
+      "modifier": "glass",
+      "file": "guns/gun_027.wav"
+    },
+    {
+      "id": 28,
+      "name": "FERAL GRAVITON MAUL",
+      "class_index": 8,
+      "modifier": "freeze",
+      "file": "guns/gun_028.wav"
+    },
+    {
+      "id": 29,
+      "name": "FERAL NEEDLE STORM",
+      "class_index": 9,
+      "modifier": "pierce",
+      "file": "guns/gun_029.wav"
+    },
+    {
+      "id": 30,
+      "name": "IRONWIND FLUXSIDE",
+      "class_index": 0,
+      "modifier": "arc",
+      "file": "guns/gun_030.wav"
+    },
+    {
+      "id": 31,
+      "name": "IRONWIND SHARD CANNON",
+      "class_index": 1,
+      "modifier": "splash",
+      "file": "guns/gun_031.wav"
+    },
+    {
+      "id": 32,
+      "name": "IRONWIND LANCER RAIL",
+      "class_index": 2,
+      "modifier": "vamp",
+      "file": "guns/gun_032.wav"
+    },
+    {
+      "id": 33,
+      "name": "IRONWIND NOVA LAUNCHER",
+      "class_index": 3,
+      "modifier": "recoil",
+      "file": "guns/gun_033.wav"
+    },
+    {
+      "id": 34,
+      "name": "IRONWIND SPECTRE CARBINE",
+      "class_index": 4,
+      "modifier": "arc",
+      "file": "guns/gun_034.wav"
+    },
+    {
+      "id": 35,
+      "name": "IRONWIND INFERNO REPEATER",
+      "class_index": 5,
+      "modifier": "splash",
+      "file": "guns/gun_035.wav"
+    },
+    {
+      "id": 36,
+      "name": "IRONWIND CRYO NEEDLE",
+      "class_index": 6,
+      "modifier": "vamp",
+      "file": "guns/gun_036.wav"
+    },
+    {
+      "id": 37,
+      "name": "IRONWIND TESLA FORK",
+      "class_index": 7,
+      "modifier": "recoil",
+      "file": "guns/gun_037.wav"
+    },
+    {
+      "id": 38,
+      "name": "IRONWIND GRAVITON MAUL",
+      "class_index": 8,
+      "modifier": "arc",
+      "file": "guns/gun_038.wav"
+    },
+    {
+      "id": 39,
+      "name": "IRONWIND NEEDLE STORM",
+      "class_index": 9,
+      "modifier": "splash",
+      "file": "guns/gun_039.wav"
+    },
+    {
+      "id": 40,
+      "name": "PARALLAX FLUXSIDE",
+      "class_index": 0,
+      "modifier": "gravity",
+      "file": "guns/gun_040.wav"
+    },
+    {
+      "id": 41,
+      "name": "PARALLAX SHARD CANNON",
+      "class_index": 1,
+      "modifier": "shred",
+      "file": "guns/gun_041.wav"
+    },
+    {
+      "id": 42,
+      "name": "PARALLAX LANCER RAIL",
+      "class_index": 2,
+      "modifier": "overclock",
+      "file": "guns/gun_042.wav"
+    },
+    {
+      "id": 43,
+      "name": "PARALLAX NOVA LAUNCHER",
+      "class_index": 3,
+      "modifier": "ignite",
+      "file": "guns/gun_043.wav"
+    },
+    {
+      "id": 44,
+      "name": "PARALLAX SPECTRE CARBINE",
+      "class_index": 4,
+      "modifier": "gravity",
+      "file": "guns/gun_044.wav"
+    },
+    {
+      "id": 45,
+      "name": "PARALLAX INFERNO REPEATER",
+      "class_index": 5,
+      "modifier": "shred",
+      "file": "guns/gun_045.wav"
+    },
+    {
+      "id": 46,
+      "name": "PARALLAX CRYO NEEDLE",
+      "class_index": 6,
+      "modifier": "overclock",
+      "file": "guns/gun_046.wav"
+    },
+    {
+      "id": 47,
+      "name": "PARALLAX TESLA FORK",
+      "class_index": 7,
+      "modifier": "ignite",
+      "file": "guns/gun_047.wav"
+    },
+    {
+      "id": 48,
+      "name": "PARALLAX GRAVITON MAUL",
+      "class_index": 8,
+      "modifier": "gravity",
+      "file": "guns/gun_048.wav"
+    },
+    {
+      "id": 49,
+      "name": "PARALLAX NEEDLE STORM",
+      "class_index": 9,
+      "modifier": "shred",
+      "file": "guns/gun_049.wav"
+    },
+    {
+      "id": 50,
+      "name": "NIGHTFALL FLUXSIDE",
+      "class_index": 0,
+      "modifier": "pierce",
+      "file": "guns/gun_050.wav"
+    },
+    {
+      "id": 51,
+      "name": "NIGHTFALL SHARD CANNON",
+      "class_index": 1,
+      "modifier": "shield",
+      "file": "guns/gun_051.wav"
+    },
+    {
+      "id": 52,
+      "name": "NIGHTFALL LANCER RAIL",
+      "class_index": 2,
+      "modifier": "glass",
+      "file": "guns/gun_052.wav"
+    },
+    {
+      "id": 53,
+      "name": "NIGHTFALL NOVA LAUNCHER",
+      "class_index": 3,
+      "modifier": "freeze",
+      "file": "guns/gun_053.wav"
+    },
+    {
+      "id": 54,
+      "name": "NIGHTFALL SPECTRE CARBINE",
+      "class_index": 4,
+      "modifier": "pierce",
+      "file": "guns/gun_054.wav"
+    },
+    {
+      "id": 55,
+      "name": "NIGHTFALL INFERNO REPEATER",
+      "class_index": 5,
+      "modifier": "shield",
+      "file": "guns/gun_055.wav"
+    },
+    {
+      "id": 56,
+      "name": "NIGHTFALL CRYO NEEDLE",
+      "class_index": 6,
+      "modifier": "glass",
+      "file": "guns/gun_056.wav"
+    },
+    {
+      "id": 57,
+      "name": "NIGHTFALL TESLA FORK",
+      "class_index": 7,
+      "modifier": "freeze",
+      "file": "guns/gun_057.wav"
+    },
+    {
+      "id": 58,
+      "name": "NIGHTFALL GRAVITON MAUL",
+      "class_index": 8,
+      "modifier": "pierce",
+      "file": "guns/gun_058.wav"
+    },
+    {
+      "id": 59,
+      "name": "NIGHTFALL NEEDLE STORM",
+      "class_index": 9,
+      "modifier": "shield",
+      "file": "guns/gun_059.wav"
+    },
+    {
+      "id": 60,
+      "name": "MERCURY FLUXSIDE",
+      "class_index": 0,
+      "modifier": "splash",
+      "file": "guns/gun_060.wav"
+    },
+    {
+      "id": 61,
+      "name": "MERCURY SHARD CANNON",
+      "class_index": 1,
+      "modifier": "vamp",
+      "file": "guns/gun_061.wav"
+    },
+    {
+      "id": 62,
+      "name": "MERCURY LANCER RAIL",
+      "class_index": 2,
+      "modifier": "recoil",
+      "file": "guns/gun_062.wav"
+    },
+    {
+      "id": 63,
+      "name": "MERCURY NOVA LAUNCHER",
+      "class_index": 3,
+      "modifier": "arc",
+      "file": "guns/gun_063.wav"
+    },
+    {
+      "id": 64,
+      "name": "MERCURY SPECTRE CARBINE",
+      "class_index": 4,
+      "modifier": "splash",
+      "file": "guns/gun_064.wav"
+    },
+    {
+      "id": 65,
+      "name": "MERCURY INFERNO REPEATER",
+      "class_index": 5,
+      "modifier": "vamp",
+      "file": "guns/gun_065.wav"
+    },
+    {
+      "id": 66,
+      "name": "MERCURY CRYO NEEDLE",
+      "class_index": 6,
+      "modifier": "recoil",
+      "file": "guns/gun_066.wav"
+    },
+    {
+      "id": 67,
+      "name": "MERCURY TESLA FORK",
+      "class_index": 7,
+      "modifier": "arc",
+      "file": "guns/gun_067.wav"
+    },
+    {
+      "id": 68,
+      "name": "MERCURY GRAVITON MAUL",
+      "class_index": 8,
+      "modifier": "splash",
+      "file": "guns/gun_068.wav"
+    },
+    {
+      "id": 69,
+      "name": "MERCURY NEEDLE STORM",
+      "class_index": 9,
+      "modifier": "vamp",
+      "file": "guns/gun_069.wav"
+    },
+    {
+      "id": 70,
+      "name": "SHATTER FLUXSIDE",
+      "class_index": 0,
+      "modifier": "shred",
+      "file": "guns/gun_070.wav"
+    },
+    {
+      "id": 71,
+      "name": "SHATTER SHARD CANNON",
+      "class_index": 1,
+      "modifier": "overclock",
+      "file": "guns/gun_071.wav"
+    },
+    {
+      "id": 72,
+      "name": "SHATTER LANCER RAIL",
+      "class_index": 2,
+      "modifier": "ignite",
+      "file": "guns/gun_072.wav"
+    },
+    {
+      "id": 73,
+      "name": "SHATTER NOVA LAUNCHER",
+      "class_index": 3,
+      "modifier": "gravity",
+      "file": "guns/gun_073.wav"
+    },
+    {
+      "id": 74,
+      "name": "SHATTER SPECTRE CARBINE",
+      "class_index": 4,
+      "modifier": "shred",
+      "file": "guns/gun_074.wav"
+    },
+    {
+      "id": 75,
+      "name": "SHATTER INFERNO REPEATER",
+      "class_index": 5,
+      "modifier": "overclock",
+      "file": "guns/gun_075.wav"
+    },
+    {
+      "id": 76,
+      "name": "SHATTER CRYO NEEDLE",
+      "class_index": 6,
+      "modifier": "ignite",
+      "file": "guns/gun_076.wav"
+    },
+    {
+      "id": 77,
+      "name": "SHATTER TESLA FORK",
+      "class_index": 7,
+      "modifier": "gravity",
+      "file": "guns/gun_077.wav"
+    },
+    {
+      "id": 78,
+      "name": "SHATTER GRAVITON MAUL",
+      "class_index": 8,
+      "modifier": "shred",
+      "file": "guns/gun_078.wav"
+    },
+    {
+      "id": 79,
+      "name": "SHATTER NEEDLE STORM",
+      "class_index": 9,
+      "modifier": "overclock",
+      "file": "guns/gun_079.wav"
+    },
+    {
+      "id": 80,
+      "name": "HAZARD FLUXSIDE",
+      "class_index": 0,
+      "modifier": "shield",
+      "file": "guns/gun_080.wav"
+    },
+    {
+      "id": 81,
+      "name": "HAZARD SHARD CANNON",
+      "class_index": 1,
+      "modifier": "glass",
+      "file": "guns/gun_081.wav"
+    },
+    {
+      "id": 82,
+      "name": "HAZARD LANCER RAIL",
+      "class_index": 2,
+      "modifier": "freeze",
+      "file": "guns/gun_082.wav"
+    },
+    {
+      "id": 83,
+      "name": "HAZARD NOVA LAUNCHER",
+      "class_index": 3,
+      "modifier": "pierce",
+      "file": "guns/gun_083.wav"
+    },
+    {
+      "id": 84,
+      "name": "HAZARD SPECTRE CARBINE",
+      "class_index": 4,
+      "modifier": "shield",
+      "file": "guns/gun_084.wav"
+    },
+    {
+      "id": 85,
+      "name": "HAZARD INFERNO REPEATER",
+      "class_index": 5,
+      "modifier": "glass",
+      "file": "guns/gun_085.wav"
+    },
+    {
+      "id": 86,
+      "name": "HAZARD CRYO NEEDLE",
+      "class_index": 6,
+      "modifier": "freeze",
+      "file": "guns/gun_086.wav"
+    },
+    {
+      "id": 87,
+      "name": "HAZARD TESLA FORK",
+      "class_index": 7,
+      "modifier": "pierce",
+      "file": "guns/gun_087.wav"
+    },
+    {
+      "id": 88,
+      "name": "HAZARD GRAVITON MAUL",
+      "class_index": 8,
+      "modifier": "shield",
+      "file": "guns/gun_088.wav"
+    },
+    {
+      "id": 89,
+      "name": "HAZARD NEEDLE STORM",
+      "class_index": 9,
+      "modifier": "glass",
+      "file": "guns/gun_089.wav"
+    },
+    {
+      "id": 90,
+      "name": "ECLIPSE FLUXSIDE",
+      "class_index": 0,
+      "modifier": "vamp",
+      "file": "guns/gun_090.wav"
+    },
+    {
+      "id": 91,
+      "name": "ECLIPSE SHARD CANNON",
+      "class_index": 1,
+      "modifier": "recoil",
+      "file": "guns/gun_091.wav"
+    },
+    {
+      "id": 92,
+      "name": "ECLIPSE LANCER RAIL",
+      "class_index": 2,
+      "modifier": "arc",
+      "file": "guns/gun_092.wav"
+    },
+    {
+      "id": 93,
+      "name": "ECLIPSE NOVA LAUNCHER",
+      "class_index": 3,
+      "modifier": "splash",
+      "file": "guns/gun_093.wav"
+    },
+    {
+      "id": 94,
+      "name": "ECLIPSE SPECTRE CARBINE",
+      "class_index": 4,
+      "modifier": "vamp",
+      "file": "guns/gun_094.wav"
+    },
+    {
+      "id": 95,
+      "name": "ECLIPSE INFERNO REPEATER",
+      "class_index": 5,
+      "modifier": "recoil",
+      "file": "guns/gun_095.wav"
+    },
+    {
+      "id": 96,
+      "name": "ECLIPSE CRYO NEEDLE",
+      "class_index": 6,
+      "modifier": "arc",
+      "file": "guns/gun_096.wav"
+    },
+    {
+      "id": 97,
+      "name": "ECLIPSE TESLA FORK",
+      "class_index": 7,
+      "modifier": "splash",
+      "file": "guns/gun_097.wav"
+    },
+    {
+      "id": 98,
+      "name": "ECLIPSE GRAVITON MAUL",
+      "class_index": 8,
+      "modifier": "vamp",
+      "file": "guns/gun_098.wav"
+    },
+    {
+      "id": 99,
+      "name": "ECLIPSE NEEDLE STORM",
+      "class_index": 9,
+      "modifier": "recoil",
+      "file": "guns/gun_099.wav"
+    },
+    {
+      "id": 100,
+      "name": "VOIDSONG FLUXSIDE",
+      "class_index": 0,
+      "modifier": "overclock",
+      "file": "guns/gun_100.wav"
+    },
+    {
+      "id": 101,
+      "name": "VOIDSONG SHARD CANNON",
+      "class_index": 1,
+      "modifier": "ignite",
+      "file": "guns/gun_101.wav"
+    },
+    {
+      "id": 102,
+      "name": "VOIDSONG LANCER RAIL",
+      "class_index": 2,
+      "modifier": "gravity",
+      "file": "guns/gun_102.wav"
+    },
+    {
+      "id": 103,
+      "name": "VOIDSONG NOVA LAUNCHER",
+      "class_index": 3,
+      "modifier": "shred",
+      "file": "guns/gun_103.wav"
+    },
+    {
+      "id": 104,
+      "name": "VOIDSONG SPECTRE CARBINE",
+      "class_index": 4,
+      "modifier": "overclock",
+      "file": "guns/gun_104.wav"
+    },
+    {
+      "id": 105,
+      "name": "VOIDSONG INFERNO REPEATER",
+      "class_index": 5,
+      "modifier": "ignite",
+      "file": "guns/gun_105.wav"
+    },
+    {
+      "id": 106,
+      "name": "VOIDSONG CRYO NEEDLE",
+      "class_index": 6,
+      "modifier": "gravity",
+      "file": "guns/gun_106.wav"
+    },
+    {
+      "id": 107,
+      "name": "VOIDSONG TESLA FORK",
+      "class_index": 7,
+      "modifier": "shred",
+      "file": "guns/gun_107.wav"
+    },
+    {
+      "id": 108,
+      "name": "VOIDSONG GRAVITON MAUL",
+      "class_index": 8,
+      "modifier": "overclock",
+      "file": "guns/gun_108.wav"
+    },
+    {
+      "id": 109,
+      "name": "VOIDSONG NEEDLE STORM",
+      "class_index": 9,
+      "modifier": "ignite",
+      "file": "guns/gun_109.wav"
+    },
+    {
+      "id": 110,
+      "name": "STORMGLASS FLUXSIDE",
+      "class_index": 0,
+      "modifier": "glass",
+      "file": "guns/gun_110.wav"
+    },
+    {
+      "id": 111,
+      "name": "STORMGLASS SHARD CANNON",
+      "class_index": 1,
+      "modifier": "freeze",
+      "file": "guns/gun_111.wav"
+    },
+    {
+      "id": 112,
+      "name": "STORMGLASS LANCER RAIL",
+      "class_index": 2,
+      "modifier": "pierce",
+      "file": "guns/gun_112.wav"
+    },
+    {
+      "id": 113,
+      "name": "STORMGLASS NOVA LAUNCHER",
+      "class_index": 3,
+      "modifier": "shield",
+      "file": "guns/gun_113.wav"
+    },
+    {
+      "id": 114,
+      "name": "STORMGLASS SPECTRE CARBINE",
+      "class_index": 4,
+      "modifier": "glass",
+      "file": "guns/gun_114.wav"
+    },
+    {
+      "id": 115,
+      "name": "STORMGLASS INFERNO REPEATER",
+      "class_index": 5,
+      "modifier": "freeze",
+      "file": "guns/gun_115.wav"
+    },
+    {
+      "id": 116,
+      "name": "STORMGLASS CRYO NEEDLE",
+      "class_index": 6,
+      "modifier": "pierce",
+      "file": "guns/gun_116.wav"
+    },
+    {
+      "id": 117,
+      "name": "STORMGLASS TESLA FORK",
+      "class_index": 7,
+      "modifier": "shield",
+      "file": "guns/gun_117.wav"
+    },
+    {
+      "id": 118,
+      "name": "STORMGLASS GRAVITON MAUL",
+      "class_index": 8,
+      "modifier": "glass",
+      "file": "guns/gun_118.wav"
+    },
+    {
+      "id": 119,
+      "name": "STORMGLASS NEEDLE STORM",
+      "class_index": 9,
+      "modifier": "freeze",
+      "file": "guns/gun_119.wav"
+    },
+    {
+      "id": 120,
+      "name": "HELIOS FLUXSIDE",
+      "class_index": 0,
+      "modifier": "recoil",
+      "file": "guns/gun_120.wav"
+    },
+    {
+      "id": 121,
+      "name": "HELIOS SHARD CANNON",
+      "class_index": 1,
+      "modifier": "arc",
+      "file": "guns/gun_121.wav"
+    },
+    {
+      "id": 122,
+      "name": "HELIOS LANCER RAIL",
+      "class_index": 2,
+      "modifier": "splash",
+      "file": "guns/gun_122.wav"
+    },
+    {
+      "id": 123,
+      "name": "HELIOS NOVA LAUNCHER",
+      "class_index": 3,
+      "modifier": "vamp",
+      "file": "guns/gun_123.wav"
+    },
+    {
+      "id": 124,
+      "name": "HELIOS SPECTRE CARBINE",
+      "class_index": 4,
+      "modifier": "recoil",
+      "file": "guns/gun_124.wav"
+    },
+    {
+      "id": 125,
+      "name": "HELIOS INFERNO REPEATER",
+      "class_index": 5,
+      "modifier": "arc",
+      "file": "guns/gun_125.wav"
+    },
+    {
+      "id": 126,
+      "name": "HELIOS CRYO NEEDLE",
+      "class_index": 6,
+      "modifier": "splash",
+      "file": "guns/gun_126.wav"
+    },
+    {
+      "id": 127,
+      "name": "HELIOS TESLA FORK",
+      "class_index": 7,
+      "modifier": "vamp",
+      "file": "guns/gun_127.wav"
+    },
+    {
+      "id": 128,
+      "name": "HELIOS GRAVITON MAUL",
+      "class_index": 8,
+      "modifier": "recoil",
+      "file": "guns/gun_128.wav"
+    },
+    {
+      "id": 129,
+      "name": "HELIOS NEEDLE STORM",
+      "class_index": 9,
+      "modifier": "arc",
+      "file": "guns/gun_129.wav"
+    },
+    {
+      "id": 130,
+      "name": "REDLINE FLUXSIDE",
+      "class_index": 0,
+      "modifier": "ignite",
+      "file": "guns/gun_130.wav"
+    },
+    {
+      "id": 131,
+      "name": "REDLINE SHARD CANNON",
+      "class_index": 1,
+      "modifier": "gravity",
+      "file": "guns/gun_131.wav"
+    },
+    {
+      "id": 132,
+      "name": "REDLINE LANCER RAIL",
+      "class_index": 2,
+      "modifier": "shred",
+      "file": "guns/gun_132.wav"
+    },
+    {
+      "id": 133,
+      "name": "REDLINE NOVA LAUNCHER",
+      "class_index": 3,
+      "modifier": "overclock",
+      "file": "guns/gun_133.wav"
+    },
+    {
+      "id": 134,
+      "name": "REDLINE SPECTRE CARBINE",
+      "class_index": 4,
+      "modifier": "ignite",
+      "file": "guns/gun_134.wav"
+    },
+    {
+      "id": 135,
+      "name": "REDLINE INFERNO REPEATER",
+      "class_index": 5,
+      "modifier": "gravity",
+      "file": "guns/gun_135.wav"
+    },
+    {
+      "id": 136,
+      "name": "REDLINE CRYO NEEDLE",
+      "class_index": 6,
+      "modifier": "shred",
+      "file": "guns/gun_136.wav"
+    },
+    {
+      "id": 137,
+      "name": "REDLINE TESLA FORK",
+      "class_index": 7,
+      "modifier": "overclock",
+      "file": "guns/gun_137.wav"
+    },
+    {
+      "id": 138,
+      "name": "REDLINE GRAVITON MAUL",
+      "class_index": 8,
+      "modifier": "ignite",
+      "file": "guns/gun_138.wav"
+    },
+    {
+      "id": 139,
+      "name": "REDLINE NEEDLE STORM",
+      "class_index": 9,
+      "modifier": "gravity",
+      "file": "guns/gun_139.wav"
+    },
+    {
+      "id": 140,
+      "name": "SUNDOWN FLUXSIDE",
+      "class_index": 0,
+      "modifier": "freeze",
+      "file": "guns/gun_140.wav"
+    },
+    {
+      "id": 141,
+      "name": "SUNDOWN SHARD CANNON",
+      "class_index": 1,
+      "modifier": "pierce",
+      "file": "guns/gun_141.wav"
+    },
+    {
+      "id": 142,
+      "name": "SUNDOWN LANCER RAIL",
+      "class_index": 2,
+      "modifier": "shield",
+      "file": "guns/gun_142.wav"
+    },
+    {
+      "id": 143,
+      "name": "SUNDOWN NOVA LAUNCHER",
+      "class_index": 3,
+      "modifier": "glass",
+      "file": "guns/gun_143.wav"
+    },
+    {
+      "id": 144,
+      "name": "SUNDOWN SPECTRE CARBINE",
+      "class_index": 4,
+      "modifier": "freeze",
+      "file": "guns/gun_144.wav"
+    },
+    {
+      "id": 145,
+      "name": "SUNDOWN INFERNO REPEATER",
+      "class_index": 5,
+      "modifier": "pierce",
+      "file": "guns/gun_145.wav"
+    },
+    {
+      "id": 146,
+      "name": "SUNDOWN CRYO NEEDLE",
+      "class_index": 6,
+      "modifier": "shield",
+      "file": "guns/gun_146.wav"
+    },
+    {
+      "id": 147,
+      "name": "SUNDOWN TESLA FORK",
+      "class_index": 7,
+      "modifier": "glass",
+      "file": "guns/gun_147.wav"
+    },
+    {
+      "id": 148,
+      "name": "SUNDOWN GRAVITON MAUL",
+      "class_index": 8,
+      "modifier": "freeze",
+      "file": "guns/gun_148.wav"
+    },
+    {
+      "id": 149,
+      "name": "SUNDOWN NEEDLE STORM",
+      "class_index": 9,
+      "modifier": "pierce",
+      "file": "guns/gun_149.wav"
+    },
+    {
+      "id": 150,
+      "name": "NEBULA FLUXSIDE",
+      "class_index": 0,
+      "modifier": "arc",
+      "file": "guns/gun_150.wav"
+    },
+    {
+      "id": 151,
+      "name": "NEBULA SHARD CANNON",
+      "class_index": 1,
+      "modifier": "splash",
+      "file": "guns/gun_151.wav"
+    },
+    {
+      "id": 152,
+      "name": "NEBULA LANCER RAIL",
+      "class_index": 2,
+      "modifier": "vamp",
+      "file": "guns/gun_152.wav"
+    },
+    {
+      "id": 153,
+      "name": "NEBULA NOVA LAUNCHER",
+      "class_index": 3,
+      "modifier": "recoil",
+      "file": "guns/gun_153.wav"
+    },
+    {
+      "id": 154,
+      "name": "NEBULA SPECTRE CARBINE",
+      "class_index": 4,
+      "modifier": "arc",
+      "file": "guns/gun_154.wav"
+    },
+    {
+      "id": 155,
+      "name": "NEBULA INFERNO REPEATER",
+      "class_index": 5,
+      "modifier": "splash",
+      "file": "guns/gun_155.wav"
+    },
+    {
+      "id": 156,
+      "name": "NEBULA CRYO NEEDLE",
+      "class_index": 6,
+      "modifier": "vamp",
+      "file": "guns/gun_156.wav"
+    },
+    {
+      "id": 157,
+      "name": "NEBULA TESLA FORK",
+      "class_index": 7,
+      "modifier": "recoil",
+      "file": "guns/gun_157.wav"
+    },
+    {
+      "id": 158,
+      "name": "NEBULA GRAVITON MAUL",
+      "class_index": 8,
+      "modifier": "arc",
+      "file": "guns/gun_158.wav"
+    },
+    {
+      "id": 159,
+      "name": "NEBULA NEEDLE STORM",
+      "class_index": 9,
+      "modifier": "splash",
+      "file": "guns/gun_159.wav"
+    },
+    {
+      "id": 160,
+      "name": "COLDSTAR FLUXSIDE",
+      "class_index": 0,
+      "modifier": "gravity",
+      "file": "guns/gun_160.wav"
+    },
+    {
+      "id": 161,
+      "name": "COLDSTAR SHARD CANNON",
+      "class_index": 1,
+      "modifier": "shred",
+      "file": "guns/gun_161.wav"
+    },
+    {
+      "id": 162,
+      "name": "COLDSTAR LANCER RAIL",
+      "class_index": 2,
+      "modifier": "overclock",
+      "file": "guns/gun_162.wav"
+    },
+    {
+      "id": 163,
+      "name": "COLDSTAR NOVA LAUNCHER",
+      "class_index": 3,
+      "modifier": "ignite",
+      "file": "guns/gun_163.wav"
+    },
+    {
+      "id": 164,
+      "name": "COLDSTAR SPECTRE CARBINE",
+      "class_index": 4,
+      "modifier": "gravity",
+      "file": "guns/gun_164.wav"
+    },
+    {
+      "id": 165,
+      "name": "COLDSTAR INFERNO REPEATER",
+      "class_index": 5,
+      "modifier": "shred",
+      "file": "guns/gun_165.wav"
+    },
+    {
+      "id": 166,
+      "name": "COLDSTAR CRYO NEEDLE",
+      "class_index": 6,
+      "modifier": "overclock",
+      "file": "guns/gun_166.wav"
+    },
+    {
+      "id": 167,
+      "name": "COLDSTAR TESLA FORK",
+      "class_index": 7,
+      "modifier": "ignite",
+      "file": "guns/gun_167.wav"
+    },
+    {
+      "id": 168,
+      "name": "COLDSTAR GRAVITON MAUL",
+      "class_index": 8,
+      "modifier": "gravity",
+      "file": "guns/gun_168.wav"
+    },
+    {
+      "id": 169,
+      "name": "COLDSTAR NEEDLE STORM",
+      "class_index": 9,
+      "modifier": "shred",
+      "file": "guns/gun_169.wav"
+    },
+    {
+      "id": 170,
+      "name": "CINDER FLUXSIDE",
+      "class_index": 0,
+      "modifier": "pierce",
+      "file": "guns/gun_170.wav"
+    },
+    {
+      "id": 171,
+      "name": "CINDER SHARD CANNON",
+      "class_index": 1,
+      "modifier": "shield",
+      "file": "guns/gun_171.wav"
+    },
+    {
+      "id": 172,
+      "name": "CINDER LANCER RAIL",
+      "class_index": 2,
+      "modifier": "glass",
+      "file": "guns/gun_172.wav"
+    },
+    {
+      "id": 173,
+      "name": "CINDER NOVA LAUNCHER",
+      "class_index": 3,
+      "modifier": "freeze",
+      "file": "guns/gun_173.wav"
+    },
+    {
+      "id": 174,
+      "name": "CINDER SPECTRE CARBINE",
+      "class_index": 4,
+      "modifier": "pierce",
+      "file": "guns/gun_174.wav"
+    },
+    {
+      "id": 175,
+      "name": "CINDER INFERNO REPEATER",
+      "class_index": 5,
+      "modifier": "shield",
+      "file": "guns/gun_175.wav"
+    },
+    {
+      "id": 176,
+      "name": "CINDER CRYO NEEDLE",
+      "class_index": 6,
+      "modifier": "glass",
+      "file": "guns/gun_176.wav"
+    },
+    {
+      "id": 177,
+      "name": "CINDER TESLA FORK",
+      "class_index": 7,
+      "modifier": "freeze",
+      "file": "guns/gun_177.wav"
+    },
+    {
+      "id": 178,
+      "name": "CINDER GRAVITON MAUL",
+      "class_index": 8,
+      "modifier": "pierce",
+      "file": "guns/gun_178.wav"
+    },
+    {
+      "id": 179,
+      "name": "CINDER NEEDLE STORM",
+      "class_index": 9,
+      "modifier": "shield",
+      "file": "guns/gun_179.wav"
+    },
+    {
+      "id": 180,
+      "name": "NULLFIELD FLUXSIDE",
+      "class_index": 0,
+      "modifier": "splash",
+      "file": "guns/gun_180.wav"
+    },
+    {
+      "id": 181,
+      "name": "NULLFIELD SHARD CANNON",
+      "class_index": 1,
+      "modifier": "vamp",
+      "file": "guns/gun_181.wav"
+    },
+    {
+      "id": 182,
+      "name": "NULLFIELD LANCER RAIL",
+      "class_index": 2,
+      "modifier": "recoil",
+      "file": "guns/gun_182.wav"
+    },
+    {
+      "id": 183,
+      "name": "NULLFIELD NOVA LAUNCHER",
+      "class_index": 3,
+      "modifier": "arc",
+      "file": "guns/gun_183.wav"
+    },
+    {
+      "id": 184,
+      "name": "NULLFIELD SPECTRE CARBINE",
+      "class_index": 4,
+      "modifier": "splash",
+      "file": "guns/gun_184.wav"
+    },
+    {
+      "id": 185,
+      "name": "NULLFIELD INFERNO REPEATER",
+      "class_index": 5,
+      "modifier": "vamp",
+      "file": "guns/gun_185.wav"
+    },
+    {
+      "id": 186,
+      "name": "NULLFIELD CRYO NEEDLE",
+      "class_index": 6,
+      "modifier": "recoil",
+      "file": "guns/gun_186.wav"
+    },
+    {
+      "id": 187,
+      "name": "NULLFIELD TESLA FORK",
+      "class_index": 7,
+      "modifier": "arc",
+      "file": "guns/gun_187.wav"
+    },
+    {
+      "id": 188,
+      "name": "NULLFIELD GRAVITON MAUL",
+      "class_index": 8,
+      "modifier": "splash",
+      "file": "guns/gun_188.wav"
+    },
+    {
+      "id": 189,
+      "name": "NULLFIELD NEEDLE STORM",
+      "class_index": 9,
+      "modifier": "vamp",
+      "file": "guns/gun_189.wav"
+    },
+    {
+      "id": 190,
+      "name": "ECHOCRAFT FLUXSIDE",
+      "class_index": 0,
+      "modifier": "shred",
+      "file": "guns/gun_190.wav"
+    },
+    {
+      "id": 191,
+      "name": "ECHOCRAFT SHARD CANNON",
+      "class_index": 1,
+      "modifier": "overclock",
+      "file": "guns/gun_191.wav"
+    },
+    {
+      "id": 192,
+      "name": "ECHOCRAFT LANCER RAIL",
+      "class_index": 2,
+      "modifier": "ignite",
+      "file": "guns/gun_192.wav"
+    },
+    {
+      "id": 193,
+      "name": "ECHOCRAFT NOVA LAUNCHER",
+      "class_index": 3,
+      "modifier": "gravity",
+      "file": "guns/gun_193.wav"
+    },
+    {
+      "id": 194,
+      "name": "ECHOCRAFT SPECTRE CARBINE",
+      "class_index": 4,
+      "modifier": "shred",
+      "file": "guns/gun_194.wav"
+    },
+    {
+      "id": 195,
+      "name": "ECHOCRAFT INFERNO REPEATER",
+      "class_index": 5,
+      "modifier": "overclock",
+      "file": "guns/gun_195.wav"
+    },
+    {
+      "id": 196,
+      "name": "ECHOCRAFT CRYO NEEDLE",
+      "class_index": 6,
+      "modifier": "ignite",
+      "file": "guns/gun_196.wav"
+    },
+    {
+      "id": 197,
+      "name": "ECHOCRAFT TESLA FORK",
+      "class_index": 7,
+      "modifier": "gravity",
+      "file": "guns/gun_197.wav"
+    },
+    {
+      "id": 198,
+      "name": "ECHOCRAFT GRAVITON MAUL",
+      "class_index": 8,
+      "modifier": "shred",
+      "file": "guns/gun_198.wav"
+    },
+    {
+      "id": 199,
+      "name": "ECHOCRAFT NEEDLE STORM",
+      "class_index": 9,
+      "modifier": "overclock",
+      "file": "guns/gun_199.wav"
+    },
+    {
+      "id": 200,
+      "name": "DARKMATTER FLUXSIDE",
+      "class_index": 0,
+      "modifier": "shield",
+      "file": "guns/gun_200.wav"
+    },
+    {
+      "id": 201,
+      "name": "DARKMATTER SHARD CANNON",
+      "class_index": 1,
+      "modifier": "glass",
+      "file": "guns/gun_201.wav"
+    },
+    {
+      "id": 202,
+      "name": "DARKMATTER LANCER RAIL",
+      "class_index": 2,
+      "modifier": "freeze",
+      "file": "guns/gun_202.wav"
+    },
+    {
+      "id": 203,
+      "name": "DARKMATTER NOVA LAUNCHER",
+      "class_index": 3,
+      "modifier": "pierce",
+      "file": "guns/gun_203.wav"
+    },
+    {
+      "id": 204,
+      "name": "DARKMATTER SPECTRE CARBINE",
+      "class_index": 4,
+      "modifier": "shield",
+      "file": "guns/gun_204.wav"
+    },
+    {
+      "id": 205,
+      "name": "DARKMATTER INFERNO REPEATER",
+      "class_index": 5,
+      "modifier": "glass",
+      "file": "guns/gun_205.wav"
+    },
+    {
+      "id": 206,
+      "name": "DARKMATTER CRYO NEEDLE",
+      "class_index": 6,
+      "modifier": "freeze",
+      "file": "guns/gun_206.wav"
+    },
+    {
+      "id": 207,
+      "name": "DARKMATTER TESLA FORK",
+      "class_index": 7,
+      "modifier": "pierce",
+      "file": "guns/gun_207.wav"
+    },
+    {
+      "id": 208,
+      "name": "DARKMATTER GRAVITON MAUL",
+      "class_index": 8,
+      "modifier": "shield",
+      "file": "guns/gun_208.wav"
+    },
+    {
+      "id": 209,
+      "name": "DARKMATTER NEEDLE STORM",
+      "class_index": 9,
+      "modifier": "glass",
+      "file": "guns/gun_209.wav"
+    },
+    {
+      "id": 210,
+      "name": "OBLIVION FLUXSIDE",
+      "class_index": 0,
+      "modifier": "vamp",
+      "file": "guns/gun_210.wav"
+    },
+    {
+      "id": 211,
+      "name": "OBLIVION SHARD CANNON",
+      "class_index": 1,
+      "modifier": "recoil",
+      "file": "guns/gun_211.wav"
+    },
+    {
+      "id": 212,
+      "name": "OBLIVION LANCER RAIL",
+      "class_index": 2,
+      "modifier": "arc",
+      "file": "guns/gun_212.wav"
+    },
+    {
+      "id": 213,
+      "name": "OBLIVION NOVA LAUNCHER",
+      "class_index": 3,
+      "modifier": "splash",
+      "file": "guns/gun_213.wav"
+    },
+    {
+      "id": 214,
+      "name": "OBLIVION SPECTRE CARBINE",
+      "class_index": 4,
+      "modifier": "vamp",
+      "file": "guns/gun_214.wav"
+    },
+    {
+      "id": 215,
+      "name": "OBLIVION INFERNO REPEATER",
+      "class_index": 5,
+      "modifier": "recoil",
+      "file": "guns/gun_215.wav"
+    },
+    {
+      "id": 216,
+      "name": "OBLIVION CRYO NEEDLE",
+      "class_index": 6,
+      "modifier": "arc",
+      "file": "guns/gun_216.wav"
+    },
+    {
+      "id": 217,
+      "name": "OBLIVION TESLA FORK",
+      "class_index": 7,
+      "modifier": "splash",
+      "file": "guns/gun_217.wav"
+    },
+    {
+      "id": 218,
+      "name": "OBLIVION GRAVITON MAUL",
+      "class_index": 8,
+      "modifier": "vamp",
+      "file": "guns/gun_218.wav"
+    },
+    {
+      "id": 219,
+      "name": "OBLIVION NEEDLE STORM",
+      "class_index": 9,
+      "modifier": "recoil",
+      "file": "guns/gun_219.wav"
+    },
+    {
+      "id": 220,
+      "name": "INFINITY FLUXSIDE",
+      "class_index": 0,
+      "modifier": "overclock",
+      "file": "guns/gun_220.wav"
+    },
+    {
+      "id": 221,
+      "name": "INFINITY SHARD CANNON",
+      "class_index": 1,
+      "modifier": "ignite",
+      "file": "guns/gun_221.wav"
+    },
+    {
+      "id": 222,
+      "name": "INFINITY LANCER RAIL",
+      "class_index": 2,
+      "modifier": "gravity",
+      "file": "guns/gun_222.wav"
+    },
+    {
+      "id": 223,
+      "name": "INFINITY NOVA LAUNCHER",
+      "class_index": 3,
+      "modifier": "shred",
+      "file": "guns/gun_223.wav"
+    },
+    {
+      "id": 224,
+      "name": "INFINITY SPECTRE CARBINE",
+      "class_index": 4,
+      "modifier": "overclock",
+      "file": "guns/gun_224.wav"
+    },
+    {
+      "id": 225,
+      "name": "INFINITY INFERNO REPEATER",
+      "class_index": 5,
+      "modifier": "ignite",
+      "file": "guns/gun_225.wav"
+    },
+    {
+      "id": 226,
+      "name": "INFINITY CRYO NEEDLE",
+      "class_index": 6,
+      "modifier": "gravity",
+      "file": "guns/gun_226.wav"
+    },
+    {
+      "id": 227,
+      "name": "INFINITY TESLA FORK",
+      "class_index": 7,
+      "modifier": "shred",
+      "file": "guns/gun_227.wav"
+    },
+    {
+      "id": 228,
+      "name": "INFINITY GRAVITON MAUL",
+      "class_index": 8,
+      "modifier": "overclock",
+      "file": "guns/gun_228.wav"
+    },
+    {
+      "id": 229,
+      "name": "INFINITY NEEDLE STORM",
+      "class_index": 9,
+      "modifier": "ignite",
+      "file": "guns/gun_229.wav"
+    },
+    {
+      "id": 230,
+      "name": "CROWNLESS FLUXSIDE",
+      "class_index": 0,
+      "modifier": "glass",
+      "file": "guns/gun_230.wav"
+    },
+    {
+      "id": 231,
+      "name": "CROWNLESS SHARD CANNON",
+      "class_index": 1,
+      "modifier": "freeze",
+      "file": "guns/gun_231.wav"
+    },
+    {
+      "id": 232,
+      "name": "CROWNLESS LANCER RAIL",
+      "class_index": 2,
+      "modifier": "pierce",
+      "file": "guns/gun_232.wav"
+    },
+    {
+      "id": 233,
+      "name": "CROWNLESS NOVA LAUNCHER",
+      "class_index": 3,
+      "modifier": "shield",
+      "file": "guns/gun_233.wav"
+    },
+    {
+      "id": 234,
+      "name": "CROWNLESS SPECTRE CARBINE",
+      "class_index": 4,
+      "modifier": "glass",
+      "file": "guns/gun_234.wav"
+    },
+    {
+      "id": 235,
+      "name": "CROWNLESS INFERNO REPEATER",
+      "class_index": 5,
+      "modifier": "freeze",
+      "file": "guns/gun_235.wav"
+    },
+    {
+      "id": 236,
+      "name": "CROWNLESS CRYO NEEDLE",
+      "class_index": 6,
+      "modifier": "pierce",
+      "file": "guns/gun_236.wav"
+    },
+    {
+      "id": 237,
+      "name": "CROWNLESS TESLA FORK",
+      "class_index": 7,
+      "modifier": "shield",
+      "file": "guns/gun_237.wav"
+    },
+    {
+      "id": 238,
+      "name": "CROWNLESS GRAVITON MAUL",
+      "class_index": 8,
+      "modifier": "glass",
+      "file": "guns/gun_238.wav"
+    },
+    {
+      "id": 239,
+      "name": "CROWNLESS NEEDLE STORM",
+      "class_index": 9,
+      "modifier": "freeze",
+      "file": "guns/gun_239.wav"
+    },
+    {
+      "id": 240,
+      "name": "LASTLIGHT FLUXSIDE",
+      "class_index": 0,
+      "modifier": "recoil",
+      "file": "guns/gun_240.wav"
+    },
+    {
+      "id": 241,
+      "name": "LASTLIGHT SHARD CANNON",
+      "class_index": 1,
+      "modifier": "arc",
+      "file": "guns/gun_241.wav"
+    },
+    {
+      "id": 242,
+      "name": "LASTLIGHT LANCER RAIL",
+      "class_index": 2,
+      "modifier": "splash",
+      "file": "guns/gun_242.wav"
+    },
+    {
+      "id": 243,
+      "name": "LASTLIGHT NOVA LAUNCHER",
+      "class_index": 3,
+      "modifier": "vamp",
+      "file": "guns/gun_243.wav"
+    },
+    {
+      "id": 244,
+      "name": "LASTLIGHT SPECTRE CARBINE",
+      "class_index": 4,
+      "modifier": "recoil",
+      "file": "guns/gun_244.wav"
+    },
+    {
+      "id": 245,
+      "name": "LASTLIGHT INFERNO REPEATER",
+      "class_index": 5,
+      "modifier": "arc",
+      "file": "guns/gun_245.wav"
+    },
+    {
+      "id": 246,
+      "name": "LASTLIGHT CRYO NEEDLE",
+      "class_index": 6,
+      "modifier": "splash",
+      "file": "guns/gun_246.wav"
+    },
+    {
+      "id": 247,
+      "name": "LASTLIGHT TESLA FORK",
+      "class_index": 7,
+      "modifier": "vamp",
+      "file": "guns/gun_247.wav"
+    },
+    {
+      "id": 248,
+      "name": "LASTLIGHT GRAVITON MAUL",
+      "class_index": 8,
+      "modifier": "recoil",
+      "file": "guns/gun_248.wav"
+    },
+    {
+      "id": 249,
+      "name": "LASTLIGHT NEEDLE STORM",
+      "class_index": 9,
+      "modifier": "arc",
+      "file": "guns/gun_249.wav"
+    },
+    {
+      "id": 250,
+      "name": "JESTER'S POPPER",
+      "class_index": 1,
+      "modifier": "scatter",
+      "file": "guns/gun_250.wav"
+    },
+    {
+      "id": 251,
+      "name": "ABYSS HEARTBREAKER",
+      "class_index": 3,
+      "modifier": "ignite",
+      "file": "guns/gun_251.wav"
+    },
+    {
+      "id": 252,
+      "name": "SERAPHIM HALO",
+      "class_index": 7,
+      "modifier": "arc",
+      "file": "guns/gun_252.wav"
+    },
+    {
+      "id": 253,
+      "name": "WARDEN'S ECHO",
+      "class_index": 8,
+      "modifier": "gravity",
+      "file": "guns/gun_253.wav"
+    },
+    {
+      "id": 254,
+      "name": "THORN QUEEN",
+      "class_index": 9,
+      "modifier": "shred",
+      "file": "guns/gun_254.wav"
+    },
+    {
+      "id": 255,
+      "name": "BLACKWAKE BROADSIDE",
+      "class_index": 3,
+      "modifier": "splash",
+      "file": "guns/gun_255.wav"
+    }
+  ],
+  "fx": {
+    "shot_pistol": "fx/shot_pistol.wav",
+    "shot_ultra": "fx/shot_ultra.wav",
+    "shot_rifle": "fx/shot_rifle.wav",
+    "hit": "fx/hit.wav",
+    "upgrade": "fx/upgrade.wav",
+    "maw": "fx/maw.wav",
+    "warden": "fx/warden.wav",
+    "sonicboom": "fx/sonicboom.wav",
+    "creeperhiss": "fx/creeperhiss.wav",
+    "blockshift": "fx/blockshift.wav",
+    "blockenter": "fx/blockenter.wav",
+    "heavengate": "fx/heavengate.wav",
+    "heavenenter": "fx/heavenenter.wav",
+    "altar": "fx/altar.wav",
+    "angelcharge": "fx/angelcharge.wav",
+    "hellenter": "fx/hellenter.wav",
+    "ringleader_ascend": "fx/ringleader_ascend.wav",
+    "ringleader_revive": "fx/ringleader_revive.wav",
+    "ringleader_finale": "fx/ringleader_finale.wav",
+    "menu_confirm": "fx/menu_confirm.wav",
+    "reload": "fx/reload.wav",
+    "gun_overheat": "fx/gun_overheat.wav",
+    "gun_cooldown": "fx/gun_cooldown.wav",
+    "casing_metal": "fx/casing_metal.wav",
+    "critical_hit": "fx/critical_hit.wav",
+    "weakspot_hit": "fx/weakspot_hit.wav",
+    "enemy_armor_break": "fx/enemy_armor_break.wav",
+    "enemy_flesh_impact": "fx/enemy_flesh_impact.wav",
+    "glass_impact": "fx/glass_impact.wav",
+    "stone_impact": "fx/stone_impact.wav",
+    "metal_impact": "fx/metal_impact.wav",
+    "dodge": "fx/dodge.wav",
+    "dash": "fx/dash.wav",
+    "footstep_metal": "fx/footstep_metal.wav",
+    "footstep_grass": "fx/footstep_grass.wav",
+    "projectile_energy": "fx/projectile_energy.wav",
+    "projectile_scatter": "fx/projectile_scatter.wav",
+    "projectile_pierce": "fx/projectile_pierce.wav",
+    "projectile_pulse": "fx/projectile_pulse.wav",
+    "projectile_splash": "fx/projectile_splash.wav",
+    "projectile_ignite": "fx/projectile_ignite.wav",
+    "projectile_freeze": "fx/projectile_freeze.wav",
+    "projectile_arc": "fx/projectile_arc.wav",
+    "projectile_gravity": "fx/projectile_gravity.wav",
+    "projectile_shred": "fx/projectile_shred.wav",
+    "projectile_shield": "fx/projectile_shield.wav",
+    "projectile_vamp": "fx/projectile_vamp.wav",
+    "projectile_overclock": "fx/projectile_overclock.wav",
+    "projectile_glass": "fx/projectile_glass.wav",
+    "projectile_recoil": "fx/projectile_recoil.wav",
+    "pistol_combo_legendary": "fx/pistol_combo_legendary.wav",
+    "world_portal": "fx/world_portal.wav",
+    "shop_purchase": "fx/shop_purchase.wav",
+    "shop_reject": "fx/shop_reject.wav",
+    "wave_start": "fx/wave_start.wav",
+    "wave_clear": "fx/wave_clear.wav",
+    "boss_spawn": "fx/boss_spawn.wav",
+    "boss_dead": "fx/boss_dead.wav",
+    "boss_weakspot": "fx/boss_weakspot.wav",
+    "level_up": "fx/level_up.wav",
+    "ui_focus": "fx/ui_focus.wav",
+    "ui_back": "fx/ui_back.wav",
+    "ui_confirm": "fx/ui_confirm.wav",
+    "ui_error": "fx/ui_error.wav",
+    "checkpoint": "fx/checkpoint.wav",
+    "pickups_health": "fx/pickups_health.wav",
+    "pickups_armor": "fx/pickups_armor.wav",
+    "pickups_salvage": "fx/pickups_salvage.wav",
+    "enemy_rush": "fx/enemy_rush.wav",
+    "enemy_shot": "fx/enemy_shot.wav",
+    "enemy_melee": "fx/enemy_melee.wav",
+    "water_splash": "fx/water_splash.wav",
+    "rain_rumble": "fx/rain_rumble.wav",
+    "wind_meadow": "fx/wind_meadow.wav",
+    "fire_crackle": "fx/fire_crackle.wav",
+    "circus_screech": "fx/circus_screech.wav",
+    "circus_confetti": "fx/circus_confetti.wav",
+    "pistol_twin": "fx/pistol_twin.wav",
+    "pistol_fan": "fx/pistol_fan.wav",
+    "pistol_pierce": "fx/pistol_pierce.wav",
+    "pistol_bloom": "fx/pistol_bloom.wav",
+    "pistol_ricochet": "fx/pistol_ricochet.wav",
+    "pistol_chain": "fx/pistol_chain.wav",
+    "pistol_ignite": "fx/pistol_ignite.wav",
+    "pistol_freeze": "fx/pistol_freeze.wav",
+    "pistol_gravity": "fx/pistol_gravity.wav",
+    "pistol_expose": "fx/pistol_expose.wav",
+    "pistol_drain": "fx/pistol_drain.wav",
+    "pistol_shield": "fx/pistol_shield.wav",
+    "pistol_chrono": "fx/pistol_chrono.wav",
+    "pistol_burst": "fx/pistol_burst.wav",
+    "pistol_shards": "fx/pistol_shards.wav",
+    "pistol_seeker": "fx/pistol_seeker.wav",
+    "pistol_dash": "fx/pistol_dash.wav",
+    "pistol_thunder": "fx/pistol_thunder.wav",
+    "pistol_energize": "fx/pistol_energize.wav",
+    "pistol_execute": "fx/pistol_execute.wav"
+  },
+  "effects": {},
+  "license_review": "Review commercial rights, trademarks and third-party engine licenses separately; no external samples used.",
+  "pistol_upgrades": {
+    "twin": "fx/pistol_twin.wav",
+    "fan": "fx/pistol_fan.wav",
+    "pierce": "fx/pistol_pierce.wav",
+    "bloom": "fx/pistol_bloom.wav",
+    "ricochet": "fx/pistol_ricochet.wav",
+    "chain": "fx/pistol_chain.wav",
+    "ignite": "fx/pistol_ignite.wav",
+    "freeze": "fx/pistol_freeze.wav",
+    "gravity": "fx/pistol_gravity.wav",
+    "expose": "fx/pistol_expose.wav",
+    "drain": "fx/pistol_drain.wav",
+    "shield": "fx/pistol_shield.wav",
+    "chrono": "fx/pistol_chrono.wav",
+    "burst": "fx/pistol_burst.wav",
+    "shards": "fx/pistol_shards.wav",
+    "seeker": "fx/pistol_seeker.wav",
+    "dash": "fx/pistol_dash.wav",
+    "thunder": "fx/pistol_thunder.wav",
+    "energize": "fx/pistol_energize.wav",
+    "execute": "fx/pistol_execute.wav"
+  },
+  "bullet_types": {
+    "energy": "fx/projectile_energy.wav",
+    "scatter": "fx/projectile_scatter.wav",
+    "pierce": "fx/projectile_pierce.wav",
+    "pulse": "fx/projectile_pulse.wav",
+    "splash": "fx/projectile_splash.wav",
+    "ignite": "fx/projectile_ignite.wav",
+    "freeze": "fx/projectile_freeze.wav",
+    "arc": "fx/projectile_arc.wav",
+    "gravity": "fx/projectile_gravity.wav",
+    "shred": "fx/projectile_shred.wav",
+    "shield": "fx/projectile_shield.wav",
+    "vamp": "fx/projectile_vamp.wav",
+    "overclock": "fx/projectile_overclock.wav",
+    "glass": "fx/projectile_glass.wav",
+    "recoil": "fx/projectile_recoil.wav"
+  },
+  "version": "2.0",
+  "gun_round_robin_variants": 3,
+  "gun_layers": [
+    "transient",
+    "mechanical",
+    "body",
+    "modifier",
+    "pressure tail",
+    "sub-bass",
+    "short reflections"
+  ],
+  "additional_fx": {
+    "circus_acrobat_bells": "fx/circus_acrobat_bells.wav",
+    "circus_acrobat_landing": "fx/circus_acrobat_landing.wav",
+    "circus_acrobat_reveal": "fx/circus_acrobat_reveal.wav",
+    "circus_mime_gliding_shoe": "fx/circus_mime_gliding_shoe.wav",
+    "circus_mime_porcelain_crack": "fx/circus_mime_porcelain_crack.wav",
+    "circus_mime_reveal": "fx/circus_mime_reveal.wav",
+    "circus_dancer_sawdust": "fx/circus_dancer_sawdust.wav",
+    "circus_dancer_skirt": "fx/circus_dancer_skirt.wav",
+    "circus_dancer_bonecrack": "fx/circus_dancer_bonecrack.wav",
+    "circus_ringleader_brass": "fx/circus_ringleader_brass.wav",
+    "circus_ringleader_coat": "fx/circus_ringleader_coat.wav",
+    "circus_ringleader_floating": "fx/circus_ringleader_floating.wav",
+    "circus_crew_turn": "fx/circus_crew_turn.wav",
+    "circus_crew_torn_costume": "fx/circus_crew_torn_costume.wav",
+    "circus_crew_revive": "fx/circus_crew_revive.wav",
+    "circus_crew_collapse": "fx/circus_crew_collapse.wav",
+    "circus_bell_distorted": "fx/circus_bell_distorted.wav",
+    "circus_curtain_drop": "fx/circus_curtain_drop.wav",
+    "bullet_whiz_energy": "fx/bullet_whiz_energy.wav",
+    "bullet_whiz_rail": "fx/bullet_whiz_rail.wav",
+    "bullet_ricochet_metal": "fx/bullet_ricochet_metal.wav",
+    "bullet_ricochet_stone": "fx/bullet_ricochet_stone.wav",
+    "bullet_impact_ice": "fx/bullet_impact_ice.wav",
+    "bullet_impact_fire": "fx/bullet_impact_fire.wav",
+    "bullet_impact_rail": "fx/bullet_impact_rail.wav",
+    "bullet_impact_gravity": "fx/bullet_impact_gravity.wav",
+    "bullet_impact_plasma": "fx/bullet_impact_plasma.wav",
+    "bullet_impact_armor": "fx/bullet_impact_armor.wav",
+    "bullet_impact_glass": "fx/bullet_impact_glass.wav",
+    "gun_trigger_click": "fx/gun_trigger_click.wav",
+    "gun_eject_brass": "fx/gun_eject_brass.wav",
+    "gun_pump_action": "fx/gun_pump_action.wav",
+    "gun_coil_charge": "fx/gun_coil_charge.wav",
+    "gun_thermal_vent": "fx/gun_thermal_vent.wav",
+    "gun_weapon_ready": "fx/gun_weapon_ready.wav",
+    "gun_barrel_cooldown": "fx/gun_barrel_cooldown.wav",
+    "enemy_footstep_concrete": "fx/enemy_footstep_concrete.wav",
+    "enemy_footstep_sawdust": "fx/enemy_footstep_sawdust.wav",
+    "enemy_attack_breath": "fx/enemy_attack_breath.wav",
+    "enemy_weakspot_rupture": "fx/enemy_weakspot_rupture.wav",
+    "player_bullet_nearmiss": "fx/player_bullet_nearmiss.wav",
+    "ui_legendary_upgrade": "fx/ui_legendary_upgrade.wav",
+    "ui_ultracombo_fuse": "fx/ui_ultracombo_fuse.wav",
+    "world_hell_breach": "fx/world_hell_breach.wav",
+    "world_heaven_chime": "fx/world_heaven_chime.wav"
+  },
+  "additional_music": [
+    "music/circusreveal.wav",
+    "music/ringleaderfinale.wav"
+  ],
+  "sound_inventory": {
+    "music_wav": 19,
+    "gun_wav": 768,
+    "fx_wav": 142
+  }
+}
