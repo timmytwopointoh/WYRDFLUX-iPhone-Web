@@ -9,7 +9,19 @@
 </nav></section>
 <script>
 if(location.protocol==='https:'&&'serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js',{scope:'./'}).catch(()=>{});
-const base='https://miss-princesses-masterpiece-maker.tailbe4401.ts.net:8443';
+const gateway='https://miss-princesses-masterpiece-maker.tailbe4401.ts.net';
+let base='';
+async function discover(){
+  const results=await Promise.all([8443,10000].map(async port=>{
+    const address=gateway+':'+port, controller=new AbortController(), timer=setTimeout(()=>controller.abort(),3500);
+    try{const response=await fetch(address+'/health',{cache:'no-store',signal:controller.signal});
+      if(!response.ok)return null;const health=await response.json();
+      return health.service==='elysium-pocket'&&health.seats===2?address:null;
+    }catch{return null;}finally{clearTimeout(timer);}
+  }));
+  base=results.find(Boolean)||'';
+  if(!base)throw Error('PC game gateway is not ready. Wait for Ready in the desktop overlay.');
+}
 let token='', running=false, generation=0, inspect=false, tail=Promise.resolve(), lastTap=null, points=new Map(), gesture=null, frameURL='';
 const $=id=>document.getElementById(id), img=$('frame');
 async function api(path,body){const r=await fetch(base+path,{method:body===undefined?'GET':'POST',cache:'no-store',headers:{'Authorization':'Bearer '+token,...(body===undefined?{}:{'Content-Type':'application/json'})},...(body===undefined?{}:{body:JSON.stringify(body)})});if(!r.ok){let message;try{message=(await r.json()).error}catch{}throw Error(message||('Connection failed '+r.status));}return r;}
@@ -19,7 +31,7 @@ function pos(x,y){let r=img.getBoundingClientRect();if(!img.naturalWidth||r.widt
 function click(kind,x,y){let p=pos(x,y);if(p)send({kind,...p});}
 function pan(dx,dy){let k=Math.abs(dx)>Math.abs(dy)?(dx>0?'ArrowLeft':'ArrowRight'):(dy>0?'ArrowUp':'ArrowDown');key(k);}
 function stop(){running=false;generation++;points.clear();if(gesture)clearTimeout(gesture.timer);gesture=null;if(frameURL){URL.revokeObjectURL(frameURL);frameURL='';}img.removeAttribute('src');$('pair').style.display='block';$('game').style.display='none';}
-$('code').addEventListener('input',()=>{$('code').value=$('code').value.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,8)});$('code').addEventListener('keydown',e=>{if(e.key==='Enter')$('join').click()});$('join').onclick=async()=>{if($('join').disabled)return;$('join').disabled=true;$('error').textContent='Connecting…';try{const code=$('code').value.trim().toUpperCase();if(!/^[23456789ABCDEFGHJKLMNPQRSTUVWXYZ]{8}$/.test(code))throw Error('Enter all 8 characters');const r=await api('/join',{code});const j=await r.json();token=j.token;running=true;generation++;$('seat').textContent='Player '+j.player;$('pair').style.display='none';$('game').style.display='flex';$('code').value='';frames(generation);}catch(e){$('error').textContent=e.message==='Failed to fetch'||e instanceof TypeError?'PC game gateway unavailable. Open Elysium Pocket - Two Players and wait for Ready.':e.message;}finally{$('join').disabled=false;}};
+$('code').addEventListener('input',()=>{$('code').value=$('code').value.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,8)});$('code').addEventListener('keydown',e=>{if(e.key==='Enter')$('join').click()});$('join').onclick=async()=>{if($('join').disabled)return;$('join').disabled=true;$('error').textContent='Connecting…';try{const code=$('code').value.trim().toUpperCase();if(!/^[23456789ABCDEFGHJKLMNPQRSTUVWXYZ]{8}$/.test(code))throw Error('Enter all 8 characters');await discover();const r=await api('/join',{code});const j=await r.json();token=j.token;running=true;generation++;$('seat').textContent='Player '+j.player;$('pair').style.display='none';$('game').style.display='flex';$('code').value='';frames(generation);}catch(e){$('error').textContent=e.message==='Failed to fetch'||e instanceof TypeError?'PC game gateway unavailable. Open Elysium Pocket - Two Players and wait for Ready.':e.message;}finally{$('join').disabled=false;}};
 $('leave').onclick=async()=>{try{await api('/leave',{})}catch{}stop();token='';};
 async function frames(g){while(running&&g===generation){try{let r=await api('/frame');let b=await r.blob();if(g!==generation)return;let url=URL.createObjectURL(b);let old=frameURL;frameURL=url;img.src=url;if(old)URL.revokeObjectURL(old);$('status').textContent='Connected';}catch(e){$('status').textContent='Waiting for game view';}await new Promise(r=>setTimeout(r,100));}}
 document.querySelectorAll('[data-key]').forEach(b=>b.onclick=()=>key(b.dataset.key));
