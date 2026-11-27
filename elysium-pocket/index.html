@@ -1,12 +1,12 @@
 <!doctype html>
-<html><head><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><meta charset="utf-8"><title>Elysium Pocket</title><meta name="elysium-build" content="0.6-code-only"><link rel="manifest" href="./manifest.webmanifest"><link rel="apple-touch-icon" href="./icon-180.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="theme-color" content="#101711">
+<html><head><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><meta charset="utf-8"><title>Elysium Pocket</title><meta name="elysium-build" content="0.7-full-view"><link rel="manifest" href="./manifest.webmanifest"><link rel="apple-touch-icon" href="./icon-180.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="theme-color" content="#101711">
 <style>
 *{box-sizing:border-box}html,body{margin:0;height:100%;background:#101711;color:#eee;font:15px system-ui;overscroll-behavior:none}body{display:flex;flex-direction:column}header,nav{display:flex;align-items:center;gap:6px;padding:6px max(6px,env(safe-area-inset-right)) 6px max(6px,env(safe-area-inset-left));background:#233027;flex-wrap:wrap}header{justify-content:space-between}button,input{font:inherit;border:1px solid #75816b;background:#344438;color:white;border-radius:8px;padding:10px;min-height:42px}button:active{background:#64754f}#end{background:#633d2d}#map{min-height:0;flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden;touch-action:none;background:#090d09}#frame{max-height:100%;max-width:100%;object-fit:contain;touch-action:none;user-select:none;-webkit-user-drag:none}#pair{margin:auto;padding:20px;max-width:420px}#pair input{width:100%;margin:8px 0}#game{display:none;flex:1;min-height:0;flex-direction:column}#status{font-size:13px}nav{justify-content:center}button{white-space:nowrap}#context.active{background:#a07838}
 
-#map.reading{overflow:auto;display:block;touch-action:pan-x pan-y}#map.reading #frame{display:block;max-width:none;max-height:none;width:auto;height:auto;touch-action:pan-x pan-y}#game.compact nav{display:none}header button{padding:6px;min-height:36px}#read.active{background:#a07838}
+#game{position:relative}#map{position:relative;display:block;overflow:hidden;touch-action:none}#frame{position:absolute;max-width:none;max-height:none;object-fit:fill;touch-action:none}header{flex-wrap:nowrap;flex-shrink:0;gap:4px;padding:3px 6px;font-size:13px}header button{padding:5px 8px;min-height:32px;font-size:12px}#status{font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}nav{position:absolute;bottom:4px;left:4px;right:4px;z-index:2;background:#233027ed;border:1px solid #75816b;border-radius:8px;gap:4px;padding:4px;max-height:50%;overflow:auto;justify-content:center}nav button{font-size:12px;padding:5px 8px;min-height:32px}#game.compact nav{display:none}#read.active{background:#a07838}#viewminus,#viewplus{font-weight:bold;min-width:34px}@media(max-width:520px){header{flex-wrap:wrap}header button{min-height:32px}#status{margin-left:auto}}
 </style></head><body>
 <section id="pair"><h2>Elysium Pocket</h2><p>Enter your 8-character player code.</p><input id="code" type="text" autocomplete="off" autocapitalize="characters" maxlength="8" spellcheck="false" placeholder="8-character code"><button id="join">Connect</button><p id="error"></p></section>
-<section id="game"><header><strong id="seat"></strong><span id="status">Connecting…</span><button id="read">Read text</button><button id="tools">Hide controls</button><button id="leave">Disconnect</button></header><div id="map"><img id="frame" draggable="false" alt="Game stream"></div><nav>
+<section id="game" class="compact"><header><strong id="seat"></strong><span id="status">Connecting…</span><button id="read">Fit</button><button id="viewminus" aria-label="Reduce display zoom">−</button><button id="viewplus" aria-label="Increase display zoom">+</button><button id="tools">Controls</button><button id="leave">Disconnect</button></header><div id="map"><img id="frame" draggable="false" alt="Game stream"></div><nav>
 <button data-key="j">◀ Commander</button><button data-key="n">Commander ▶</button><button data-key="r">Recruit</button><button data-key="t">Transfer</button><button data-key="p">Power</button><button data-key="l">Trade</button><button data-key="PageUp">Zoom +</button><button data-key="PageDown">Zoom −</button><button id="context">Inspect</button><button data-key="Escape">Back</button><button id="end">End turn</button>
 </nav></section>
 <script>
@@ -24,7 +24,7 @@ async function discover(){
   base=results.find(Boolean)||'';
   if(!base)throw Error('PC game gateway is not ready. Wait for Ready in the desktop overlay.');
 }
-let reading=false,token='', running=false, generation=0, inspect=false, tail=Promise.resolve(), lastTap=null, points=new Map(), gesture=null, frameURL='';
+let zoom=null, offsetX=0,offsetY=0,viewW=0,viewH=0,token='', running=false, generation=0, inspect=false, tail=Promise.resolve(), lastTap=null, points=new Map(), gesture=null, frameURL='';
 const $=id=>document.getElementById(id), img=$('frame');
 async function api(path,body){const r=await fetch(base+path,{method:body===undefined?'GET':'POST',cache:'no-store',headers:{'Authorization':'Bearer '+token,...(body===undefined?{}:{'Content-Type':'application/json'})},...(body===undefined?{}:{body:JSON.stringify(body)})});if(!r.ok){let message;try{message=(await r.json()).error}catch{}const error=Error(message||('Connection failed '+r.status));error.status=r.status;throw error;}return r;}
 function send(v){const g=generation;tail=tail.catch(()=>{}).then(async()=>{if(running&&g===generation)await api('/input',v)}).catch(()=>{$('status').textContent='Input failed';});return tail;}
@@ -32,18 +32,43 @@ function key(k){return send({kind:'key',key:k});}
 function pos(x,y){let r=img.getBoundingClientRect();if(!img.naturalWidth||r.width<=0||r.height<=0||x<r.left||x>r.right||y<r.top||y>r.bottom)return null;return{x:(x-r.left)/r.width,y:(y-r.top)/r.height};}
 function click(kind,x,y){let p=pos(x,y);if(p)send({kind,...p});}
 function pan(dx,dy){let k=Math.abs(dx)>Math.abs(dy)?(dx>0?'ArrowLeft':'ArrowRight'):(dy>0?'ArrowUp':'ArrowDown');key(k);}
-function stop(){setReading(false);$('game').classList.remove('compact');$('tools').textContent='Hide controls';running=false;generation++;points.clear();if(gesture)clearTimeout(gesture.timer);gesture=null;if(frameURL){URL.revokeObjectURL(frameURL);frameURL='';}img.removeAttribute('src');$('pair').style.display='block';$('game').style.display='none';}
+function stop(){zoom=null;offsetX=offsetY=0;viewW=viewH=0;$('game').classList.add('compact');$('tools').textContent='Controls';running=false;generation++;points.clear();if(gesture)clearTimeout(gesture.timer);gesture=null;if(frameURL){URL.revokeObjectURL(frameURL);frameURL='';}img.removeAttribute('src');$('pair').style.display='block';$('game').style.display='none';}
 $('code').addEventListener('input',()=>{$('code').value=$('code').value.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,8)});$('code').addEventListener('keydown',e=>{if(e.key==='Enter')$('join').click()});$('join').onclick=async()=>{if($('join').disabled)return;$('join').disabled=true;$('error').textContent='Connecting…';try{const code=$('code').value.trim().toUpperCase();if(!/^[23456789ABCDEFGHJKLMNPQRSTUVWXYZ]{8}$/.test(code))throw Error('Enter all 8 characters');await discover();const r=await api('/join',{code});const j=await r.json();token=j.token;running=true;generation++;$('seat').textContent='Player '+j.player;$('pair').style.display='none';$('game').style.display='flex';$('code').value='';frames(generation);}catch(e){$('error').textContent=e.message==='Failed to fetch'||e instanceof TypeError?'PC game gateway unavailable. Open Elysium Pocket - Two Players and wait for Ready.':e.message;}finally{$('join').disabled=false;}};
 $('leave').onclick=async()=>{try{await api('/leave',{})}catch{}stop();token='';};
-function setReading(on){reading=on;$('map').classList.toggle('reading',on);$('read').classList.toggle('active',on);$('read').textContent=on?'Resume play':'Read text';if(!on){$('map').scrollLeft=0;$('map').scrollTop=0;}}
-$('read').onclick=()=>setReading(!reading);$('tools').onclick=()=>{$('game').classList.toggle('compact');$('tools').textContent=$('game').classList.contains('compact')?'Show controls':'Hide controls';};
+const map=$('map');
+const clamp=(n,lo,hi)=>Math.max(lo,Math.min(hi,n));
+function fitScale(){return Math.min(map.clientWidth/viewW,map.clientHeight/viewH);}
+function fillScale(){return Math.max(map.clientWidth/viewW,map.clientHeight/viewH);}
+function scale(){return fitScale()*(zoom===null?(map.clientWidth>map.clientHeight?Math.max(1,fillScale()/fitScale()):1):zoom);}
+function layout(){
+ if(!viewW||!viewH||!map.clientWidth||!map.clientHeight)return;
+ const sc=scale(),w=viewW*sc,h=viewH*sc;
+ offsetX=clamp(offsetX,-Math.max(0,(w-map.clientWidth)/2),Math.max(0,(w-map.clientWidth)/2));
+ offsetY=clamp(offsetY,-Math.max(0,(h-map.clientHeight)/2),Math.max(0,(h-map.clientHeight)/2));
+ Object.assign(img.style,{width:w+'px',height:h+'px',left:(map.clientWidth-w)/2+offsetX+'px',top:(map.clientHeight-h)/2+offsetY+'px'});
+ $('read').textContent=scale()>fitScale()*1.01?'Fit':'Fill';
+}
+function changeZoom(factor,x,y){
+ if(!viewW||!viewH)return;
+ const rect=map.getBoundingClientRect(),old=scale(),cx=x==null?map.clientWidth/2:x-rect.left,cy=y==null?map.clientHeight/2:y-rect.top;
+ const oldLeft=(map.clientWidth-viewW*old)/2+offsetX,oldTop=(map.clientHeight-viewH*old)/2+offsetY;
+ const u=(cx-oldLeft)/old,v=(cy-oldTop)/old;
+ zoom=clamp(old/fitScale()*factor,1,6);
+ const next=scale();offsetX=cx-u*next-(map.clientWidth-viewW*next)/2;offsetY=cy-v*next-(map.clientHeight-viewH*next)/2;layout();
+}
+img.onload=()=>{if(img.naturalWidth!==viewW||img.naturalHeight!==viewH){viewW=img.naturalWidth;viewH=img.naturalHeight;offsetX=offsetY=0;layout();}};
+new ResizeObserver(layout).observe(map);
+$('read').onclick=()=>{if(!viewW)return;zoom=scale()>fitScale()*1.01?1:Math.max(1,fillScale()/fitScale());offsetX=offsetY=0;layout();};
+$('viewminus').onclick=()=>changeZoom(1/1.3);
+$('viewplus').onclick=()=>changeZoom(1.3);
+$('tools').onclick=()=>{$('game').classList.toggle('compact');$('tools').textContent=$('game').classList.contains('compact')?'Controls':'Hide';};
 async function frames(g){while(running&&g===generation){try{let r=await api('/frame');let b=await r.blob();if(g!==generation)return;let url=URL.createObjectURL(b);let old=frameURL;frameURL=url;img.src=url;if(old)URL.revokeObjectURL(old);$('status').textContent='Connected';}catch(e){if(g!==generation)return;if(e.status===403){stop();token='';$('error').textContent='Session ended. Enter your new player code.';return;}$('status').textContent='Waiting for game view';}await new Promise(r=>setTimeout(r,100));}}
 document.querySelectorAll('[data-key]').forEach(b=>b.onclick=()=>key(b.dataset.key));
 $('end').onclick=()=>{if(confirm('End your turn?'))key('y');};
 $('context').onclick=()=>{inspect=!inspect;$('context').classList.toggle('active',inspect);};
 img.oncontextmenu=e=>e.preventDefault();
-img.onpointerdown=e=>{if(reading)return;if(!pos(e.clientX,e.clientY))return;e.preventDefault();img.setPointerCapture(e.pointerId);points.set(e.pointerId,{x:e.clientX,y:e.clientY});if(points.size===1){gesture={id:e.pointerId,x:e.clientX,y:e.clientY,px:e.clientX,py:e.clientY,moved:false,fired:false,pinch:false};let g=gesture;g.timer=setTimeout(()=>{if(gesture===g&&!g.moved&&!g.pinch){g.fired=true;click('right',g.x,g.y);}},550);}else if(points.size===2&&gesture){clearTimeout(gesture.timer);gesture.pinch=true;const a=[...points.values()];gesture.dist=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y);}};
-img.onpointermove=e=>{if(!points.has(e.pointerId)||!gesture)return;e.preventDefault();points.set(e.pointerId,{x:e.clientX,y:e.clientY});let g=gesture;if(points.size===2){const a=[...points.values()];let d=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y);if(Math.abs(d-g.dist)>34){key(d>g.dist?'PageUp':'PageDown');g.dist=d;}return;}if(g.pinch||g.fired)return;if(Math.hypot(e.clientX-g.x,e.clientY-g.y)>14){clearTimeout(g.timer);g.moved=true;}let dx=e.clientX-g.px,dy=e.clientY-g.py;if(g.moved&&Math.hypot(dx,dy)>55){pan(dx,dy);g.px=e.clientX;g.py=e.clientY;}};
+img.onpointerdown=e=>{if(!pos(e.clientX,e.clientY))return;e.preventDefault();img.setPointerCapture(e.pointerId);points.set(e.pointerId,{x:e.clientX,y:e.clientY});if(points.size===1){gesture={id:e.pointerId,x:e.clientX,y:e.clientY,px:e.clientX,py:e.clientY,moved:false,fired:false,pinch:false};let g=gesture;g.timer=setTimeout(()=>{if(gesture===g&&!g.moved&&!g.pinch){g.fired=true;click('right',g.x,g.y);}},550);}else if(points.size===2&&gesture){clearTimeout(gesture.timer);gesture.pinch=true;const a=[...points.values()];gesture.dist=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y);}};
+img.onpointermove=e=>{if(!points.has(e.pointerId)||!gesture)return;e.preventDefault();points.set(e.pointerId,{x:e.clientX,y:e.clientY});let g=gesture;if(points.size===2){const a=[...points.values()];let d=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y);if(d>0&&g.dist>0){changeZoom(d/g.dist,(a[0].x+a[1].x)/2,(a[0].y+a[1].y)/2);g.dist=d;}return;}if(g.pinch||g.fired)return;if(Math.hypot(e.clientX-g.x,e.clientY-g.y)>14){clearTimeout(g.timer);g.moved=true;}let dx=e.clientX-g.px,dy=e.clientY-g.py;if(g.moved&&scale()>fitScale()*1.01){offsetX+=dx;offsetY+=dy;layout();g.px=e.clientX;g.py=e.clientY;}else if(g.moved&&Math.hypot(dx,dy)>55){pan(dx,dy);g.px=e.clientX;g.py=e.clientY;}};
 img.onpointerup=e=>{if(!points.has(e.pointerId))return;points.delete(e.pointerId);let g=gesture;if(!g)return;clearTimeout(g.timer);if(!g.moved&&!g.pinch&&!g.fired){if(inspect){click('right',e.clientX,e.clientY);inspect=false;$('context').classList.remove('active');}else{let now=performance.now(),p=pos(e.clientX,e.clientY);if(p){let dbl=lastTap&&now-lastTap.time<300&&Math.hypot(e.clientX-lastTap.x,e.clientY-lastTap.y)<22;click(dbl?'double':'left',e.clientX,e.clientY);lastTap=dbl?null:{time:now,x:e.clientX,y:e.clientY};}}}if(!points.size)gesture=null;};
 img.onpointercancel=e=>{points.delete(e.pointerId);if(gesture)clearTimeout(gesture.timer);gesture=null;};
 </script></body></html>
