@@ -1,11 +1,11 @@
 <!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta charset="utf-8"><title>GRAVETHROE Player 3</title><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#121416"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="apple-mobile-web-app-title" content="GRAVETHROE"><style>
 *{box-sizing:border-box;touch-action:none}body{margin:0;background:#08090b;color:#eee;font:16px system-ui;overflow:hidden}#video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}#join{position:absolute;inset:0;display:grid;place-content:center;gap:12px;background:#121416;z-index:5;text-align:center}input,button{font:inherit;color:white;background:#24272c;border:1px solid #5a6268;border-radius:8px;padding:12px}#hud{position:absolute;top:12px;left:12px;background:#0008;padding:8px;pointer-events:none}#cross{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);color:white;pointer-events:none}#controls{position:absolute;inset:0;display:none}.stick{position:absolute;bottom:10%;width:110px;height:110px;border:2px solid #fff7;border-radius:50%;background:#0004}.stick i{position:absolute;left:36px;top:36px;width:34px;height:34px;background:#fff5;border-radius:50%;pointer-events:none}#move{left:0;top:15%;bottom:0;width:50%;height:auto;border:0;background:transparent;border-radius:0;z-index:1}#move .ring{position:absolute;width:112px;height:112px;left:22%;bottom:12%;transform:translate(-50%,0);border:2px solid #fff9;background:#0005;border-radius:50%;pointer-events:none}#move .ring i{left:37px;top:37px;background:#fff9}#move .ring.active{border-color:white}#inputState{position:absolute;top:52px;left:12px;background:#0009;padding:5px;font-size:12px;pointer-events:none;z-index:4}#fire{width:86px}#look{left:50%;right:0;top:17%;bottom:0;width:auto;height:auto;border:0;border-radius:0;background:transparent;z-index:1}#look i{display:none}#fire{z-index:3}#controls .key{z-index:3}#controls .held{background:#842d2dbb;border-color:#ff7777}.key{position:absolute;min-width:56px;background:#0008;border-color:#fff7;user-select:none}#fire{right:3%;bottom:38%;height:65px}#reload{right:4%;bottom:18%}#jump{right:4%;bottom:4%}#sprint{left:7%;bottom:34%}#light{right:17%;top:5%}#leave{right:3%;top:5%}#state{position:absolute;left:50%;top:12%;transform:translateX(-50%);background:#0009;padding:6px;pointer-events:none}#video{will-change:transform;transform-origin:50% 50%}#predflash{position:absolute;inset:0;pointer-events:none;opacity:0;background:radial-gradient(ellipse at 57% 67%,#fff9 0%,#ffc45b35 8%,transparent 25%);z-index:2}#predict{left:3%;top:16%;font-size:12px}#ready{right:17%;bottom:18%}#face{left:3%;top:28%;font-size:12px}#join{padding:12px}#join input{touch-action:manipulation}#depthCanvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;display:none} </style></head><body>
 <img id="video"><canvas id="depthCanvas"></canvas><div id="predflash"></div><div id="controls"><div id="hud">PLAYER 3</div><div id="cross">+</div><div id="state">Waiting for match</div><div id="inputState">TOUCH READY</div><div id="move" class="stick"><div class="ring"><i></i></div></div><div id="look" class="stick"><i></i></div><button id="fire" class="key">FIRE</button><button id="reload" class="key">LOAD</button><button id="jump" class="key">JUMP</button><button id="sprint" class="key">RUN</button><button id="light" class="key">LIGHT</button><button id="leave" class="key">EXIT</button><button id="predict" class="key">PRED ON</button><button id="ready" class="key">READY</button><button id="face" class="key">FACE 1/24</button></div>
-<div id="join"><h1>GRAVETHROE</h1><div>Depth Reprojection V2</div><div>Player 1: RTS · Player 2: local FPS</div><div>Player 3: remote FPS</div><input id="code" placeholder="8-digit pairing code" autocomplete="off" inputmode="numeric" maxlength="8"><button id="connect">JOIN PLAYER 3</button><span id="msg" role="status">Start GRAVETHROE on the PC, then enter its code.</span><small>iPhone: Safari → Share → Add to Home Screen<br>Android: browser menu → Install app</small></div>
+<div id="join"><h1>GRAVETHROE</h1><div>Depth Reprojection — Fast</div><div>Player 1: RTS · Player 2: local FPS</div><div>Player 3: remote FPS</div><input id="code" placeholder="8-digit pairing code" autocomplete="off" inputmode="numeric" maxlength="8"><button id="connect">JOIN PLAYER 3</button><span id="msg" role="status">Start GRAVETHROE on the PC, then enter its code.</span><small>iPhone: Safari → Share → Add to Home Screen<br>Android: browser menu → Install app</small></div>
 <script>
 let token='',input={mx:0,my:0,lx:0,ly:0,flags:0},generation=0,frameUrl='',streamAbort=null,displayed=0,lastFpsTime=0,fps=0;
 const $=x=>document.getElementById(x);
-let base='',clockOffset=0,timedVideo=false,absoluteAim=false,depthEnabled=false,depthRenderer=null,depthMeta=null,depthMode=false;
+let base='',clockOffset=0,timedVideo=false,absoluteAim=false,depthEnabled=false,depthStream=false,depthRenderer=null,depthMeta=null,depthMode=false;
 function createDepthRenderer(canvas){
  const gl=canvas.getContext('webgl2',{alpha:true,antialias:false,depth:true});if(!gl)return null;
  const vertex=`#version 300 es
@@ -75,7 +75,7 @@ $('face').onclick=()=>{if(waiting){faceChoice=(faceChoice+1)%24;$('face').textCo
 
 const gateway='https://miss-princesses-masterpiece-maker.tailbe4401.ts.net';
 function timeout(ms){const c=new AbortController();setTimeout(()=>c.abort(),ms);return c.signal}
-async function discover(){const matches=await Promise.all([8443,10000,443].map(async p=>{const url=gateway+(p===443?'':':'+p);try{const r=await fetch(url+'/health',{cache:'no-store',signal:timeout(4500)});const j=await r.json();return r.ok&&j.service==='grave-app-test'&&j.seat===3?{url,j}:null}catch{return null}}));const found=matches.filter(Boolean);if(found.length!==1)throw Error(found.length?'More than one GRAVETHROE host is active. Close the extra session.':'PC game server offline or not updated. Start GRAVETHROE and wait for the pairing code.');const host=found[0];const start=Date.now();const r=await fetch(host.url+'/health',{cache:'no-store',signal:timeout(3500)});const health=await r.json();clockOffset=Number.isFinite(health.server_ms)?health.server_ms-(start+Date.now())/2:0;timedVideo=health.timed_video===1;depthEnabled=health.depth_v1===1;absoluteAim=health.aim_absolute===1;return host.url}
+async function discover(){const matches=await Promise.all([8443,10000,443].map(async p=>{const url=gateway+(p===443?'':':'+p);try{const r=await fetch(url+'/health',{cache:'no-store',signal:timeout(4500)});const j=await r.json();return r.ok&&j.service==='grave-app-test'&&j.seat===3?{url,j}:null}catch{return null}}));const found=matches.filter(Boolean);if(found.length!==1)throw Error(found.length?'More than one GRAVETHROE host is active. Close the extra session.':'PC game server offline or not updated. Start GRAVETHROE and wait for the pairing code.');const host=found[0];const start=Date.now();const r=await fetch(host.url+'/health',{cache:'no-store',signal:timeout(3500)});const health=await r.json();clockOffset=Number.isFinite(health.server_ms)?health.server_ms-(start+Date.now())/2:0;timedVideo=health.timed_video===1;depthEnabled=health.depth_v1===1;depthStream=health.depth_stream===1;absoluteAim=health.aim_absolute===1;return host.url}
 function layoutState(playing){if(window.parent!==window)window.parent.postMessage({type:'gravethroe-player3-layout',playing},location.origin)}
 async function req(path,body){return fetch(base+path,{method:body===undefined?'GET':'POST',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},...(body===undefined?{}:{body:JSON.stringify(body)}),cache:'no-store',signal:timeout(path==="/input"?1500:3500)})}
 function zero(){clearTouchState();input={mx:0,my:0,lx:0,ly:0,flags:0};document.querySelectorAll('.stick i').forEach(e=>e.style.transform='')}
@@ -115,9 +115,44 @@ async function decodeLatest(){
  $('state').textContent=fps+' FPS';}catch{URL.revokeObjectURL(u)}
  }}finally{decoding=false;if(queued)decodeLatest()}
 }
+let depthQueued=null,depthDecoding=false;
+function offerDepth(data,g){depthQueued={data,g};if(!depthDecoding)decodeDepthLatest()}
+async function decodeDepthLatest(){
+ depthDecoding=true;try{while(depthQueued){const q=depthQueued;depthQueued=null;if(q.g!==generation)continue;
+ let url='';try{const p=parseDepthPacket(q.data);if(p.stamp<=lastFrameStamp&&depthMode)continue;
+ url=URL.createObjectURL(new Blob([p.bytes],{type:'image/jpeg'}));const im=new Image();im.src=url;await im.decode();
+ if(q.g!==generation){URL.revokeObjectURL(url);continue}
+ depthRenderer.upload(im,p.depth);depthMeta=p.meta;depthMode=true;lastFrameArrival=performance.now();lastFrameStamp=p.stamp;
+ $('video').src=url;if(frameUrl)URL.revokeObjectURL(frameUrl);frameUrl=url;url='';
+ displayed++;if(lastFrameArrival-lastFpsTime>=1000){fps=Math.round(displayed*1000/(lastFrameArrival-lastFpsTime));displayed=0;lastFpsTime=lastFrameArrival}
+ $('state').textContent=fps+' FPS | DEPTH';
+ }catch{if(url)URL.revokeObjectURL(url)}
+ }}finally{depthDecoding=false;if(depthQueued)decodeDepthLatest()}
+}
+async function depthContinuous(g){
+ const abort=new AbortController();streamAbort=abort;let watchdog=setTimeout(()=>abort.abort(),4500);let started=false,lastGood=performance.now();
+ try{const r=await fetch(base+'/depth-stream',{headers:{Authorization:'Bearer '+token},cache:'no-store',signal:abort.signal});
+ if(r.status===403){stop('Seat expired. Rejoin.');return}if(!r.ok||!r.body)throw Error('Depth stream unavailable');
+ const reader=r.body.getReader();let pending=new Uint8Array(0);
+ while(token&&g===generation){const {value,done}=await reader.read();if(done)break;
+ clearTimeout(watchdog);watchdog=setTimeout(()=>abort.abort(),4500);
+ const all=new Uint8Array(pending.length+value.length);all.set(pending);all.set(value,pending.length);let pos=0,latest=null;
+ while(all.length-pos>=4){const n=new DataView(all.buffer,pos,4).getUint32(0);if(n>300008)throw Error('Invalid depth frame');if(all.length-pos-4<n)break;pos+=4;if(n)latest=all.slice(pos,pos+n);pos+=n}
+ pending=all.slice(pos);if(latest){offerDepth(latest.buffer,g);started=true}
+ if(depthMode&&lastFrameArrival>lastGood)lastGood=lastFrameArrival;
+ if(started&&!waiting&&performance.now()-lastGood>5000)throw Error('Depth decode stalled');
+ }
+ }finally{clearTimeout(watchdog);abort.abort();if(streamAbort===abort)streamAbort=null}
+}
 async function startVideo(g){
- if(depthEnabled){try{if(!depthRenderer)depthRenderer=createDepthRenderer($('depthCanvas'));if(depthRenderer){let fails=0,stamp=0;lastFpsTime=performance.now();while(token&&g===generation&&fails<8){const t=performance.now();try{const r=await req('/depth-frame');if(r.status===403){stop('Seat expired. Rejoin.');return}if(!r.ok){if(!waiting)fails++;await pause(100);continue}const packet=parseDepthPacket(await r.arrayBuffer());if(packet.stamp!==stamp){const url=URL.createObjectURL(new Blob([packet.bytes],{type:'image/jpeg'}));const im=new Image();im.src=url;try{await im.decode();if(g!==generation){URL.revokeObjectURL(url);return}depthRenderer.upload(im,packet.depth);depthMeta=packet.meta;depthMode=true;stamp=packet.stamp;lastFrameArrival=performance.now();lastFrameStamp=stamp;$('video').src=url;if(frameUrl)URL.revokeObjectURL(frameUrl);frameUrl=url;displayed++;if(lastFrameArrival-lastFpsTime>=1000){fps=Math.round(displayed*1000/(lastFrameArrival-lastFpsTime));displayed=0;lastFpsTime=lastFrameArrival}$('state').textContent=fps+' FPS | DEPTH';fails=0}catch(e){URL.revokeObjectURL(url);throw e}}}catch{if(!waiting)fails++}await pause(Math.max(0,45-(performance.now()-t)))} }}catch{}}
- depthMode=false;depthMeta=null;$('depthCanvas').style.display='none';if(token&&g===generation)frames(g)
+ displayed=0;fps=0;lastFpsTime=performance.now();
+ if(depthEnabled){try{if(!depthRenderer)depthRenderer=createDepthRenderer($('depthCanvas'));
+ if(depthRenderer&&depthStream){try{await depthContinuous(g)}catch{}}
+ if(depthRenderer&&token&&g===generation){let fails=0,stamp=0;while(token&&g===generation&&fails<8){const t=performance.now();try{const r=await req('/depth-frame');if(r.status===403){stop('Seat expired. Rejoin.');return}if(!r.ok){if(!waiting)fails++;await pause(80);continue}
+ const data=await r.arrayBuffer();const p=parseDepthPacket(data);if(p.stamp!==stamp){stamp=p.stamp;offerDepth(data,g);fails=0}
+ }catch{if(!waiting)fails++}await pause(Math.max(0,25-(performance.now()-t)))}}
+ }catch{}}
+ depthQueued=null;depthMode=false;depthMeta=null;$('depthCanvas').style.display='none';if(token&&g===generation)frames(g)
 }
 async function frames(g){
  displayed=0;fps=0;lastFpsTime=performance.now();
