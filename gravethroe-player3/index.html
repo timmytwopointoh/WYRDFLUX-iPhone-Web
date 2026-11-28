@@ -1,137 +1,38 @@
-<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta charset="utf-8"><title>GRAVETHROE Player 3</title><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#121416"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="apple-mobile-web-app-title" content="GRAVETHROE"><style>
-*{box-sizing:border-box;touch-action:none}body{margin:0;background:#08090b;color:#eee;font:16px system-ui;overflow:hidden}#video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}#join{position:absolute;inset:0;display:grid;place-content:center;gap:12px;background:#121416;z-index:5;text-align:center}input,button{font:inherit;color:white;background:#24272c;border:1px solid #5a6268;border-radius:8px;padding:12px}#hud{position:absolute;top:12px;left:12px;background:#0008;padding:8px;pointer-events:none}#cross{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);color:white;pointer-events:none}#controls{position:absolute;inset:0;display:none}.stick{position:absolute;bottom:10%;width:110px;height:110px;border:2px solid #fff7;border-radius:50%;background:#0004}.stick i{position:absolute;left:36px;top:36px;width:34px;height:34px;background:#fff5;border-radius:50%;pointer-events:none}#move{left:0;top:15%;bottom:0;width:50%;height:auto;border:0;background:transparent;border-radius:0;z-index:1}#move .ring{position:absolute;width:112px;height:112px;left:22%;bottom:12%;transform:translate(-50%,0);border:2px solid #fff9;background:#0005;border-radius:50%;pointer-events:none}#move .ring i{left:37px;top:37px;background:#fff9}#move .ring.active{border-color:white}#inputState{position:absolute;top:52px;left:12px;background:#0009;padding:5px;font-size:12px;pointer-events:none;z-index:4}#fire{width:86px}#look{left:50%;right:0;top:17%;bottom:0;width:auto;height:auto;border:0;border-radius:0;background:transparent;z-index:1}#look i{display:none}#fire{z-index:3}#controls .key{z-index:3}#controls .held{background:#842d2dbb;border-color:#ff7777}.key{position:absolute;min-width:56px;background:#0008;border-color:#fff7;user-select:none}#fire{right:3%;bottom:38%;height:65px}#reload{right:4%;bottom:18%}#jump{right:4%;bottom:4%}#sprint{left:7%;bottom:34%}#light{right:17%;top:5%}#leave{right:3%;top:5%}#state{position:absolute;left:50%;top:12%;transform:translateX(-50%);background:#0009;padding:6px;pointer-events:none}</style></head><body>
-<img id="video"><div id="controls"><div id="hud">PLAYER 3</div><div id="cross">+</div><div id="state">Waiting for match</div><div id="inputState">TOUCH READY</div><div id="move" class="stick"><div class="ring"><i></i></div></div><div id="look" class="stick"><i></i></div><button id="fire" class="key">FIRE</button><button id="reload" class="key">LOAD</button><button id="jump" class="key">JUMP</button><button id="sprint" class="key">RUN</button><button id="light" class="key">LIGHT</button><button id="leave" class="key">EXIT</button></div>
-<div id="join"><h1>GRAVETHROE</h1><div>Player 1: RTS · Player 2: local FPS</div><div>Player 3: remote FPS</div><input id="code" placeholder="8-digit pairing code" autocomplete="off" inputmode="numeric" maxlength="8"><button id="connect">JOIN PLAYER 3</button><span id="msg" role="status">Start GRAVETHROE on the PC, then enter its code.</span><small>iPhone: Safari → Share → Add to Home Screen<br>Android: browser menu → Install app</small></div>
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#121416"><meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="apple-mobile-web-app-title" content="GRAVETHROE">
+<link rel="manifest" href="./manifest.webmanifest"><title>GRAVETHROE Player 3</title>
+<style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#121416;overscroll-behavior:none}
+#safe{position:fixed;inset:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px);overflow:hidden}
+#game{position:absolute;top:50%;left:50%;display:block;border:0;max-width:none;max-height:none;transform-origin:50% 50%;background:#121416}</style>
+</head><body><div id="safe"><iframe id="game" title="GRAVETHROE Player 3" src="./client.html" allow="fullscreen" allowfullscreen scrolling="no"></iframe></div>
 <script>
-let token='',input={mx:0,my:0,lx:0,ly:0,flags:0},generation=0,frameUrl='',streamAbort=null,displayed=0,lastFpsTime=0,fps=0;
-const $=x=>document.getElementById(x);
-let base='';
-const gateway='https://miss-princesses-masterpiece-maker.tailbe4401.ts.net';
-function timeout(ms){const c=new AbortController();setTimeout(()=>c.abort(),ms);return c.signal}
-async function discover(){const matches=await Promise.all([8443,10000,443].map(async p=>{const url=gateway+(p===443?'':':'+p);try{const r=await fetch(url+'/health',{cache:'no-store',signal:timeout(4500)});const j=await r.json();return r.ok&&j.service==='grave-app-test'&&j.seat===3?url:null}catch{return null}}));const found=matches.filter(Boolean);if(found.length!==1)throw Error(found.length?'More than one GRAVETHROE host is active. Close the extra session.':'PC game server offline or not updated. Start GRAVETHROE and wait for the pairing code.');return found[0]}
-if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});
-async function req(path,body){return fetch(base+path,{method:body===undefined?'GET':'POST',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},...(body===undefined?{}:{body:JSON.stringify(body)}),cache:'no-store',signal:timeout(path==="/input"?1500:3500)})}
-function zero(){clearTouchState();input={mx:0,my:0,lx:0,ly:0,flags:0};document.querySelectorAll('.stick i').forEach(e=>e.style.transform='')}
-function stop(message){generation++;if(streamAbort)streamAbort.abort();streamAbort=null;token='';zero();$('join').style.display='grid';$('controls').style.display='none';$('msg').textContent=message||'';if(frameUrl)URL.revokeObjectURL(frameUrl);frameUrl='';$('video').removeAttribute('src')}
-$('connect').onclick=async()=>{if($('connect').disabled)return;$('connect').disabled=true;try{const code=$('code').value.trim();if(!/^\d{8}$/.test(code))throw Error('Enter exactly 8 digits.');$('msg').textContent='Finding PC game host…';base=await discover();const r=await req('/join',{code});const j=await r.json();if(!r.ok)throw Error(j.error);token=j.token;zero();$('join').style.display='none';$('controls').style.display='block';const g=++generation;inputs(g);frames(g);status(g)}catch(e){$('msg').textContent=e.message}finally{$('connect').disabled=false}};
-const pause=ms=>new Promise(r=>setTimeout(r,ms));
-let inputAck=0,lastInputRtt=0,controllerSeq=0;
-async function inputs(g){
- let pending=0,lastSend=0,lastSignature='';
- while(token&&g===generation){
-  const now=performance.now(),signature=JSON.stringify(input);
-  if(pending<4&&(signature!==lastSignature||now-lastSend>=33)){
-   lastSend=now;lastSignature=signature;pending++;
-   const body={...input,seq:++controllerSeq},start=now;
-   // Bounded pipeline: new state can overtake old requests; host discards stale sequences.
-   req('/input',body).then(r=>{
-    if(g!==generation)return;
-    if(r.status===403){stop('Seat expired. Rejoin.');return}
-    if(r.ok){inputAck=performance.now();lastInputRtt=Math.round(inputAck-start)}
-   }).catch(()=>{}).finally(()=>pending--);
-  }
-  await pause(8);
+'use strict';
+const safe=document.getElementById('safe'),game=document.getElementById('game');
+let playing=false;
+const mobile=/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)||navigator.maxTouchPoints>0;
+function layout(){
+ const w=Math.max(1,safe.clientWidth),h=Math.max(1,safe.clientHeight);
+ const rotate=playing&&mobile&&h>w;
+ game.style.width=(rotate?h:w)+'px';
+ game.style.height=(rotate?w:h)+'px';
+ game.style.transform='translate(-50%,-50%)'+(rotate?' rotate(90deg)':'');
+ document.documentElement.dataset.landscape=rotate?'rotated':'native';
+}
+window.addEventListener('message',e=>{
+ if(e.origin!==location.origin||e.source!==game.contentWindow||e.data?.type!=='gravethroe-player3-layout'||typeof e.data.playing!=='boolean')return;
+ playing=e.data.playing;layout();
+ if(playing&&mobile&&screen.orientation&&typeof screen.orientation.lock==='function'){
+  try{Promise.resolve(screen.orientation.lock('landscape')).catch(()=>{})}catch{}
+ }else if(!playing&&screen.orientation&&typeof screen.orientation.unlock==='function'){
+  try{screen.orientation.unlock()}catch{}
  }
-}
-
-let queued=null,decoding=false;
-function display(bytes,g){queued={bytes,g};if(!decoding)decodeLatest()}
-async function decodeLatest(){
- decoding=true;
- try{while(queued){const q=queued;queued=null;if(q.g!==generation)continue;
- const u=URL.createObjectURL(q.bytes instanceof Blob?q.bytes:new Blob([q.bytes],{type:'image/jpeg'}));
- const im=new Image();im.src=u;
- try{await im.decode();if(q.g!==generation){URL.revokeObjectURL(u);continue}
- $('video').src=u;if(frameUrl)URL.revokeObjectURL(frameUrl);frameUrl=u;displayed++;
- const t=performance.now();if(t-lastFpsTime>=1000){fps=Math.round(displayed*1000/(t-lastFpsTime));displayed=0;lastFpsTime=t}
- $('state').textContent=fps+' FPS';}catch{URL.revokeObjectURL(u)}
- }}finally{decoding=false;if(queued)decodeLatest()}
-}
-async function frames(g){
- displayed=0;fps=0;lastFpsTime=performance.now();
- const abort=new AbortController();streamAbort=abort;
- let watchdog=setTimeout(()=>abort.abort(),3500);
- try{
- const r=await fetch(base+'/stream',{headers:{Authorization:'Bearer '+token},cache:'no-store',signal:abort.signal});
- if(r.status===403){stop('Seat expired. Rejoin.');return}if(!r.ok||!r.body)throw Error('Streaming unavailable');
- const reader=r.body.getReader();let pending=new Uint8Array(0);
- while(token&&g===generation){const {value,done}=await reader.read();if(done)break;
- clearTimeout(watchdog);watchdog=setTimeout(()=>abort.abort(),3500);
- const all=new Uint8Array(pending.length+value.length);all.set(pending);all.set(value,pending.length);let pos=0,latest=null;
- while(all.length-pos>=4){const n=new DataView(all.buffer,pos,4).getUint32(0);if(n>250000)throw Error('Invalid frame');if(all.length-pos-4<n)break;pos+=4;if(n)latest=all.slice(pos,pos+n);pos+=n}
- pending=all.slice(pos);if(latest)display(latest,g);
- }
- }catch{}finally{clearTimeout(watchdog);abort.abort();if(streamAbort===abort)streamAbort=null}
- // Compatibility fallback if a proxy or old WebView cannot stream responses.
- while(token&&g===generation){const t=performance.now();try{const r=await req('/frame');if(r.status===403){stop('Seat expired. Rejoin.');return}if(r.ok){const b=await r.blob();if(g!==generation)return;display(b,g)}else $('state').textContent='Waiting for match'}catch{$('state').textContent='Connection interrupted'}await pause(Math.max(0,33-(performance.now()-t)))}
-}
-async function status(g){while(token&&g===generation){try{const r=await req('/status');if(r.ok){const j=await r.json();if(g===generation){
- $('hud').textContent=j.waiting?'PLAYER 3':j.downed?'DOWNED — WAIT FOR TEAMMATE '+Math.round((j.revive_progress||0)*100)+'%':'HP '+j.hp+'   AMMO '+j.ammo+' / '+j.reserve;
- $('reload').textContent=j.revive_available?'REVIVE '+Math.round((j.revive_progress||0)*100)+'%':'LOAD';
- const moving=Math.hypot(input.mx,input.my)>.1;
- const link=performance.now()-inputAck<900;
- $('inputState').textContent=!link?'INPUT RECONNECTING':(moving?'MOVE '+Math.round(Math.hypot(input.mx,input.my)*100)+'%':'TOUCH READY')+(j.speed!==undefined?' · '+Math.round(j.speed)+' cm/s':'')+' · '+lastInputRtt+' ms';
- }}}catch{}await pause(500)}}
-// Independent pointer ownership: left thumb moves, right thumb aims or aims+fires.
-let movePointer=null,moveOrigin=null,aimPointer=null,aimOwner=null,aimOrigin=null;
-const buttonPointers=new Map();
-function clearTouchState(){
- movePointer=null;moveOrigin=null;aimPointer=null;aimOwner=null;aimOrigin=null;buttonPointers.clear();resetMoveRing();
- for(const id of ['fire','reload','jump','sprint','light'])$(id).classList.remove('held');
-}
-function resetMoveRing(){
- const ring=$('move').firstElementChild;ring.classList.remove('active');
- ring.style.left='';ring.style.top='';ring.style.bottom='';ring.style.transform='';ring.firstElementChild.style.transform='';
-}
-function moveUpdate(v){
- if(!moveOrigin||movePointer!==v.pointerId)return;
- const ring=$('move').firstElementChild;
- let a=(v.clientX-moveOrigin.x)/42,b=(v.clientY-moveOrigin.y)/42;
- const mag=Math.hypot(a,b),scale=mag<=.045?0:Math.min(1,(mag-.045)/.955)/mag;
- input.mx=a*scale;input.my=-b*scale;
- ring.firstElementChild.style.transform='translate('+input.mx*38+'px,'+(-input.my)*38+'px)';
-}
-const move=$('move');
-move.onpointerdown=v=>{
- if(movePointer!==null)return;
- movePointer=v.pointerId;moveOrigin={x:v.clientX,y:v.clientY};
- const r=move.getBoundingClientRect(),ring=move.firstElementChild;
- ring.style.left=(v.clientX-r.left)+'px';ring.style.top=(v.clientY-r.top)+'px';ring.style.bottom='auto';ring.style.transform='translate(-50%,-50%)';ring.classList.add('active');
- move.setPointerCapture(v.pointerId);moveUpdate(v);
-};
-move.onpointermove=v=>{if(v.pointerId===movePointer)moveUpdate(v)};
-move.onpointerup=move.onpointercancel=move.onlostpointercapture=v=>{
- if(v.pointerId!==movePointer)return;
- movePointer=null;moveOrigin=null;input.mx=input.my=0;resetMoveRing();
-};
-function aimUpdate(v){
- if(v.pointerId!==aimPointer||!aimOrigin)return;
- // Floating look stick: drag from initial thumb position, including on FIRE.
- let x=(v.clientX-aimOrigin.x)/42,y=(v.clientY-aimOrigin.y)/42;
- const mag=Math.hypot(x,y),scale=mag<=.04?0:Math.min(1,(mag-.04)/.96)/mag;
- input.lx=x*scale;input.ly=-y*scale;
-}
-function bindAim(e,fire){
- e.onpointerdown=v=>{
-  if(aimPointer!==null)return;
-  aimPointer=v.pointerId;aimOwner=e;aimOrigin={x:v.clientX,y:v.clientY};
-  e.setPointerCapture(v.pointerId);input.lx=input.ly=0;
-  if(fire){input.flags|=1;e.classList.add('held')}
- };
- e.onpointermove=v=>{if(aimOwner===e)aimUpdate(v)};
- e.onpointerup=e.onpointercancel=e.onlostpointercapture=v=>{
-  if(v.pointerId!==aimPointer||aimOwner!==e)return;
-  aimPointer=null;aimOwner=null;aimOrigin=null;input.lx=input.ly=0;
-  if(fire){input.flags&=~1;e.classList.remove('held')}
- };
-}
-bindAim($('look'),false);bindAim($('fire'),true);
-for(const [id,flag] of [['reload',2],['jump',4],['sprint',8],['light',16]]){
- const e=$(id);
- e.onpointerdown=v=>{if(buttonPointers.has(id))return;buttonPointers.set(id,v.pointerId);e.setPointerCapture(v.pointerId);input.flags|=flag;e.classList.add('held')};
- e.onpointerup=e.onpointercancel=e.onlostpointercapture=v=>{if(buttonPointers.get(id)!==v.pointerId)return;buttonPointers.delete(id);input.flags&=~flag;e.classList.remove('held')};
-}
-$('leave').onclick=async()=>{zero();try{await req('/leave',{})}catch{}stop('Disconnected')};
-$('code').addEventListener('input',()=>{$('code').value=$('code').value.replace(/[^0-9]/g,'').slice(0,8)});
-window.addEventListener('blur',zero);document.addEventListener('visibilitychange',()=>{if(document.hidden)zero()});
+});
+layout();window.addEventListener('resize',layout);
+window.addEventListener('orientationchange',()=>{layout();setTimeout(layout,250);setTimeout(layout,700)});
+if(window.visualViewport)visualViewport.addEventListener('resize',layout);
+if(window.ResizeObserver)new ResizeObserver(layout).observe(safe);
+if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{});
 </script></body></html>
