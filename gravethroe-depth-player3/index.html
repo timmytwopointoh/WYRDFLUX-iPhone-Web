@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#121416"><meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="apple-mobile-web-app-title" content="GRAVETHROE">
+<link rel="manifest" href="./manifest.webmanifest"><title>GRAVETHROE Depth Player 3</title>
+<style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#121416;overscroll-behavior:none}
+#safe{position:fixed;inset:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px);overflow:hidden}
+#game{position:absolute;top:50%;left:50%;display:block;border:0;max-width:none;max-height:none;transform-origin:50% 50%;background:#121416}</style>
+</head><body><div id="safe"><iframe id="game" title="GRAVETHROE Depth Player 3" src="./client.html" allow="fullscreen" allowfullscreen scrolling="no"></iframe></div>
+<script>
+'use strict';
+const safe=document.getElementById('safe'),game=document.getElementById('game');
+let playing=false;
+const mobile=/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)||navigator.maxTouchPoints>0;
+function layout(){
+ const w=Math.max(1,safe.clientWidth),h=Math.max(1,safe.clientHeight);
+ const rotate=playing&&mobile&&h>w;
+ game.style.width=(rotate?h:w)+'px';
+ game.style.height=(rotate?w:h)+'px';
+ game.style.transform='translate(-50%,-50%)'+(rotate?' rotate(90deg)':'');
+ document.documentElement.dataset.landscape=rotate?'rotated':'native';
+}
+window.addEventListener('message',e=>{
+ if(e.origin!==location.origin||e.source!==game.contentWindow||e.data?.type!=='gravethroe-player3-layout'||typeof e.data.playing!=='boolean')return;
+ playing=e.data.playing;layout();
+ if(playing&&mobile&&screen.orientation&&typeof screen.orientation.lock==='function'){
+  try{Promise.resolve(screen.orientation.lock('landscape')).catch(()=>{})}catch{}
+ }else if(!playing&&screen.orientation&&typeof screen.orientation.unlock==='function'){
+  try{screen.orientation.unlock()}catch{}
+ }
+});
+layout();window.addEventListener('resize',layout);
+window.addEventListener('orientationchange',()=>{layout();setTimeout(layout,250);setTimeout(layout,700)});
+if(window.visualViewport)visualViewport.addEventListener('resize',layout);
+if(window.ResizeObserver)new ResizeObserver(layout).observe(safe);
+if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{});
+</script></body></html>
