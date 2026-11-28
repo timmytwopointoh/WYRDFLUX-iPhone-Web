@@ -1,0 +1,168 @@
+<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta charset="utf-8"><title>GRAVETHROE Player 3</title><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#121416"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="apple-mobile-web-app-title" content="GRAVETHROE"><style>
+*{box-sizing:border-box;touch-action:none}body{margin:0;background:#08090b;color:#eee;font:16px system-ui;overflow:hidden}#video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}#join{position:absolute;inset:0;display:grid;place-content:center;gap:12px;background:#121416;z-index:5;text-align:center}input,button{font:inherit;color:white;background:#24272c;border:1px solid #5a6268;border-radius:8px;padding:12px}#hud{position:absolute;top:12px;left:12px;background:#0008;padding:8px;pointer-events:none}#cross{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);color:white;pointer-events:none}#controls{position:absolute;inset:0;display:none}.stick{position:absolute;bottom:10%;width:110px;height:110px;border:2px solid #fff7;border-radius:50%;background:#0004}.stick i{position:absolute;left:36px;top:36px;width:34px;height:34px;background:#fff5;border-radius:50%;pointer-events:none}#move{left:0;top:15%;bottom:0;width:50%;height:auto;border:0;background:transparent;border-radius:0;z-index:1}#move .ring{position:absolute;width:112px;height:112px;left:22%;bottom:12%;transform:translate(-50%,0);border:2px solid #fff9;background:#0005;border-radius:50%;pointer-events:none}#move .ring i{left:37px;top:37px;background:#fff9}#move .ring.active{border-color:white}#inputState{position:absolute;top:52px;left:12px;background:#0009;padding:5px;font-size:12px;pointer-events:none;z-index:4}#fire{width:86px}#look{left:50%;right:0;top:17%;bottom:0;width:auto;height:auto;border:0;border-radius:0;background:transparent;z-index:1}#look i{display:none}#fire{z-index:3}#controls .key{z-index:3}#controls .held{background:#842d2dbb;border-color:#ff7777}.key{position:absolute;min-width:56px;background:#0008;border-color:#fff7;user-select:none}#fire{right:3%;bottom:38%;height:65px}#reload{right:4%;bottom:18%}#jump{right:4%;bottom:4%}#sprint{left:7%;bottom:34%}#light{right:17%;top:5%}#leave{right:3%;top:5%}#state{position:absolute;left:50%;top:12%;transform:translateX(-50%);background:#0009;padding:6px;pointer-events:none}#video{will-change:transform;transform-origin:50% 50%}#predflash{position:absolute;inset:0;pointer-events:none;opacity:0;background:radial-gradient(ellipse at 57% 67%,#fff9 0%,#ffc45b35 8%,transparent 25%);z-index:2}#predict{left:3%;top:16%;font-size:12px}#ready{right:17%;bottom:18%}#face{left:3%;top:28%;font-size:12px}#join{padding:12px}#join input{touch-action:manipulation}</style></head><body>
+<img id="video"><div id="predflash"></div><div id="controls"><div id="hud">PLAYER 3</div><div id="cross">+</div><div id="state">Waiting for match</div><div id="inputState">TOUCH READY</div><div id="move" class="stick"><div class="ring"><i></i></div></div><div id="look" class="stick"><i></i></div><button id="fire" class="key">FIRE</button><button id="reload" class="key">LOAD</button><button id="jump" class="key">JUMP</button><button id="sprint" class="key">RUN</button><button id="light" class="key">LIGHT</button><button id="leave" class="key">EXIT</button><button id="predict" class="key">PRED ON</button><button id="ready" class="key">READY</button><button id="face" class="key">FACE 1/24</button></div>
+<div id="join"><h1>GRAVETHROE</h1><div>Predictive phone test V1</div><div>Player 1: RTS · Player 2: local FPS</div><div>Player 3: remote FPS</div><input id="code" placeholder="8-digit pairing code" autocomplete="off" inputmode="numeric" maxlength="8"><button id="connect">JOIN PLAYER 3</button><span id="msg" role="status">Start GRAVETHROE on the PC, then enter its code.</span><small>iPhone: Safari → Share → Add to Home Screen<br>Android: browser menu → Install app</small></div>
+<script>
+let token='',input={mx:0,my:0,lx:0,ly:0,flags:0},generation=0,frameUrl='',streamAbort=null,displayed=0,lastFpsTime=0,fps=0;
+const $=x=>document.getElementById(x);
+let base='',clockOffset=0,timedVideo=false,absoluteAim=false;
+let predicting=true,playing=false,lastFrameArrival=0,lastFrameStamp=0,lastStatusAt=0,serverAmmo=0,localAmmo=0,serverDown=false,waiting=true,localReady=false,faceChoice=0;
+let predictedYaw=0,predictedPitch=0,aimSeeded=false,aimSamples=[],localYaw=0,localPitch=0,localShot=0,flashAt=-1e9,recoilAt=-1e9,animationId=0,renderX=0,renderY=0,renderZoom=1,renderAt=0;
+const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));const wrap=a=>((a+180)%360+360)%360-180;
+function wireState(){return {...input,lx:absoluteAim?localYaw:input.lx,ly:absoluteAim?localPitch:input.ly,flags:input.flags|(absoluteAim?64:0)|(waiting&&localReady?32:0)|((faceChoice+1)<<7)}}
+function predictionReset(){lastFrameArrival=lastFrameStamp=lastStatusAt=0;serverAmmo=localAmmo=0;serverDown=false;waiting=true;localReady=false;aimSeeded=false;aimSamples=[];localYaw=localPitch=predictedYaw=predictedPitch=0;localShot=0;flashAt=recoilAt=-1e9;renderX=renderY=0;renderZoom=1;renderAt=0;$('video').style.transform='none';$('predflash').style.opacity=0;$('ready').textContent='READY'}
+function predictShot(now){if(!predicting||!playing||waiting||serverDown||localAmmo<=0||now-lastStatusAt>1200||now-lastFrameArrival>700||(input.flags&2)||now<localShot)return;localShot=now+280;localAmmo--;flashAt=recoilAt=now;}
+function sampleAim(now){aimSamples.push({t:now,y:localYaw,p:localPitch});while(aimSamples.length>2&&aimSamples[1].t<now-1200)aimSamples.shift();if(aimSamples.length>120)aimSamples.shift()}
+function visualLoop(now){animationId=0;if(!playing)return;const dt=renderAt?Math.min(.05,(now-renderAt)/1000):.016;renderAt=now;
+ const fresh=lastFrameArrival>0&&now-lastFrameArrival<700&&now-lastStatusAt<1200&&!waiting&&!serverDown&&now-inputAck<1000;
+ let x=0,y=0,z=1;if(predicting&&fresh){
+  const age=lastFrameStamp?clamp(Date.now()+clockOffset-lastFrameStamp,0,220):clamp(lastInputRtt/2+33,0,160);
+  let yaw=input.lx*75*age/1000,pitch=input.ly*55*age/1000;
+  if(absoluteAim&&aimSeeded&&aimSamples.length){const target=now-age;let old=aimSamples[0];for(const s of aimSamples){if(s.t>target)break;old=s}yaw=wrap(localYaw-old.y);pitch=localPitch-old.p;}
+  const w=$('video').clientWidth,h=$('video').clientHeight,fw=Math.min(w,h*16/9),fh=fw*9/16;
+  x=clamp(-Math.tan(clamp(yaw,-5,5)*Math.PI/180)*fw*.5-input.mx*fw*.009,-fw*.047,fw*.047);
+  y=clamp(Math.tan(clamp(pitch,-4,4)*Math.PI/180)*fw*.5+input.my*fh*.005,-fh*.047,fh*.047);
+  if(input.flags&1)predictShot(now);
+  const recoil=Math.max(0,1-(now-recoilAt)/115);y+=recoil*fh*.012;z=1+Math.min(.12,2*Math.max(Math.abs(x)/Math.max(1,fw),Math.abs(y)/Math.max(1,fh)));
+ }
+ const k=1-Math.exp(-dt*25);renderX+=(x-renderX)*k;renderY+=(y-renderY)*k;renderZoom+=(z-renderZoom)*k;
+ $('video').style.transform='translate3d('+renderX.toFixed(2)+'px,'+renderY.toFixed(2)+'px,0) scale('+renderZoom.toFixed(4)+')';$('predflash').style.opacity=predicting&&fresh?String(Math.max(0,1-(now-flashAt)/65)*.65):'0';
+ animationId=requestAnimationFrame(visualLoop);
+}
+$('predict').onclick=()=>{predicting=!predicting;$('predict').textContent=predicting?'PRED ON':'PRED OFF';if(!predicting){flashAt=recoilAt=-1e9}};
+$('ready').onclick=()=>{if(waiting){localReady=!localReady;$('ready').textContent=localReady?'UNREADY':'READY';pumpInput?.()}};
+$('face').onclick=()=>{if(waiting){faceChoice=(faceChoice+1)%24;$('face').textContent='FACE '+(faceChoice+1)+'/24';localReady=false;$('ready').textContent='READY';pumpInput?.()}};
+
+const gateway='https://miss-princesses-masterpiece-maker.tailbe4401.ts.net';
+function timeout(ms){const c=new AbortController();setTimeout(()=>c.abort(),ms);return c.signal}
+async function discover(){const matches=await Promise.all([8443,10000,443].map(async p=>{const url=gateway+(p===443?'':':'+p);try{const r=await fetch(url+'/health',{cache:'no-store',signal:timeout(4500)});const j=await r.json();return r.ok&&j.service==='grave-app-test'&&j.seat===3?{url,j}:null}catch{return null}}));const found=matches.filter(Boolean);if(found.length!==1)throw Error(found.length?'More than one GRAVETHROE host is active. Close the extra session.':'PC game server offline or not updated. Start GRAVETHROE and wait for the pairing code.');const host=found[0];const start=Date.now();const r=await fetch(host.url+'/health',{cache:'no-store',signal:timeout(3500)});const health=await r.json();clockOffset=Number.isFinite(health.server_ms)?health.server_ms-(start+Date.now())/2:0;timedVideo=health.timed_video===1;absoluteAim=health.aim_absolute===1;return host.url}
+function layoutState(playing){if(window.parent!==window)window.parent.postMessage({type:'gravethroe-player3-layout',playing},location.origin)}
+async function req(path,body){return fetch(base+path,{method:body===undefined?'GET':'POST',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},...(body===undefined?{}:{body:JSON.stringify(body)}),cache:'no-store',signal:timeout(path==="/input"?1500:3500)})}
+function zero(){clearTouchState();input={mx:0,my:0,lx:0,ly:0,flags:0};document.querySelectorAll('.stick i').forEach(e=>e.style.transform='')}
+function stop(message){playing=false;cancelAnimationFrame(animationId);predictionReset();layoutState(false);generation++;if(streamAbort)streamAbort.abort();streamAbort=null;token='';zero();$('join').style.display='grid';$('controls').style.display='none';$('msg').textContent=message||'';if(frameUrl)URL.revokeObjectURL(frameUrl);frameUrl='';$('video').removeAttribute('src')}
+$('connect').onclick=async()=>{if($('connect').disabled)return;$('connect').disabled=true;try{const code=$('code').value.trim();if(!/^\d{8}$/.test(code))throw Error('Enter exactly 8 digits.');$('msg').textContent='Finding PC game host…';base=await discover();const r=await req('/join',{code});const j=await r.json();if(!r.ok)throw Error(j.error);token=j.token;predictionReset();zero();playing=true;animationId=requestAnimationFrame(visualLoop);$('join').style.display='none';$('controls').style.display='block';layoutState(true);const g=++generation;inputs(g);frames(g);status(g)}catch(e){$('msg').textContent=e.message}finally{$('connect').disabled=false}};
+const pause=ms=>new Promise(r=>setTimeout(r,ms));
+let inputAck=0,lastInputRtt=0,controllerSeq=0,pumpInput=null;
+async function inputs(g){
+ let pending=0,lastSend=0,lastSignature='';
+ const pump=()=>{if(!token||g!==generation)return;
+  const now=performance.now(),state=wireState(),signature=JSON.stringify(state);
+  if(pending<4&&(signature!==lastSignature||now-lastSend>=33)){
+   lastSend=now;lastSignature=signature;pending++;
+   const body={...state,seq:++controllerSeq},start=now;
+   // Bounded pipeline: new state can overtake old requests; host discards stale sequences.
+   req('/input',body).then(r=>{
+    if(g!==generation)return;
+    if(r.status===403){stop('Seat expired. Rejoin.');return}
+    if(r.ok){inputAck=performance.now();lastInputRtt=Math.round(inputAck-start)}
+   }).catch(()=>{}).finally(()=>pending--);
+  }
+ };pumpInput=pump;
+ while(token&&g===generation){pump();await pause(8)}
+ if(pumpInput===pump)pumpInput=null;
+}
+
+let queued=null,decoding=false;
+function display(bytes,g,stamp=0){queued={bytes,g,stamp};if(!decoding)decodeLatest()}
+async function decodeLatest(){
+ decoding=true;
+ try{while(queued){const q=queued;queued=null;if(q.g!==generation)continue;
+ const u=URL.createObjectURL(q.bytes instanceof Blob?q.bytes:new Blob([q.bytes],{type:'image/jpeg'}));
+ const im=new Image();im.src=u;
+ try{await im.decode();if(q.g!==generation){URL.revokeObjectURL(u);continue}
+ lastFrameArrival=performance.now();lastFrameStamp=q.stamp;$('video').src=u;if(frameUrl)URL.revokeObjectURL(frameUrl);frameUrl=u;displayed++;
+ const t=performance.now();if(t-lastFpsTime>=1000){fps=Math.round(displayed*1000/(t-lastFpsTime));displayed=0;lastFpsTime=t}
+ $('state').textContent=fps+' FPS';}catch{URL.revokeObjectURL(u)}
+ }}finally{decoding=false;if(queued)decodeLatest()}
+}
+async function frames(g){
+ displayed=0;fps=0;lastFpsTime=performance.now();
+ const abort=new AbortController();streamAbort=abort;
+ let watchdog=setTimeout(()=>abort.abort(),3500);
+ try{
+ const r=await fetch(base+(timedVideo?'/stream-latest?fps=30':'/stream'),{headers:{Authorization:'Bearer '+token},cache:'no-store',signal:abort.signal});
+ if(r.status===403){stop('Seat expired. Rejoin.');return}if(!r.ok||!r.body)throw Error('Streaming unavailable');
+ const reader=r.body.getReader();let pending=new Uint8Array(0);
+ while(token&&g===generation){const {value,done}=await reader.read();if(done)break;
+ clearTimeout(watchdog);watchdog=setTimeout(()=>abort.abort(),3500);
+ const all=new Uint8Array(pending.length+value.length);all.set(pending);all.set(value,pending.length);let pos=0,latest=null;
+ while(all.length-pos>=4){const n=new DataView(all.buffer,pos,4).getUint32(0);if(n>250008)throw Error('Invalid frame');if(all.length-pos-4<n)break;pos+=4;if(n)latest=all.slice(pos,pos+n);pos+=n}
+ pending=all.slice(pos);if(latest){if(timedVideo){if(latest.length>8){const dv=new DataView(latest.buffer,latest.byteOffset,8);const stamp=dv.getUint32(0)*4294967296+dv.getUint32(4);display(latest.slice(8),g,stamp)}}else display(latest,g)}
+ }
+ }catch{}finally{clearTimeout(watchdog);abort.abort();if(streamAbort===abort)streamAbort=null}
+ // Compatibility fallback if a proxy or old WebView cannot stream responses.
+ while(token&&g===generation){const t=performance.now();try{const r=await req('/frame');if(r.status===403){stop('Seat expired. Rejoin.');return}if(r.ok){const b=await r.blob();if(g!==generation)return;display(b,g)}else $('state').textContent='Waiting for match'}catch{$('state').textContent='Connection interrupted'}await pause(Math.max(0,33-(performance.now()-t)))}
+}
+async function status(g){while(token&&g===generation){try{const r=await req('/status');if(r.ok){const j=await r.json();if(g===generation){
+ lastStatusAt=performance.now();waiting=!!j.waiting;serverDown=!!j.downed||(!waiting&&j.hp<=0);if(Number.isFinite(j.ammo)){if(j.ammo!==serverAmmo||lastStatusAt-localShot>400)localAmmo=j.ammo;serverAmmo=j.ammo;}if(absoluteAim&&Array.isArray(j.aim)&&!aimSeeded){localYaw=j.aim[0];localPitch=j.aim[1];aimSeeded=true;sampleAim(lastStatusAt)}$('ready').style.display=waiting?'block':'none';$('face').style.display=waiting?'block':'none';
+ $('hud').textContent=j.waiting?'PLAYER 3':j.downed?'DOWNED — WAIT FOR TEAMMATE '+Math.round((j.revive_progress||0)*100)+'%':'HP '+j.hp+'   AMMO '+j.ammo+' / '+j.reserve;
+ $('reload').textContent=j.revive_available?'REVIVE '+Math.round((j.revive_progress||0)*100)+'%':'LOAD';
+ const moving=Math.hypot(input.mx,input.my)>.1;
+ const link=performance.now()-inputAck<900;
+ $('inputState').textContent=!link?'INPUT RECONNECTING':(moving?'MOVE '+Math.round(Math.hypot(input.mx,input.my)*100)+'%':'TOUCH READY')+(j.speed!==undefined?' · '+Math.round(j.speed)+' cm/s':'')+' · '+lastInputRtt+' ms';
+ }}}catch{}await pause(180)}}
+// Independent pointer ownership: left thumb moves, right thumb aims or aims+fires.
+let movePointer=null,moveOrigin=null,aimPointer=null,aimOwner=null,aimOrigin=null;
+const buttonPointers=new Map();
+function clearTouchState(){
+ movePointer=null;moveOrigin=null;aimPointer=null;aimOwner=null;aimOrigin=null;buttonPointers.clear();resetMoveRing();
+ for(const id of ['fire','reload','jump','sprint','light'])$(id).classList.remove('held');
+}
+function resetMoveRing(){
+ const ring=$('move').firstElementChild;ring.classList.remove('active');
+ ring.style.left='';ring.style.top='';ring.style.bottom='';ring.style.transform='';ring.firstElementChild.style.transform='';
+}
+function moveUpdate(v){
+ if(!moveOrigin||movePointer!==v.pointerId)return;
+ const ring=$('move').firstElementChild;
+ let a=(v.clientX-moveOrigin.x)/42,b=(v.clientY-moveOrigin.y)/42;
+ const mag=Math.hypot(a,b),scale=mag<=.045?0:Math.min(1,(mag-.045)/.955)/mag;
+ input.mx=a*scale;input.my=-b*scale;
+ ring.firstElementChild.style.transform='translate('+input.mx*38+'px,'+(-input.my)*38+'px)';
+}
+const move=$('move');
+move.onpointerdown=v=>{
+ if(movePointer!==null)return;
+ movePointer=v.pointerId;moveOrigin={x:v.clientX,y:v.clientY};
+ const r=move.getBoundingClientRect(),ring=move.firstElementChild;
+ ring.style.left=(v.clientX-r.left)+'px';ring.style.top=(v.clientY-r.top)+'px';ring.style.bottom='auto';ring.style.transform='translate(-50%,-50%)';ring.classList.add('active');
+ move.setPointerCapture(v.pointerId);moveUpdate(v);
+};
+move.onpointermove=v=>{if(v.pointerId===movePointer)moveUpdate(v)};
+move.onpointerup=move.onpointercancel=move.onlostpointercapture=v=>{
+ if(v.pointerId!==movePointer)return;
+ movePointer=null;moveOrigin=null;input.mx=input.my=0;resetMoveRing();
+};
+function aimUpdate(v){
+ if(v.pointerId!==aimPointer||!aimOrigin)return;
+ // Floating look stick: drag from initial thumb position, including on FIRE.
+ if(absoluteAim){const gain=.16*(input.flags&1?.72:1);localYaw=wrap(localYaw+(v.clientX-aimOrigin.x)*gain);localPitch=clamp(localPitch-(v.clientY-aimOrigin.y)*gain*.78,-85,85);aimOrigin={x:v.clientX,y:v.clientY};sampleAim(performance.now());return}
+ let x=(v.clientX-aimOrigin.x)/42,y=(v.clientY-aimOrigin.y)/42;
+ const mag=Math.hypot(x,y),scale=mag<=.04?0:Math.min(1,(mag-.04)/.96)/mag;
+ input.lx=x*scale;input.ly=-y*scale;
+}
+function bindAim(e,fire){
+ e.onpointerdown=v=>{
+  if(aimPointer!==null)return;
+  aimPointer=v.pointerId;aimOwner=e;aimOrigin={x:v.clientX,y:v.clientY};
+  e.setPointerCapture(v.pointerId);input.lx=input.ly=0;
+  if(fire){input.flags|=1;e.classList.add('held');predictShot(performance.now())}
+ };
+ e.onpointermove=v=>{if(aimOwner===e)aimUpdate(v)};
+ e.onpointerup=e.onpointercancel=e.onlostpointercapture=v=>{
+  if(v.pointerId!==aimPointer||aimOwner!==e)return;
+  aimPointer=null;aimOwner=null;aimOrigin=null;input.lx=input.ly=0;
+  if(fire){input.flags&=~1;e.classList.remove('held')}
+ };
+}
+bindAim($('look'),false);bindAim($('fire'),true);
+for(const [id,flag] of [['reload',2],['jump',4],['sprint',8],['light',16]]){
+ const e=$(id);
+ e.onpointerdown=v=>{if(buttonPointers.has(id))return;buttonPointers.set(id,v.pointerId);e.setPointerCapture(v.pointerId);input.flags|=flag;e.classList.add('held')};
+ e.onpointerup=e.onpointercancel=e.onlostpointercapture=v=>{if(buttonPointers.get(id)!==v.pointerId)return;buttonPointers.delete(id);input.flags&=~flag;e.classList.remove('held')};
+}
+$('leave').onclick=async()=>{zero();try{await req('/leave',{})}catch{}stop('Disconnected')};
+$('code').addEventListener('input',()=>{$('code').value=$('code').value.replace(/[^0-9]/g,'').slice(0,8)});
+for(const type of ['pointerdown','pointermove','pointerup','pointercancel','lostpointercapture'])document.addEventListener(type,()=>queueMicrotask(()=>pumpInput?.()));
+window.addEventListener('blur',()=>{zero();pumpInput?.()});document.addEventListener('visibilitychange',()=>{if(document.hidden){zero();pumpInput?.()}});
+</script></body></html>
